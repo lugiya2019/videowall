@@ -1,31 +1,37 @@
-# VideoWall Controller (MVP)
+ï»¿# VideoWall Controller
 
-## ¿ìËÙÔËĞĞ
+## è¿è¡Œ
 ```bash
-# °²×°ÒÀÀµ
 npm install
-# Æô¶¯
-npm start
+npm start   # é»˜è®¤ 0.0.0.0:8080, WS: /ws
 ```
-Ä¬ÈÏ¶Ë¿Ú 8080£¬ä¯ÀÀÆ÷·ÃÎÊ `http://<NAS-IP>:8080`¡£
+ç¯å¢ƒå¯é€‰ï¼š`PORT`ã€`HOST`ã€`PUBLIC_URL`
 
-## Docker Compose (ÈºêÍ)
+## Docker
 ```bash
-cd /volume1/videowall/controller
 npm install --production
-node src/server.js
+docker compose up -d --build
 ```
-»ò×ÔĞĞĞ´ `Dockerfile` ¹ÒÔØ `/data` Óë `public`¡£
+`data/`ã€`public/` ä¼šé€šè¿‡ Compose æŒ‚è½½ã€‚
 
-## API ¼òÊö
-- `GET /api/devices` Éè±¸ÁĞ±í
-- `POST /api/broadcast` ÏÂ·¢²¥·Å
-- `POST /api/stop` Í£Ö¹
-- `POST /api/power` { action: sleep|wake|reboot }
+## API æ¦‚è§ˆ
+- `GET /api/ping` å¥åº·æ£€æŸ¥
+- `GET /api/devices` åœ¨çº¿è®¾å¤‡
+- `POST /api/broadcast` { programId?, startAtUtcMs?, loop?, screens? }
+- `POST /api/stop` åœæ­¢
+- `POST /api/power` { action }
+- `POST /api/upload` multipart `file`ï¼Œè‡ªåŠ¨è£åˆ‡ç”ŸæˆèŠ‚ç›®
+- `GET /api/programs` / `GET /api/programs/:id`
+- `POST /api/programs/:id/broadcast` ä¸‹å‘æŒ‡å®šèŠ‚ç›®
+- `GET /api/schedule` åˆ—è¡¨
+- `POST /api/schedule` åˆ›å»ºæ’æœŸ { programId, startAtUtcMs, loop }
+- `DELETE /api/schedule/:id` åˆ é™¤æ’æœŸ
 
-## WebSocket ÏûÏ¢
-- ¿ØÖÆ¶Ë ¡ú ¿Í»§¶Ë£º`play`, `stop`, `power`
-- ¿Í»§¶Ë ¡ú ¿ØÖÆ¶Ë£º`hello {deviceId, role}`, `ping`
+ç”Ÿæˆçš„åª’ä½“é™æ€è·¯å¾„ï¼š`/media/<programId>/left|center|right.<ext>`ï¼ŒåŒæ—¶è¿”å› `checksum` ä¾›å®¢æˆ·ç«¯æ ¡éªŒã€‚
 
-## ×Ô´øÇ°¶Ë
-`public/index.html` Îª×îĞ¡¿ØÖÆÃæ°å¡£
+## WebSocket æ¶ˆæ¯
+- æ§åˆ¶ -> å®¢æˆ·ç«¯ï¼š`welcome|synctime { serverTime }`ï¼Œ`play { programId,startAtUtcMs,loop,screens }`ï¼Œ`stop`ï¼Œ`power { action }`
+- å®¢æˆ·ç«¯ -> æ§åˆ¶ï¼š`hello { deviceId, role }`ï¼Œ`ping`
+
+## å‰ç«¯
+`public/index.html` æä¾›ä¸Šä¼ ã€èŠ‚ç›®åˆ—è¡¨ã€ä¸€é”®ä¸‹å‘å’Œæ’æœŸç®¡ç†ã€‚
