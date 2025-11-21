@@ -16,10 +16,21 @@ android {
         buildConfigField "String", "WS_URL", '"ws://192.168.1.10:8080/ws"'
     }
 
+    signingConfigs {
+        // Use the standard debug keystore so release builds are installable without extra credentials
+        release {
+            storeFile file("${System.properties['user.home']}/.android/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig signingConfigs.release
         }
         debug {
             debuggable = true

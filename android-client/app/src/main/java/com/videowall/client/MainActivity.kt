@@ -14,6 +14,9 @@ import com.google.android.exoplayer2.ui.PlayerView
 import okhttp3.*
 import okio.ByteString
 import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
+import java.security.MessageDigest
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -27,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private val client = OkHttpClient.Builder()
         .pingInterval(20, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(15, TimeUnit.SECONDS)
         .build()
 
     private var ws: WebSocket? = null
@@ -136,21 +141,26 @@ class MainActivity : AppCompatActivity() {
         val screens = obj.getJSONObject("screens")
         val screenObj = screens.optJSONObject(currentRole) ?: return
         val url = screenObj.optString("url")
+        val checksum = screenObj.optString("checksum", "")
         val audio = screenObj.optBoolean("audio", currentRole == "center")
-        val mediaItem = MediaItem.fromUri(url)
-        runOnUiThread {
-            player.setMediaItem(mediaItem)
-            player.volume = if (audio) 1f else 0f
-            player.prepare()
-            val delay = startAt - (System.currentTimeMillis() + serverTimeOffset)
-            if (delay > 0) {
-                handler.postDelayed({ player.playWhenReady = true }, delay)
-                statusText.text = "Buffered, will start in ${delay/1000.0}s"
-            } else {
-                player.playWhenReady = true
-                statusText.text = "Playing (late start)"
+        status("Prefetching...")
+        Thread {
+            val local = cacheOrDownload(url, checksum)
+            val mediaItem = if (local != null) MediaItem.fromUri(local) else MediaItem.fromUri(url)
+            runOnUiThread {
+                player.setMediaItem(mediaItem)
+                player.volume = if (audio) 1f else 0f
+                player.prepare()
+                val delay = startAt - (System.currentTimeMillis() + serverTimeOffset)
+                if (delay > 0) {
+                    handler.postDelayed({ player.playWhenReady = true }, delay)
+                    statusText.text = "Buffered, will start in ${delay/1000.0}s"
+                } else {
+                    player.playWhenReady = true
+                    statusText.text = "Playing (late start)"
+                }
             }
-        }
+        }.start()
     }
 
     private fun handlePower(obj: JSONObject) {
@@ -176,5 +186,52 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.dispatchKeyEvent(event)
+    }
+
+    private fun cacheOrDownload(url: String, checksum: String): String? {
+        if (url.isEmpty()) return null
+        val cacheRoot = File(cacheDir, "programs")
+        if (!cacheRoot.exists()) cacheRoot.mkdirs()
+        val fileName = checksum.takeIf { it.isNotEmpty() }?.take(12)?.plus("_") ?: ""
+        val guessed = url.substringAfterLast('/', "media")
+        val target = File(cacheRoot, fileName + guessed)
+        if (target.exists() && (checksum.isEmpty() || sha256(target) == checksum)) {
+          return target.absolutePath
+        }
+
+        val request = Request.Builder().url(url).build()
+        try {
+            client.newCall(request).execute().use { resp ->
+                if (!resp.isSuccessful) throw IllegalStateException("http ${resp.code}")
+                val sink = FileOutputStream(target)
+                resp.body?.byteStream()?.use { input -> input.copyTo(sink) }
+                sink.close()
+            }
+            if (checksum.isNotEmpty() && sha256(target) != checksum) {
+                target.delete()
+                throw IllegalStateException("checksum mismatch")
+            }
+            return target.absolutePath
+        } catch (e: Exception) {
+            Log.e("CACHE", "download failed", e)
+            return null
+        }
+    }
+
+    private fun sha256(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { fis ->
+            val buffer = ByteArray(8_192)
+            while (true) {
+                val read = fis.read(buffer)
+                if (read <= 0) break
+                digest.update(buffer, 0, read)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
+    private fun status(msg: String) {
+        runOnUiThread { statusText.text = msg }
     }
 }
