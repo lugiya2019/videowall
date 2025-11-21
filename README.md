@@ -54,5 +54,20 @@ docker compose up -d --build
 - 电源控制未真正关机/重启；需要厂商 API 或 MDM。
 - 没有素材上传与自动裁切，需手填三条 URL；无缓存与校验。
 
+## 打包与部署
+- 控制端 Docker 镜像（NAS/后台）：  
+  ```bash
+  cd controller
+  docker build -t videowall/controller:0.1 .
+  # 测试运行
+  docker run -d --name videowall-controller -p 8080:8080 -v ${PWD}/data:/app/data -v ${PWD}/public:/app/public videowall/controller:0.1
+  ```  
+  如在群晖，先构建镜像或 `docker save` 导入，再用已有 `docker-compose.yml` 启动。
+- 安卓 APK：  
+  1) 在 `android-client/app/build.gradle` 调整 `WS_URL` 为控制端 IP。  
+  2) 首次用 Android Studio 打开项目以生成 Gradle Wrapper。  
+  3) 命令行打包（示例 Debug）：`cd android-client && ./gradlew assembleLeftDebug`（其他屏幕替换 flavor）。  
+  4) 产物：`android-client/app/build/outputs/apk/<flavor>/debug/*.apk`。
+
 ## 更多
 贡献与开发规范见 `AGENTS.md`，运维细节见 `README-hand-off.md`。若推送到 GitHub，请确保 `.gitignore` 中的运行时数据与密钥未被提交。
