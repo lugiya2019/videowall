@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     private fun sendHello() {
         val hello = JSONObject()
         hello.put("type", "hello")
-        hello.put("deviceId", getDeviceId())
+        hello.put("deviceId", deviceId())
         hello.put("role", currentRole)
         ws?.send(hello.toString())
     }
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDeviceId(): String {
+    private fun deviceId(): String {
         return android.provider.Settings.Secure.getString(contentResolver, android.provider.Settings.Secure.ANDROID_ID)
     }
 

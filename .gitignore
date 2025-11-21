@@ -13,6 +13,7 @@ controller/public/uploads/
 .gradle/
 local.properties
 app/build/
+android-client/app/build/
 *.keystore
 
 # OS/editor cruft
