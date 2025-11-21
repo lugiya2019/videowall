@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:useController="false" />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_gravity="top|start"
+        android:text="Connecting..."
+        android:background="#66000000" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="8dp"
+        android:background="#55000000">
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retry" />
+        <Button
+            android:id="@+id/btnCycleRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Role: center"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+</FrameLayout>

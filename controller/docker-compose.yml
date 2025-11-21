@@ -1,0 +1,11 @@
+version: "3"
+services:
+  controller:
+    build: .
+    container_name: videowall-controller
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./public:/app/public

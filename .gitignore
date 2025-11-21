@@ -1,0 +1,21 @@
+# Node/Controller artifacts
+node_modules/
+npm-debug.log*
+.env*
+data/
+public/uploads/
+controller/data/
+controller/public/uploads/
+
+# Android/Gradle artifacts
+*.iml
+.idea/
+.gradle/
+local.properties
+app/build/
+*.keystore
+
+# OS/editor cruft
+*.log
+Thumbs.db
+.DS_Store
