@@ -279,6 +279,8 @@ function scheduleEntry(entry) {
       broadcast({ type: "play", programId: program.id, startAtUtcMs: entry.startAtUtcMs, loop: entry.loop, screens: program.slices });
     }
     cancelSchedule(entry.id);
+    schedules = schedules.filter((s) => s.id !== entry.id);
+    saveJson(SCHEDULE_FILE, schedules);
   }, delay);
   scheduleTimers.set(entry.id, timer);
 }
