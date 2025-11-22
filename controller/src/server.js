@@ -19,6 +19,9 @@ const UPLOAD_DIR = path.join(DATA_DIR, "uploads");
 const MEDIA_DIR = path.join(DATA_DIR, "media");
 const PROGRAMS_FILE = path.join(DATA_DIR, "programs.json");
 const SCHEDULE_FILE = path.join(DATA_DIR, "schedule.json");
+const PKG = loadJson(path.join(__dirname, "..", "package.json"), {});
+const SERVER_START = Date.now();
+const DEVICE_STALE_MS = Number(process.env.DEVICE_STALE_MS || 120000);
 
 ensureDir(DATA_DIR);
 ensureDir(UPLOAD_DIR);
@@ -45,6 +48,20 @@ const scheduleTimers = new Map(); // scheduleId -> timeout
 
 app.get("/api/ping", (_, res) => {
   res.json({ ok: true, serverTime: Date.now() });
+});
+
+app.get("/api/status", (_, res) => {
+  const onlineDevices = Array.from(devices.values()).filter((d) => d.ws.readyState === 1).length;
+  res.json({
+    ok: true,
+    name: PKG.name || "videowall-controller",
+    version: PKG.version || "dev",
+    serverTime: Date.now(),
+    uptimeMs: Date.now() - SERVER_START,
+    devices: { total: devices.size, online: onlineDevices },
+    programs: programs.length,
+    schedules: schedules.length,
+  });
 });
 
 app.get("/api/devices", (_, res) => {
@@ -173,6 +190,8 @@ wss.on("connection", (ws) => {
     }
   });
 
+  ws.on("ping", () => touchDevice(ws));
+
   ws.on("close", () => {
     // cleanup disconnected devices
     for (const [id, info] of devices.entries()) {
@@ -192,6 +211,15 @@ function broadcast(obj) {
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+}
+
+function touchDevice(ws) {
+  for (const info of devices.values()) {
+    if (info.ws === ws) {
+      info.lastSeen = Date.now();
+      break;
+    }
+  }
 }
 
 function loadJson(file, fallback) {
@@ -297,6 +325,23 @@ function resumeSchedule() {
 }
 
 resumeSchedule();
+
+setInterval(cleanStaleDevices, Math.min(DEVICE_STALE_MS / 2, 30000));
+function cleanStaleDevices() {
+  const now = Date.now();
+  for (const [id, info] of devices.entries()) {
+    const stale = info.lastSeen && now - info.lastSeen > DEVICE_STALE_MS;
+    const closed = info.ws.readyState !== 1;
+    if (stale || closed) {
+      try {
+        info.ws.terminate();
+      } catch (e) {
+        // ignore
+      }
+      devices.delete(id);
+    }
+  }
+}
 
 server.listen(PORT, HOST, () => {
   console.log(`Controller listening on http://${HOST}:${PORT}`);

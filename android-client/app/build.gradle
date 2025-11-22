@@ -11,8 +11,8 @@ android {
         applicationId "com.videowall.client"
         minSdk 21
         targetSdk 34
-        versionCode 1
-        versionName "0.1"
+        versionCode 2
+        versionName "0.2"
         buildConfigField "String", "WS_URL", '"ws://192.168.1.10:8080/ws"'
     }
 
@@ -64,6 +64,16 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+    }
+
+    // Ensure APK file names carry role, build type, version, and build timestamp to avoid confusion
+    def buildTimestamp = new Date().format("yyyyMMdd-HHmmss")
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def flavorPart = variant.flavorName ?: "noflavor"
+            def typePart = variant.buildType.name
+            outputFileName = "videowall-${flavorPart}-${typePart}-v${variant.versionName}-${buildTimestamp}.apk"
+        }
     }
 }
 

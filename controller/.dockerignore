@@ -1,0 +1,14 @@
+.git
+node_modules
+npm-debug.log
+yarn.lock
+data
+tmp
+*.log
+android-client
+notes
+platform-tools*
+*.zip
+*.msi
+*.exe
+.DS_Store

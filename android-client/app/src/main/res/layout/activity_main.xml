@@ -12,35 +12,85 @@
         android:keepScreenOn="true"
         app:use_controller="false" />
 
-    <TextView
-        android:id="@+id/statusText"
+    <!-- Glass card showing status + version -->
+    <LinearLayout
+        android:id="@+id/infoCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="16sp"
-        android:padding="12dp"
         android:layout_gravity="top|start"
-        android:text="Connecting..."
-        android:background="#66000000" />
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_info_card"
+        android:orientation="vertical"
+        android:padding="12dp">
 
+        <TextView
+            android:id="@+id/roleBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="ROLE"
+            android:textAllCaps="true"
+            android:textColor="#0A0A0A"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Connecting..."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="v0.0 | build"
+            android:textColor="#D0D8E5"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/wsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="ws://"
+            android:textColor="#9FB4D5"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <!-- Bottom control bar -->
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:padding="8dp"
-        android:background="#55000000">
+        android:layout_gravity="bottom"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="@drawable/bg_bottom_bar">
+
         <Button
             android:id="@+id/btnRetry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Retry" />
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:text="Reconnect" />
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
         <Button
             android:id="@+id/btnCycleRole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Role: center"
-            android:layout_marginStart="8dp" />
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:text="Role" />
     </LinearLayout>
 
 </FrameLayout>

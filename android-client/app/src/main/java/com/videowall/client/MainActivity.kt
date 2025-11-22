@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var player: ExoPlayer
     private lateinit var playerView: PlayerView
     private lateinit var statusText: TextView
+    private lateinit var versionText: TextView
+    private lateinit var roleBadge: TextView
+    private lateinit var wsText: TextView
     private lateinit var btnRetry: Button
     private lateinit var btnCycleRole: Button
 
@@ -38,18 +41,30 @@ class MainActivity : AppCompatActivity() {
     private var serverTimeOffset: Long = 0L
     private var currentRole = BuildConfig.ROLE
     private var serverUrl = BuildConfig.WS_URL
+    private val heartbeatIntervalMs = 20_000L
+    private val heartbeatRunnable = object : Runnable {
+        override fun run() {
+            sendPing()
+            handler.postDelayed(this, heartbeatIntervalMs)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         playerView = findViewById(R.id.playerView)
         statusText = findViewById(R.id.statusText)
+        versionText = findViewById(R.id.versionText)
+        roleBadge = findViewById(R.id.roleBadge)
+        wsText = findViewById(R.id.wsText)
         btnRetry = findViewById(R.id.btnRetry)
         btnCycleRole = findViewById(R.id.btnCycleRole)
 
         player = ExoPlayer.Builder(this).build()
         playerView.player = player
 
+        versionText.text = "v${BuildConfig.VERSION_NAME} | ${BuildConfig.ROLE}"
+        wsText.text = serverUrl
         btnRetry.setOnClickListener { connectWs() }
         btnCycleRole.setOnClickListener { cycleRole() }
         updateRoleLabel()
@@ -58,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        stopHeartbeat()
         ws?.close(1000, "bye")
         player.release()
     }
@@ -74,15 +90,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateRoleLabel() {
         btnCycleRole.text = "Role: $currentRole"
+        roleBadge.text = currentRole.uppercase(Locale.getDefault())
     }
 
     private fun connectWs() {
         statusText.text = "Connecting..."
+        stopHeartbeat()
         val request = Request.Builder().url(serverUrl).build()
         ws = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 runOnUiThread { statusText.text = "Connected" }
                 sendHello()
+                startHeartbeat()
             }
 
             override fun onMessage(webSocket: WebSocket, text: String) {
@@ -95,11 +114,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
                 runOnUiThread { statusText.text = "Closed" }
+                stopHeartbeat()
             }
 
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
                 Log.e("WS", "failure", t)
                 runOnUiThread { statusText.text = "WS error: ${t.message}" }
+                stopHeartbeat()
                 reconnectLater()
             }
         })
@@ -115,6 +136,13 @@ class MainActivity : AppCompatActivity() {
         hello.put("deviceId", deviceId())
         hello.put("role", currentRole)
         ws?.send(hello.toString())
+    }
+
+    private fun sendPing() {
+        val ping = JSONObject()
+        ping.put("type", "ping")
+        ping.put("deviceId", deviceId())
+        ws?.send(ping.toString())
     }
 
     private fun handleMessage(text: String) {
@@ -186,6 +214,15 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.dispatchKeyEvent(event)
+    }
+
+    private fun startHeartbeat() {
+        handler.removeCallbacks(heartbeatRunnable)
+        handler.postDelayed(heartbeatRunnable, heartbeatIntervalMs)
+    }
+
+    private fun stopHeartbeat() {
+        handler.removeCallbacks(heartbeatRunnable)
     }
 
     private fun cacheOrDownload(url: String, checksum: String): String? {
