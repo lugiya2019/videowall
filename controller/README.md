@@ -1,37 +1,39 @@
-﻿# VideoWall Controller
+# VideoWall Controller
 
-## 运行
+Node.js (Express + WebSocket) server that drives the three-screen wall. This folder builds into the Docker image.
+
+## Run locally
 ```bash
 npm install
-npm start   # 默认 0.0.0.0:8080, WS: /ws
+npm start   # defaults HOST=0.0.0.0 PORT=8088 WS path /ws
 ```
-环境可选：`PORT`、`HOST`、`PUBLIC_URL`
+Environment overrides: `PORT`, `HOST`, `PUBLIC_URL`, `DEVICE_STALE_MS` (ms before a device is considered offline).
 
 ## Docker
 ```bash
 npm install --production
-docker compose up -d --build
+docker compose up -d --build    # uses docker-compose.yml, mounts ./data and ./public
 ```
-`data/`、`public/` 会通过 Compose 挂载。
 
-## API 概览
-- `GET /api/ping` 健康检查
-- `GET /api/devices` 在线设备
+## APIs
+- `GET /api/ping` simple health
+- `GET /api/status` version + uptime + counts
+- `GET /api/devices` list online devices
 - `POST /api/broadcast` { programId?, startAtUtcMs?, loop?, screens? }
-- `POST /api/stop` 停止
+- `POST /api/stop` stop playback
 - `POST /api/power` { action }
-- `POST /api/upload` multipart `file`，自动裁切生成节目
+- `POST /api/upload` multipart `file` -> auto-slice 6000x1920 into L/C/R
 - `GET /api/programs` / `GET /api/programs/:id`
-- `POST /api/programs/:id/broadcast` 下发指定节目
-- `GET /api/schedule` 列表
-- `POST /api/schedule` 创建排期 { programId, startAtUtcMs, loop }
-- `DELETE /api/schedule/:id` 删除排期
+- `POST /api/programs/:id/broadcast` broadcast a program
+- `GET /api/schedule` list entries
+- `POST /api/schedule` create { programId, startAtUtcMs, loop }
+- `DELETE /api/schedule/:id` remove entry
 
-生成的媒体静态路径：`/media/<programId>/left|center|right.<ext>`，同时返回 `checksum` 供客户端校验。
+Media is exposed at `/media/<programId>/left|center|right.<ext>` and includes `checksum` for client-side cache verification.
 
-## WebSocket 消息
-- 控制 -> 客户端：`welcome|synctime { serverTime }`，`play { programId,startAtUtcMs,loop,screens }`，`stop`，`power { action }`
-- 客户端 -> 控制：`hello { deviceId, role }`，`ping`
+## WebSocket messages
+- server -> client: `welcome|synctime { serverTime }`, `play { programId,startAtUtcMs,loop,screens }`, `stop`, `power { action }`
+- client -> server: `hello { deviceId, role }`, `ping` (JSON) or WebSocket ping frame
 
-## 前端
-`public/index.html` 提供上传、节目列表、一键下发和排期管理。
+## Frontend
+`public/index.html` provides upload, program list, and manual broadcast tooling.

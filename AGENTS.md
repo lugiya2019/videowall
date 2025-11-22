@@ -7,9 +7,9 @@
 - `README-hand-off.md`: rapid ops reference—refresh after notable behavior changes.
 
 ## Build, Test, and Development Commands
-- Controller (local): `cd controller && npm install && npm start` (port 8080, WS `/ws`); `npm run dev` is identical. Docker: `npm install --production && docker compose up -d --build` from `controller/`.
+- Controller (local): `cd controller && npm install && npm start` (port 8088, WS `/ws`); `npm run dev` is identical. Docker: `npm install --production && docker compose up -d --build` from `controller/`.
 - Android: open `android-client/` in Android Studio; or `cd android-client && ./gradlew assembleLeftDebug` (swap flavor). APKs land in `android-client/app/build/outputs/apk/<flavor>/debug/`.
-- Smoke checks: `curl http://localhost:8080/api/ping`; then POST to `/api/broadcast` with a 5s-future `startAtUtcMs` to confirm devices sync.
+- Smoke checks: `curl http://localhost:8088/api/ping`; then POST to `/api/broadcast` with a 5s-future `startAtUtcMs` to confirm devices sync.
 
 ## Coding Style & Naming Conventions
 - JavaScript: ES modules, 2-space indent, semicolons, `const`/`let`; `camelCase` for code, lowercase REST paths (`/api/devices`, `/api/broadcast`). Keep WebSocket payload keys stable with the current schema.

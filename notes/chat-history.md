@@ -22,8 +22,8 @@
 - 下行：`welcome|synctime { serverTime }`；`play { programId, startAtUtcMs, loop, screens{ left|center|right{ url,effect,audio }}}`；`stop`；`power { action }`
 
 ## 运行/部署要点
-- 控制端本地：`cd controller && npm install && npm start`（默认 8080）。
-- 群晖：`docker compose up -d --build`（路径 `/volume1/videowall/controller`；端口 8080:8080）。
+- 控制端本地：`cd controller && npm install && npm start`（默认 8088）。
+- 群晖：`docker compose up -d --build`（路径 `/volume1/videowall/controller`；端口 8088:8088）。
 - 安卓：修改 `WS_URL` 指向 NAS；在 Android Studio 选 `leftDebug|centerDebug|rightDebug` 编译并装到对应屏幕。
 
 ## 待办/限制
@@ -33,4 +33,3 @@
 ## 参考指令
 - 同步播放示例（控制台填）：左/中/右 url，延时 5 秒，programId=demo。
 - 裁切 FFmpeg 示例：`ffmpeg -i full.mp4 -vf "crop=1080:1920:0:0" left.mp4` 等三条。
-

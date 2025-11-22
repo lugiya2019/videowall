@@ -8,7 +8,7 @@
 1. 用 Android Studio 打开本目录（`android-client`）。首次会提示生成 Gradle Wrapper，选择“OK”即可。
 2. 修改 `app/build.gradle` 中的 `WS_URL`，填入你 NAS 的 WebSocket 地址，例如：
    ```groovy
-   buildConfigField "String", "WS_URL", '"ws://192.168.1.50:8080/ws"'
+   buildConfigField "String", "WS_URL", '"ws://192.168.1.50:8088/ws"'
    ```
 3. 在 Build Variants 里选择 `leftDebug` / `centerDebug` / `rightDebug`，对应三块屏。
 4. 点击 Run ?? 将 APK 装到对应屏幕；或 Build > Build APK(s) 获取 `app/build/outputs/apk/<flavor>/` 下的 APK。

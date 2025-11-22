@@ -4,7 +4,7 @@ services:
     build: .
     container_name: videowall-controller
     ports:
-      - "8080:8080"
+      - "8088:8088"
     restart: unless-stopped
     volumes:
       - ./data:/app/data

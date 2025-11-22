@@ -10,7 +10,7 @@
   ```bash
   cd controller
   npm install
-  npm start  # http://<IP>:8080 ，WS: ws://<IP>:8080/ws
+  npm start  # http://<IP>:8088 ，WS: ws://<IP>:8088/ws
   ```
 - Docker（群晖/NAS）：
   ```bash
@@ -20,19 +20,19 @@
   ```
 
 ## 新增能力（v0.1.0+full-stack 分支）
-- **素材上传/自动裁切**：`POST /api/upload` 表单字段 `file`，假定 6000x1920，FFmpeg 自动裁三份存到 `controller/data/media/<programId>/`，生成节目清单与 sha256。
+- **素材上传/自动裁切**：`POST /api/upload` 字段 `file`，输入 6000x1920（视频或图片），FFmpeg 自动裁切到 `controller/data/media/<programId>/`，生成节目清单（含 sha256）。
 - **节目管理**：`GET /api/programs` 列表；`POST /api/programs/:id/broadcast` 直接下发；静态媒体通过 `/media/<programId>/left|center|right.<ext>` 访问。
 - **排期**：`POST /api/schedule` {programId,startAtUtcMs,loop}；`GET/DELETE /api/schedule`。服务启动会恢复未来排期并定时下发。
 - **客户端缓存/校验**：WS 下发的 `screens.{role}` 包含 `url`+`checksum`，Android 先下载到本地缓存并校验 sha256，校验通过后按 `startAtUtcMs` 同步播放；失败时回退为在线播放。
 - **APK 可直接安装**：release 构建复用 debug keystore 自动签名，输出：`android-client/app/build/outputs/apk/<role>/release/app-<role>-release.apk`。
 
 ## 控制台使用
-- 访问 `http://<IP>:8080`。
+- 访问 `http://<IP>:8088`。
 - 上传 6000x1920 素材，生成节目；列表中可一键下发；排期可设定开始时间（UTC 毫秒）。
 - 手动下发仍可直接输入三路 URL。
 
 ## Smoke 测试
-1. `curl http://localhost:8080/api/ping` 得到 serverTime。
+1. `curl http://localhost:8088/api/ping` 得到 serverTime。
 2. 上传任意 6000x1920 文件，确认返回节目 ID；`GET /api/programs` 能看到 slices 带 checksum。
 3. `POST /api/programs/<id>/broadcast` 并设置 5s 后 startAtUtcMs；在三台客户端观察同步播放，中心有声，左右静音。
 4. `POST /api/schedule` 设定未来时间，等待自动下发；`GET /api/schedule` 倒计时应减少，触发后从列表移除。
@@ -50,3 +50,8 @@
 ## 打包
 - 控制端 Docker 镜像：在 `controller/` 运行 `npm install --production && docker compose up -d --build`。
 - Android：`cd android-client && ./gradlew assembleLeftRelease assembleCenterRelease assembleRightRelease`，APK 输出见上。
+
+## ����������� (2025-11-22)
+- �¼ӿ� /api/client-ips �洢����/�м�/�ҵ����� IP����̨�����е� IP ���������ݣ����浽 controller/data/clients.json��
+- Android �ͻ��� UI �ϼ��� IP ��ʾ��λ������Ϣ���棬����ָ������ȷ�豸��ַ��
+

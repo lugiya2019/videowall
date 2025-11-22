@@ -1,0 +1,9 @@
+{
+  "version": "0.3.1",
+  "files": {
+    "left": "/apk/videowall-left-release-v0.3.1-latest.apk",
+    "center": "/apk/videowall-center-release-v0.3.1-latest.apk",
+    "right": "/apk/videowall-right-release-v0.3.1-latest.apk",
+    "universal": "/apk/videowall-center-release-v0.3.1-latest.apk"
+  }
+}
