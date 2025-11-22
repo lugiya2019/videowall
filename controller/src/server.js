@@ -443,12 +443,13 @@ function buildNormalized(input, output, mode, isImage) {
 }
 
 function runFfmpeg(input, output, filter, isImage) {
+  const ffmpegBin = resolveFfmpeg();
   const args = ["-i", input, "-y", "-vf", filter];
   if (isImage) {
     args.push("-frames:v", "1");
   }
   args.push(output);
-  const res = spawnSync("ffmpeg", args, { stdio: "inherit" });
+  const res = spawnSync(ffmpegBin, args, { stdio: "inherit" });
   if (res.status !== 0) {
     throw new Error("ffmpeg failed for " + output);
   }
@@ -459,8 +460,9 @@ function createPreview(input, output, isImage) {
     fs.copyFileSync(input, output);
     return;
   }
+  const ffmpegBin = resolveFfmpeg();
   const args = ["-i", input, "-y", "-vframes", "1", "-q:v", "2", output];
-  const res = spawnSync("ffmpeg", args, { stdio: "inherit" });
+  const res = spawnSync(ffmpegBin, args, { stdio: "inherit" });
   if (res.status !== 0) {
     throw new Error("ffmpeg preview failed for " + output);
   }
@@ -473,7 +475,7 @@ function buildLocalPackage(program) {
   for (const role of Object.keys(program.slices || {})) {
     const slice = program.slices[role];
     const src = fileFromUrl(slice.url);
-    if (!src || !fs.existsSync(src)) throw new Error(`slice missing for ${role}`);
+  if (!src || !fs.existsSync(src)) throw new Error(`slice missing for ${role}`);
     const ext = path.extname(src) || ".bin";
     const dest = path.join(dir, `${role}${ext}`);
     fs.copyFileSync(src, dest);
@@ -503,6 +505,12 @@ function createTarGz(srcDir, outFile) {
   if (tarRes.status !== 0) {
     throw new Error("tar failed to create bundle");
   }
+}
+
+function resolveFfmpeg() {
+  const localBin = path.join(__dirname, "..", "bin", "ffmpeg.exe");
+  if (fs.existsSync(localBin)) return localBin;
+  return "ffmpeg";
 }
 
 function sha256File(fp) {

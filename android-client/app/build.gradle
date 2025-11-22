@@ -11,8 +11,9 @@ android {
         applicationId "com.videowall.client"
         minSdk 21
         targetSdk 34
-        versionCode 6
-        versionName "0.3.1"
+        versionCode 7
+        versionName "0.3.2"
+        manifestPlaceholders = [ screenOrientation: "landscape" ]
         buildConfigField "String", "WS_URL", '"ws://192.168.1.10:8088/ws"'
     }
 
@@ -42,14 +43,17 @@ android {
         left {
             dimension "screen"
             buildConfigField "String", "ROLE", '"left"'
+            manifestPlaceholders = [ screenOrientation: "portrait" ]
         }
         center {
             dimension "screen"
             buildConfigField "String", "ROLE", '"center"'
+            manifestPlaceholders = [ screenOrientation: "landscape" ]
         }
         right {
             dimension "screen"
             buildConfigField "String", "ROLE", '"right"'
+            manifestPlaceholders = [ screenOrientation: "portrait" ]
         }
     }
 
