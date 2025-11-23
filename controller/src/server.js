@@ -139,8 +139,10 @@ const upload = multer({ dest: UPLOAD_DIR });
 app.post("/api/upload", upload.single("file"), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: "file missing" });
   const mode = (req.body?.mode || "cover").toLowerCase(); // cover|contain|stretch
+  const gap1 = Number(req.body?.gap1 || 0);
+  const gap2 = Number(req.body?.gap2 || 0);
   try {
-    const program = await processUpload(req.file, mode);
+    const program = await processUpload(req.file, mode, gap1, gap2);
     programs = upsertProgram(programs, program);
     saveJson(PROGRAMS_FILE, programs);
     res.json({ ok: true, program });
@@ -259,7 +261,9 @@ wss.on("connection", (ws, req) => {
         const info = devices.get(msg.deviceId);
         info.lastSeen = Date.now();
       }
-      ws.send(JSON.stringify({ type: "pong", serverTime: Date.now() }));
+      const resp = { type: "pong", serverTime: Date.now() };
+      if (msg.ts) resp.echo = msg.ts;
+      ws.send(JSON.stringify(resp));
     }
 
     if (msg.type === "ready") {
@@ -371,7 +375,7 @@ function upsertProgram(list, program) {
   return [...list, program];
 }
 
-async function processUpload(file, mode = "cover") {
+async function processUpload(file, mode = "cover", gap1 = 0, gap2 = 0) {
   const programId = path.parse(file.originalname).name.replace(/\W+/g, "_") + "_" + Date.now();
   const isImage = file.mimetype?.startsWith("image/");
   const origExt = (path.extname(file.originalname) || "").toLowerCase();
@@ -383,15 +387,7 @@ async function processUpload(file, mode = "cover") {
   const normalized = path.join(destDir, `normalized${normExt}`);
   buildNormalized(file.path, normalized, mode, isImage);
 
-  const outputs = {
-    left: path.join(destDir, `left${sliceExt}`),
-    center: path.join(destDir, `center${sliceExt}`),
-    right: path.join(destDir, `right${sliceExt}`),
-  };
-
-  runFfmpeg(normalized, outputs.left, "crop=1080:1920:0:0", isImage);
-  runFfmpeg(normalized, outputs.center, "crop=3840:1920:1080:0", isImage);
-  runFfmpeg(normalized, outputs.right, "crop=1080:1920:4920:0", isImage);
+  const { slicesMeta, outputs } = cropWithBezels(normalized, destDir, sliceExt, gap1, gap2, isImage);
 
   const previews = {
     left: path.join(destDir, "preview-left.png"),
@@ -423,8 +419,34 @@ async function processUpload(file, mode = "cover") {
     createdAt: Date.now(),
     sourceFile: file.originalname,
     mode,
+    bezels: { gap1, gap2 },
     slices,
   };
+}
+
+function cropWithBezels(input, destDir, sliceExt, gap1Raw, gap2Raw, isImage) {
+  const gap1 = Number(gap1Raw) || 0;
+  const gap2 = Number(gap2Raw) || 0;
+  const virtualWidth = CANVAS_W + gap1 + gap2;
+  const scale = CANVAS_W / virtualWidth;
+  const wL = Math.round(1080 * scale);
+  const wC = Math.round(3840 * scale);
+  const wR = Math.round(1080 * scale);
+  const xL = 0;
+  const xC = Math.round((1080 + gap1) * scale);
+  const xR = Math.round((1080 + gap1 + 3840 + gap2) * scale);
+
+  const outputs = {
+    left: path.join(destDir, `left${sliceExt}`),
+    center: path.join(destDir, `center${sliceExt}`),
+    right: path.join(destDir, `right${sliceExt}`),
+  };
+
+  runFfmpeg(input, outputs.left, `crop=${wL}:${CANVAS_H}:${xL}:0`, isImage);
+  runFfmpeg(input, outputs.center, `crop=${wC}:${CANVAS_H}:${xC}:0`, isImage);
+  runFfmpeg(input, outputs.right, `crop=${wR}:${CANVAS_H}:${xR}:0`, isImage);
+
+  return { slicesMeta: { wL, wC, wR, xL, xC, xR }, outputs };
 }
 
 function buildNormalized(input, output, mode, isImage) {
@@ -495,8 +517,23 @@ function buildLocalPackage(program) {
 }
 
 function fileFromUrl(urlStr) {
-  if (!urlStr.startsWith("/media/")) return null;
-  return path.join(DATA_DIR, urlStr.replace("/media/", "media/"));
+  try {
+    // Absolute http(s) url that points back to our /media paths
+    if (urlStr.startsWith("http://") || urlStr.startsWith("https://")) {
+      const u = new URL(urlStr);
+      if (u.pathname.startsWith("/media/")) {
+        return path.join(DATA_DIR, u.pathname.replace("/media/", "media/"));
+      }
+      return null;
+    }
+    // Already a server path
+    if (urlStr.startsWith("/media/")) return path.join(DATA_DIR, urlStr.replace("/media/", "media/"));
+    // Raw media path stored without leading slash
+    if (urlStr.startsWith("media/")) return path.join(DATA_DIR, urlStr);
+  } catch (_e) {
+    // ignore malformed URL
+  }
+  return null;
 }
 
 function createTarGz(srcDir, outFile) {
@@ -521,7 +558,12 @@ function sha256File(fp) {
 
 function scheduleEntry(entry) {
   const delay = entry.startAtUtcMs - Date.now();
-  if (delay < 0) return; // expired
+  if (delay < 0) {
+    // remove expired entry to avoid lingering stale schedules
+    schedules = schedules.filter((s) => s.id !== entry.id);
+    saveJson(SCHEDULE_FILE, schedules);
+    return;
+  }
   const timer = setTimeout(() => {
     const program = programs.find((p) => p.id === entry.programId);
     if (program) {

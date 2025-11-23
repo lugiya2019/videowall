@@ -1,25 +1,26 @@
 <!doctype html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VideoWall 控制台</title>
   <style>
     :root {
-      --bg: radial-gradient(circle at 20% 20%, #14213d, #0b1021 40%), linear-gradient(135deg, #1f2937, #0f172a);
-      --card: rgba(255,255,255,0.06);
-      --card-border: rgba(255,255,255,0.1);
+      --bg: radial-gradient(circle at 20% 20%, #111827, #0b1021 40%), linear-gradient(135deg, #1f2937, #0f172a);
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.1);
       --text: #f8fafc;
       --muted: #9ca3af;
       --accent: #38bdf8;
       --accent-2: #a855f7;
       --success: #34d399;
       --danger: #f87171;
-      --shadow: 0 12px 30px rgba(0,0,0,0.35);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; padding: 24px;
-      font-family: "Segoe UI","PingFang SC",Arial,sans-serif;
+      font-family: "Segoe UI","Microsoft YaHei","PingFang SC",Arial,sans-serif;
       color: var(--text);
       background: var(--bg);
       min-height: 100vh;
@@ -40,82 +41,99 @@
       transition: transform 0.12s ease, box-shadow 0.12s ease;
       box-shadow: 0 6px 18px rgba(56,189,248,0.3);
     }
-    button:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(56,189,248,0.35);}
-    button.secondary {
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      box-shadow: none;
-    }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 16px; }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 16px;
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(56,189,248,0.35); }
+    button.secondary { background: rgba(255,255,255,0.06); color: var(--text); box-shadow: none; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; backdrop-filter: blur(12px); box-shadow: var(--shadow); }
     .card h3 { margin: 0 0 10px; font-size: 16px; letter-spacing: 0.2px; }
     table { border-collapse: collapse; width: 100%; font-size: 14px; }
     th, td { border-bottom: 1px solid var(--card-border); padding: 8px 6px; text-align: left; }
     th { color: var(--muted); font-weight: 600; }
     tr:last-child td { border-bottom: none; }
     .row { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 10px; border-radius: 999px;
-      background: rgba(255,255,255,0.06); color: var(--muted); font-size: 12px;
-      border: 1px solid var(--card-border);
-    }
-    #previewArea img { border-radius: 8px; border: 1px solid var(--card-border); box-shadow: 0 4px 12px rgba(0,0,0,0.25);}
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--muted); font-size: 12px; border: 1px solid var(--card-border); }
+    #previewArea img { border-radius: 8px; border: 1px solid var(--card-border); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    .preview-row { display:flex; gap:12px; align-items:center; flex-wrap:nowrap; }
+    .preview-img.left, .preview-img.right { width:90px; height:160px; object-fit:cover; }
+    .preview-img.center { width:320px; height:160px; object-fit:cover; }
     pre { background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; color: #e5e7eb; overflow-x: auto; }
-    .stack { display:flex; flex-direction:column; gap:12px; }
-    .actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    nav.actions button.active { border: 1px solid var(--accent); }
   </style>
 </head>
 <body>
-  <div class="row" style="margin-bottom:16px; justify-content:space-between; align-items:center;">
-    <h1>视频墙控制台</h1>
-    <div class="actions">
-      <span class="pill">端口 8088 / WS /ws</span>
-      <button class="secondary" onclick="loadDevices()">刷新设备</button>
-      <button class="secondary" onclick="loadPrograms()">刷新节目</button>
-      <button class="secondary" onclick="loadSchedule()">刷新排程</button>
+  <header class="card" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <div>
+      <h1>视频墙控制台</h1>
+      <div class="pill">端口 8088 · WebSocket /ws</div>
+    </div>
+    <nav class="actions">
+      <button class="secondary active" onclick="switchView('dashboard', this)">概览</button>
+      <button class="secondary" onclick="switchView('devices', this)">设备</button>
+      <button class="secondary" onclick="switchView('broadcast', this)">广播</button>
+      <button class="secondary" onclick="switchView('upload', this)">上传/发布</button>
+      <button class="secondary" onclick="switchView('programs', this)">节目库</button>
+      <button class="secondary" onclick="switchView('schedule', this)">排程</button>
+      <button class="secondary" onclick="switchView('power', this)">电源</button>
+      <button class="secondary" onclick="switchView('settings', this)">设置</button>
+    </nav>
+  </header>
+
+  <div id="dashboard" class="view">
+    <div class="grid">
+      <section class="card">
+        <h3>实时设备</h3>
+        <table id="deviceTable">
+          <thead><tr><th>ID</th><th>角色</th><th>IP</th><th>状态</th><th>最近时间</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="actions" style="margin-top:8px;">
+          <button class="secondary" onclick="loadDevices()">刷新设备</button>
+        </div>
+      </section>
+      <section class="card stack">
+        <h3>快速广播</h3>
+        <div class="row">左 URL：<input id="urlLeft" size="48" placeholder="http://example/left.mp4"></div>
+        <div class="row">中 URL：<input id="urlCenter" size="48" placeholder="http://example/center.mp4"></div>
+        <div class="row">右 URL：<input id="urlRight" size="48" placeholder="http://example/right.mp4"></div>
+        <div class="row">延时(秒)：<input id="delay" type="number" value="5" min="0" style="width:80px"> 节目ID：<input id="programId" value="manual"></div>
+        <div class="actions">
+          <button onclick="sendPlay()">广播并同步</button>
+          <button class="secondary" onclick="sendStop()">停止</button>
+        </div>
+      </section>
     </div>
   </div>
 
-  <div class="grid">
+  <div id="devices" class="view" style="display:none;">
     <section class="card">
       <h3>连接设备</h3>
-      <table id="deviceTable">
+      <table id="deviceTable2">
         <thead><tr><th>ID</th><th>角色</th><th>IP</th><th>状态</th><th>最近时间</th></tr></thead>
         <tbody></tbody>
       </table>
-    </section>
-
-    <section class="card">
-      <h3>客户端 IP 配置</h3>
-      <div class="row">左屏 IP：<input id="ipLeft" size="18" placeholder="192.168.x.x"></div>
-      <div class="row">中屏 IP：<input id="ipCenter" size="18" placeholder="192.168.x.x"></div>
-      <div class="row">右屏 IP：<input id="ipRight" size="18" placeholder="192.168.x.x"></div>
-      <div class="actions">
-        <button onclick="saveClientIps()">保存</button>
-        <span id="ipSaveStatus" style="color:var(--success);"></span>
+      <div class="actions" style="margin-top:8px;">
+        <button onclick="loadDevices(true)">刷新设备</button>
       </div>
     </section>
+  </div>
 
-    <section class="card">
-      <h3>手动播发</h3>
-      <div class="row">左 URL：<input id="urlLeft" size="60" placeholder="http://example/left.mp4"></div>
-      <div class="row">中 URL：<input id="urlCenter" size="60" placeholder="http://example/center.mp4"></div>
-      <div class="row">右 URL：<input id="urlRight" size="60" placeholder="http://example/right.mp4"></div>
-      <div class="row">延时(秒)：<input id="delay" type="number" value="5" min="0" style="width:80px"> 节目ID：<input id="programId" value="manual"></div>
+  <div id="broadcast" class="view" style="display:none;">
+    <section class="card stack">
+      <h3>手动广播</h3>
+      <div class="row">左 URL：<input id="urlLeft2" size="60" placeholder="http://example/left.mp4"></div>
+      <div class="row">中 URL：<input id="urlCenter2" size="60" placeholder="http://example/center.mp4"></div>
+      <div class="row">右 URL：<input id="urlRight2" size="60" placeholder="http://example/right.mp4"></div>
+      <div class="row">延时(秒)：<input id="delay2" type="number" value="5" min="0" style="width:80px"> 节目ID：<input id="programId2" value="manual"></div>
       <div class="actions">
-        <button onclick="sendPlay()">播发并同步</button>
+        <button onclick="sendPlay(true)">广播并同步</button>
         <button class="secondary" onclick="sendStop()">停止</button>
       </div>
     </section>
+  </div>
 
+  <div id="upload" class="view" style="display:none;">
     <section class="card stack">
       <h3>素材上传（任意尺寸 → 适配 → 预览 → 发布）</h3>
       <div class="row">
@@ -126,6 +144,7 @@
           <option value="stretch">拉伸铺满</option>
         </select>
       </div>
+      <div class="row">屏间空隙 (像素)：Gap1 <input id="gap1" type="number" value="0" min="0" style="width:80px"> Gap2 <input id="gap2" type="number" value="0" min="0" style="width:80px"></div>
       <input type="file" id="uploadFile">
       <div class="actions">
         <button onclick="doUpload()">上传并生成节目</button>
@@ -133,17 +152,19 @@
       </div>
       <div id="previewArea" style="display:none;">
         <div class="row">预览（左 / 中 / 右）</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <img id="prevLeft" width="160">
-          <img id="prevCenter" width="160">
-          <img id="prevRight" width="160">
+        <div class="preview-row">
+          <img id="prevLeft" class="preview-img left" alt="左屏预览">
+          <img id="prevCenter" class="preview-img center" alt="中屏预览">
+          <img id="prevRight" class="preview-img right" alt="右屏预览">
         </div>
         <div class="actions" style="margin-top:8px;">
           <button onclick="confirmBroadcast()">确认发布并播放</button>
         </div>
       </div>
     </section>
+  </div>
 
+  <div id="programs" class="view" style="display:none;">
     <section class="card">
       <h3>节目列表</h3>
       <div class="row">
@@ -156,7 +177,9 @@
         <tbody></tbody>
       </table>
     </section>
+  </div>
 
+  <div id="schedule" class="view" style="display:none;">
     <section class="card">
       <h3>排程</h3>
       <div class="row">节目ID：<input id="schedProgramId" placeholder="program id"> 开始UTC毫秒：<input id="schedStart" size="20" placeholder="Date.now()+10000"></div>
@@ -169,7 +192,9 @@
         <tbody></tbody>
       </table>
     </section>
+  </div>
 
+  <div id="power" class="view" style="display:none;">
     <section class="card">
       <h3>电源控制</h3>
       <div class="actions">
@@ -180,107 +205,164 @@
     </section>
   </div>
 
+  <div id="settings" class="view" style="display:none;">
+    <section class="card">
+      <h3>客户端 IP 配置</h3>
+      <div class="row">左屏 IP：<input id="ipLeft" size="18" placeholder="192.168.x.x"></div>
+      <div class="row">中屏 IP：<input id="ipCenter" size="18" placeholder="192.168.x.x"></div>
+      <div class="row">右屏 IP：<input id="ipRight" size="18" placeholder="192.168.x.x"></div>
+      <div class="actions">
+        <button onclick="saveClientIps()">保存</button>
+        <span id="ipSaveStatus" style="color:var(--success);"></span>
+      </div>
+    </section>
+  </div>
+
   <pre id="log"></pre>
 
 <script>
-async function loadDevices() {
-  const res = await fetch('/api/devices');
-  const data = await res.json();
-  const tbody = document.querySelector('#deviceTable tbody');
-  tbody.innerHTML = '';
-  data.devices.forEach(d => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${d.id}</td><td>${d.role}</td><td>${d.ip||''}</td><td>${d.online?'在线':'离线'}</td><td>${new Date(d.lastSeen||0).toLocaleTimeString()}</td>`;
-    tbody.appendChild(tr);
-  });
+function switchView(id, btn) {
+  document.querySelectorAll(".view").forEach(v => v.style.display = v.id === id ? "block" : "none");
+  document.querySelectorAll("nav.actions button").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  if (id === "devices") loadDevices(true);
+  if (id === "programs") loadPrograms();
+  if (id === "schedule") loadSchedule();
 }
 
-async function sendPlay() {
-  const delay = Number(document.querySelector('#delay').value || 0);
-  const body = {
-    programId: document.querySelector('#programId').value || 'manual',
-    startAtUtcMs: Date.now() + delay * 1000,
-    loop: true,
-    screens: {
-      left:   { url: document.querySelector('#urlLeft').value, effect: 'fade', audio: false },
-      center: { url: document.querySelector('#urlCenter').value, effect: 'fade', audio: true },
-      right:  { url: document.querySelector('#urlRight').value, effect: 'fade', audio: false }
-    }
-  };
-  const res = await fetch('/api/broadcast', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
-  const data = await res.json();
-  log(JSON.stringify(data,null,2));
-}
-
-async function sendStop() {
-  const res = await fetch('/api/stop', { method:'POST' });
-  log(JSON.stringify(await res.json(), null, 2));
-}
-
-async function power(action){
-  const res = await fetch('/api/power', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action})});
-  log(JSON.stringify(await res.json(), null, 2));
-}
-
-async function doUpload(){
-  const fileInput = document.querySelector('#uploadFile');
-  if (!fileInput.files.length) { alert('请选择文件'); return; }
-  const form = new FormData();
-  form.append('file', fileInput.files[0]);
-  form.append('mode', document.querySelector('#mode').value);
-  document.querySelector('#uploadStatus').textContent = '上传中...';
-  document.querySelector('#previewArea').style.display = 'none';
-  const res = await fetch('/api/upload', { method:'POST', body: form });
-  const data = await res.json();
-  if (data.ok) {
-    const p = data.program;
-    document.querySelector('#uploadStatus').textContent = `生成节目 ${p.id}`;
-    document.querySelector('#previewArea').style.display = 'block';
-    document.querySelector('#prevLeft').src = p.slices.left.preview;
-    document.querySelector('#prevCenter').src = p.slices.center.preview;
-    document.querySelector('#prevRight').src = p.slices.right.preview;
-    window.__lastProgramId = p.id;
-    loadPrograms();
-  } else {
-    document.querySelector('#uploadStatus').textContent = `失败: ${data.error}`;
+async function safeFetch(url, opts = {}) {
+  try {
+    const res = await fetch(url, opts);
+    if (!res.ok) throw new Error(res.status + " " + res.statusText);
+    return res;
+  } catch (e) {
+    log("请求失败: " + e.message);
+    return null;
   }
 }
 
-async function confirmBroadcast(){
-  const pid = window.__lastProgramId;
-  if (!pid) { alert('没有可发布的节目'); return; }
-  const res = await fetch(`/api/programs/${pid}/broadcast`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ startAtUtcMs: Date.now()+5000 })});
-  const data = await res.json();
-  log(JSON.stringify(data,null,2));
-}
-
-async function loadPrograms(){
-  const res = await fetch('/api/programs');
-  const data = await res.json();
-  const tbody = document.querySelector('#programTable tbody');
-  tbody.innerHTML = '';
-  (data.programs||[]).forEach(p=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${p.id}</td><td>${p.title||''}</td><td>${new Date(p.createdAt).toLocaleString()}</td>
-    <td><button onclick="broadcastProgram('${p.id}')">播发</button></td>`;
+function renderDevices(selector, list = []) {
+  const tbody = document.querySelector(selector);
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  list.forEach((d) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${d.id}</td><td>${d.role}</td><td>${d.ip || ""}</td><td>${d.online ? "在线" : "离线"}</td><td>${new Date(d.lastSeen || 0).toLocaleTimeString()}</td>`;
     tbody.appendChild(tr);
   });
 }
 
-async function broadcastProgram(id){
-  const res = await fetch(`/api/programs/${id}/broadcast`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ startAtUtcMs: Date.now()+5000 })});
+async function loadDevices(refreshOnly = false) {
+  const res = await safeFetch("/api/devices");
+  if (!res) return;
+  const data = await res.json();
+  renderDevices("#deviceTable tbody", data.devices);
+  renderDevices("#deviceTable2 tbody", data.devices);
+  if (!refreshOnly) log(`设备数：${(data.devices || []).length}`);
+}
+
+async function sendPlay(useAlt = false) {
+  const delay = Number(document.querySelector(useAlt ? "#delay2" : "#delay").value || 0);
+  const body = {
+    programId: document.querySelector(useAlt ? "#programId2" : "#programId").value || "manual",
+    startAtUtcMs: Date.now() + delay * 1000,
+    loop: true,
+    screens: {
+      left: { url: document.querySelector(useAlt ? "#urlLeft2" : "#urlLeft").value, effect: "fade", audio: false },
+      center: { url: document.querySelector(useAlt ? "#urlCenter2" : "#urlCenter").value, effect: "fade", audio: true },
+      right: { url: document.querySelector(useAlt ? "#urlRight2" : "#urlRight").value, effect: "fade", audio: false },
+    },
+  };
+  const res = await safeFetch("/api/broadcast", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!res) return;
+  const data = await res.json();
+  log(JSON.stringify(data, null, 2));
+}
+
+async function sendStop() {
+  const res = await safeFetch("/api/stop", { method: "POST" });
+  if (!res) return;
   log(JSON.stringify(await res.json(), null, 2));
 }
 
-async function saveCustom(){
-  const title = document.querySelector('#customTitle').value || 'custom';
-  const id = title.toLowerCase().replace(/[^a-z0-9]+/g,'_') + '_' + Date.now();
+async function power(action) {
+  const res = await safeFetch("/api/power", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action }) });
+  if (!res) return;
+  log(JSON.stringify(await res.json(), null, 2));
+}
+
+async function doUpload() {
+  const fileInput = document.querySelector("#uploadFile");
+  if (!fileInput.files.length) {
+    alert("请选择文件");
+    return;
+  }
+  const form = new FormData();
+  form.append("file", fileInput.files[0]);
+  form.append("mode", document.querySelector("#mode").value);
+  form.append("gap1", document.querySelector("#gap1").value || "0");
+  form.append("gap2", document.querySelector("#gap2").value || "0");
+  document.querySelector("#uploadStatus").textContent = "上传中...";
+  document.querySelector("#previewArea").style.display = "none";
+  const res = await safeFetch("/api/upload", { method: "POST", body: form });
+  if (!res) return;
+  const data = await res.json();
+  if (data.ok) {
+    const p = data.program;
+    document.querySelector("#uploadStatus").textContent = `生成节目 ${p.id}`;
+    document.querySelector("#previewArea").style.display = "block";
+    document.querySelector("#prevLeft").src = p.slices.left.preview;
+    document.querySelector("#prevCenter").src = p.slices.center.preview;
+    document.querySelector("#prevRight").src = p.slices.right.preview;
+    window.__lastProgramId = p.id;
+    loadPrograms();
+  } else {
+    document.querySelector("#uploadStatus").textContent = `失败: ${data.error}`;
+  }
+}
+
+async function confirmBroadcast() {
+  const pid = window.__lastProgramId;
+  if (!pid) {
+    alert("没有可发布的节目");
+    return;
+  }
+  const res = await safeFetch(`/api/programs/${pid}/broadcast`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ startAtUtcMs: Date.now() + 5000 }) });
+  if (!res) return;
+  const data = await res.json();
+  log(JSON.stringify(data, null, 2));
+}
+
+async function loadPrograms() {
+  const res = await safeFetch("/api/programs");
+  if (!res) return;
+  const data = await res.json();
+  const tbody = document.querySelector("#programTable tbody");
+  tbody.innerHTML = "";
+  (data.programs || []).forEach((p) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${p.id}</td><td>${p.title || ""}</td><td>${new Date(p.createdAt).toLocaleString()}</td>
+    <td><button onclick="broadcastProgram('${p.id}')">播放</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+async function broadcastProgram(id) {
+  const res = await safeFetch(`/api/programs/${id}/broadcast`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ startAtUtcMs: Date.now() + 5000 }) });
+  if (!res) return;
+  log(JSON.stringify(await res.json(), null, 2));
+}
+
+async function saveCustom() {
+  const title = document.querySelector("#customTitle").value || "custom";
+  const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "_") + "_" + Date.now();
   const slices = {
-    left:   { url: document.querySelector('#urlLeft').value, effect: 'random', audio: false },
-    center: { url: document.querySelector('#urlCenter').value, effect: 'random', audio: true },
-    right:  { url: document.querySelector('#urlRight').value, effect: 'random', audio: false }
+    left: { url: document.querySelector("#urlLeft").value, effect: "random", audio: false },
+    center: { url: document.querySelector("#urlCenter").value, effect: "random", audio: true },
+    right: { url: document.querySelector("#urlRight").value, effect: "random", audio: false },
   };
-  const res = await fetch('/api/programs/custom', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id, title, slices })});
+  const res = await safeFetch("/api/programs/custom", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, title, slices }) });
+  if (!res) return;
   const data = await res.json();
   if (data.ok) {
     loadPrograms();
@@ -290,8 +372,9 @@ async function saveCustom(){
   }
 }
 
-async function refreshFromDisk(){
-  const res = await fetch('/api/programs/reload', { method:'POST' });
+async function refreshFromDisk() {
+  const res = await safeFetch("/api/programs/reload", { method: "POST" });
+  if (!res) return;
   const data = await res.json();
   if (data.ok) {
     loadPrograms();
@@ -301,57 +384,61 @@ async function refreshFromDisk(){
   }
 }
 
-async function addSchedule(){
-  const programId = document.querySelector('#schedProgramId').value;
-  const startAtUtcMs = Number(document.querySelector('#schedStart').value);
-  const res = await fetch('/api/schedule', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ programId, startAtUtcMs })});
+async function addSchedule() {
+  const programId = document.querySelector("#schedProgramId").value;
+  const startAtUtcMs = Number(document.querySelector("#schedStart").value);
+  const res = await safeFetch("/api/schedule", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ programId, startAtUtcMs }) });
+  if (!res) return;
   log(JSON.stringify(await res.json(), null, 2));
   loadSchedule();
 }
 
-async function loadSchedule(){
-  const res = await fetch('/api/schedule');
+async function loadSchedule() {
+  const res = await safeFetch("/api/schedule");
+  if (!res) return;
   const data = await res.json();
-  const tbody = document.querySelector('#scheduleTable tbody');
-  tbody.innerHTML = '';
-  (data.schedules||[]).forEach(s=>{
-    const tr = document.createElement('tr');
+  const tbody = document.querySelector("#scheduleTable tbody");
+  tbody.innerHTML = "";
+  (data.schedules || []).forEach((s) => {
+    const tr = document.createElement("tr");
     tr.innerHTML = `<td>${s.id}</td><td>${s.programId}</td><td>${new Date(s.startAtUtcMs).toLocaleString()}</td>
     <td><button onclick="deleteSchedule('${s.id}')">删除</button></td>`;
     tbody.appendChild(tr);
   });
 }
 
-async function deleteSchedule(id){
-  await fetch(`/api/schedule/${id}`, { method:'DELETE' });
+async function deleteSchedule(id) {
+  const res = await safeFetch(`/api/schedule/${id}`, { method: "DELETE" });
+  if (!res) return;
   loadSchedule();
 }
 
-function log(msg){
-  document.querySelector('#log').textContent = msg;
-}
+function log(msg) { document.querySelector("#log").textContent = msg; }
 
-async function loadClientIps(){
-  const res = await fetch('/api/client-ips');
+async function loadClientIps() {
+  const res = await safeFetch("/api/client-ips");
+  if (!res) return;
   const data = await res.json();
   const ips = data.clientIps || {};
-  document.querySelector('#ipLeft').value = ips.left || '';
-  document.querySelector('#ipCenter').value = ips.center || '';
-  document.querySelector('#ipRight').value = ips.right || '';
+  document.querySelector("#ipLeft").value = ips.left || "";
+  document.querySelector("#ipCenter").value = ips.center || "";
+  document.querySelector("#ipRight").value = ips.right || "";
 }
 
-async function saveClientIps(){
+async function saveClientIps() {
   const body = {
-    left: document.querySelector('#ipLeft').value,
-    center: document.querySelector('#ipCenter').value,
-    right: document.querySelector('#ipRight').value,
+    left: document.querySelector("#ipLeft").value,
+    center: document.querySelector("#ipCenter").value,
+    right: document.querySelector("#ipRight").value,
   };
-  const res = await fetch('/api/client-ips', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  const res = await safeFetch("/api/client-ips", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!res) return;
   const data = await res.json();
-  document.querySelector('#ipSaveStatus').textContent = data.ok ? '已保存' : (data.error||'失败');
-  setTimeout(() => document.querySelector('#ipSaveStatus').textContent = '', 2000);
+  document.querySelector("#ipSaveStatus").textContent = data.ok ? "已保存" : (data.error || "失败");
+  setTimeout(() => (document.querySelector("#ipSaveStatus").textContent = ""), 2000);
 }
 
+// 初始加载
 loadDevices();
 loadPrograms();
 loadSchedule();

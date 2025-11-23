@@ -1,9 +1,9 @@
 {
-  "version": "0.3.2",
+  "version": "1.0.0",
   "files": {
-    "left": "/apk/videowall-left-release-v0.3.2-latest.apk",
-    "center": "/apk/videowall-center-release-v0.3.2-latest.apk",
-    "right": "/apk/videowall-right-release-v0.3.2-latest.apk",
-    "universal": "/apk/videowall-center-release-v0.3.2-latest.apk"
+    "left": "/apk/videowall-left-release-v1.0.0-latest.apk",
+    "center": "/apk/videowall-center-release-v1.0.0-latest.apk",
+    "right": "/apk/videowall-right-release-v1.0.0-latest.apk",
+    "universal": "/apk/videowall-center-release-v1.0.0-latest.apk"
   }
 }
