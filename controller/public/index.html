@@ -135,7 +135,7 @@
 
   <div id="upload" class="view" style="display:none;">
     <section class="card stack">
-      <h3>素材上传（任意尺寸 → 适配 → 预览 → 发布）</h3>
+      <h3>节目制作（裁切 & 缝隙校准 & 预览）</h3>
       <div class="row">
         适配方式：
         <select id="mode">
@@ -144,7 +144,12 @@
           <option value="stretch">拉伸铺满</option>
         </select>
       </div>
-      <div class="row">屏间空隙 (像素)：Gap1 <input id="gap1" type="number" value="0" min="0" style="width:80px"> Gap2 <input id="gap2" type="number" value="0" min="0" style="width:80px"></div>
+      <div class="row">屏间缝隙 (像素)：Gap1 <input id="gap1" type="number" value="0" min="0" style="width:80px" oninput="updateGapPreview()"> Gap2 <input id="gap2" type="number" value="0" min="0" style="width:80px" oninput="updateGapPreview()"></div>
+      <div class="row">可视化示意：五段（左屏 | 缝1 | 中屏 | 缝2 | 右屏），帮助对齐实体边框。</div>
+      <div class="card" style="background:rgba(255,255,255,0.04);">
+        <div id="gapViz" style="display:flex;align-items:center;gap:4px;height:70px;"></div>
+        <div id="gapLabel" style="color:var(--muted);font-size:12px;margin-top:6px;"></div>
+      </div>
       <input type="file" id="uploadFile">
       <div class="actions">
         <button onclick="doUpload()">上传并生成节目</button>
@@ -443,6 +448,37 @@ loadDevices();
 loadPrograms();
 loadSchedule();
 loadClientIps();
+updateGapPreview();
+
+function updateGapPreview() {
+  const gap1 = Number(document.querySelector("#gap1").value || 0);
+  const gap2 = Number(document.querySelector("#gap2").value || 0);
+  const total = 1080 + gap1 + 3840 + gap2 + 1080;
+  const scale = 600 / total;
+  const segs = [
+    { w: 1080, color: "#38bdf8", label: "左屏" },
+    { w: gap1, color: "#f59e0b", label: `缝1 ${gap1}px` },
+    { w: 3840, color: "#22c55e", label: "中屏" },
+    { w: gap2, color: "#f59e0b", label: `缝2 ${gap2}px` },
+    { w: 1080, color: "#38bdf8", label: "右屏" },
+  ];
+  const viz = document.querySelector("#gapViz");
+  viz.innerHTML = "";
+  segs.forEach((s) => {
+    const div = document.createElement("div");
+    div.style.width = `${Math.max(s.w * scale, 2)}px`;
+    div.style.height = "40px";
+    div.style.background = s.color;
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "center";
+    div.style.fontSize = "11px";
+    div.style.color = "#0b1021";
+    div.textContent = s.label;
+    viz.appendChild(div);
+  });
+  document.querySelector("#gapLabel").textContent = `总宽 ${total}px，缩放预览 600px；缝隙将被“压缩”掉，避免实际拼缝的黑边。`;
+}
 </script>
 </body>
 </html>

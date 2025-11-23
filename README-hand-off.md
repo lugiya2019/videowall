@@ -1,4 +1,4 @@
-# VideoWall Hand-off (2025-11-23, v1.0.0)
+# VideoWall Hand-off (2025-11-23, v0.4.0)
 
 ## 项目结构
 - `controller/` Node.js 控制端（Express + WebSocket，静态控制台在 `public/`，媒体/节目存储在 `data/`）。
@@ -19,34 +19,34 @@
   docker compose up -d --build
   ```
 
-## 新增能力（v1.0.0）
-- **可视化裁切 + 屏缝补偿**：控制台上传页新增 Gap1/Gap2，FFmpeg 会按“左竖-中横-右竖”裁切，并压缩两段可配置缝隙，适配物理边框。
-- **客户端内建主机/从机同步**：默认中屏为主机，开启本地 WS(47999) 对时并下发 prepare/start/sync；左右屏只需连主机即可同步播放，脱离控制端时钟。
-- **本地缓存与开机自播**：节目下载后写入缓存并持久化清单；主机重启自动读取上次节目并再次协调三屏播放。运行时每 2s 漂移检测，>150ms 直接 seek，40~150ms 轻微调速。
-- **版本号提升**：后端 1.0.0，Android 1.0.0 (versionCode 10)，新增依赖 `org.java-websocket` 作为主机 WS。
-- **APK 输出**：`android-client/app/build/outputs/apk/<role>/release/videowall-<role>-release-v1.0.0-*.apk`（自动签名，便于直装）。
+## 亮点（v0.4.0）
+- **可视化裁切 + 缝隙补偿**：上传页可输入 Gap1/Gap2，实时可视化五段（左屏 | 缝1 | 中屏 | 缝2 | 右屏），FFmpeg 按缩放后位置裁切并压缩缝隙，适配有边框的实体拼缝。
+- **客户端主机/从机同步**：默认中屏为主机，开启本地 WS(47999) 对时并下发 prepare/start/sync；左右屏仅需连主机即可同步播放，脱离控制端时钟。
+- **缓存 + 开机自播**：节目下载后缓存并持久化；主机重启会读取上次节目并自动协调播放。运行中每 2s 漂移检测，>150ms 直接 seek，40~150ms 微调倍速。
+- **APK 输出**：`android-client/app/build/outputs/apk/<role>/release/videowall-<role>-release-v0.4.0-*.apk`。
 
 ## 控制台使用
 - 访问 `http://<IP>:8088`。
-- 上传素材：可填 Gap1/Gap2（像素），预览按“左竖-中横-右竖”排布；生成节目后可一键发布。
-- 手动广播/排程与旧版一致。
+- “上传/发布”页：选择适配模式、填写缝隙 Gap1/Gap2（像素），查看可视化示意后上传；生成节目可一键发布，预览为“左竖-中横-右竖”。
+- 手动广播、节目列表、排程、电源控制均有独立页面，导航切换。
 
 ## Smoke 测试
 1. `curl http://localhost:8088/api/ping` 确认控制端存活。
-2. 上传 6000x1920 素材（含 Gap1/Gap2），看到三路预览；`GET /api/programs` 有新节目且包含 checksum。
+2. 上传 6000x1920 素材（含 Gap1/Gap2），检查预览与生成节目。
 3. 发布节目，三端（1 主 + 2 从）应在 5s 内同步播放，偏移 <50ms。
-4. 断网重启：关闭控制端，仅保留客户端，主机应自动读缓存并协调播放（左右屏需有缓存或能访问原 URL）。
+4. 断网重启仅保留客户端：主机应自动读缓存并协调播放（左右屏需能访问缓存或原 URL）。
 
 ## 已知限制
-- 未添加鉴权/HTTPS（建议反代）。
+- 未加鉴权/HTTPS（建议反代）。
 - FFmpeg 必须可执行；转码失败仅返回 500。
-- ExoPlayer 仍有弃用警告；未做断点续传/多次重试。
-- 主机假设左右屏能访问素材 URL 或已有缓存；纯离线环境需预装三路文件。
+- ExoPlayer 仍有弃用警告；未做断点续传/多重重试。
+- 主机假设左右屏能访问素材 URL 或已有缓存；纯离线需预装三路文件。
 
-## 需要调整的配置
+## 配置
 - 控制端：`PORT`、`HOST`、`PUBLIC_URL`。
-- 客户端：`app/build.gradle` 中的 `WS_URL`；从机如需自填主机 IP，可在首次运行后输入并保存（默认推断与控制端同一 IP，端口 47999）。
+  - 缓存/节目目录：`controller/data/`
+- 客户端：`app/build.gradle` 中 `WS_URL`（控制端地址）；从机的主机 WS 若未设置，会以控制端 IP 推断 47999 端口，可在 App 内手动修改后保存。
 
 ## 打包
-- 控制端 Docker 镜像：`cd controller && npm install --production && docker compose up -d --build`
+- 控制端 Docker：`cd controller && npm install --production && docker compose up -d --build`
 - Android：`cd android-client && ./gradlew assembleLeftRelease assembleCenterRelease assembleRightRelease`
