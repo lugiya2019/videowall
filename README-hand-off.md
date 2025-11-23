@@ -1,4 +1,4 @@
-# VideoWall Hand-off (2025-11-23, v0.4.0)
+# VideoWall Hand-off (2025-11-23, v0.4.0) — 版本号：0.4.0
 
 ## 项目结构
 - `controller/` Node.js 控制端（Express + WebSocket，静态控制台在 `public/`，媒体/节目存储在 `data/`）。
