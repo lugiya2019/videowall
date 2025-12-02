@@ -157,9 +157,9 @@
     .version-text { margin-top:8px; text-align:center; color:var(--muted); font-size:12px; }
 
     /* Top bar */
-    .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:8px; }
-    .topbar-title-bg { display:inline-block; background: linear-gradient(180deg, #0f1b2f, #0d1729); padding:6px 10px 2px; border-radius:10px 10px 0 0; }
-    .topbar-title { font-size:14px; font-weight:800; letter-spacing:0.4px; margin-top:-40px; }
+    .topbar { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:8px; }
+    .topbar-title-bg { display:inline-block; background: linear-gradient(180deg, #0f1b2f, #0d1729); padding:6px 10px 2px; border-radius:10px 10px 0 0; margin-top:20px; }
+    .topbar-title { font-size:14px; font-weight:800; letter-spacing:0.4px; margin:0; }
     .user-chip { display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid var(--card-border); }
     .dot-online { width:8px; height:8px; border-radius:50%; background:var(--success); box-shadow:0 0 0 4px rgba(34,197,94,0.15); }
 
@@ -281,6 +281,7 @@
           <div class="topbar-title-bg">
             <div class="topbar-title" id="topTitle">首页概览</div>
           </div>
+          <div style="height:20px;"></div>
         </div>
         <div class="user-chip">
           <span class="dot-online"></span>
