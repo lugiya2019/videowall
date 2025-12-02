@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <linearGradient
+        android:id="@+id/grad"
+        android:startX="0"
+        android:startY="0"
+        android:endX="108"
+        android:endY="108"
+        android:type="linear">
+        <item android:offset="0" android:color="#56CCF2" />
+        <item android:offset="1" android:color="#2F80ED" />
+    </linearGradient>
+    <path
+        android:fillColor="#111827"
+        android:pathData="M12,12h84v84h-84z"
+        android:fillAlpha="0.9" />
+    <path
+        android:fillColor="#4FD1C5"
+        android:fillAlpha="0.9"
+        android:pathData="M16,24h28v60h-28z" />
+    <path
+        android:fillColor="#60A5FA"
+        android:fillAlpha="0.95"
+        android:pathData="M40,18h28v72h-28z" />
+    <path
+        android:fillColor="#A78BFA"
+        android:fillAlpha="0.9"
+        android:pathData="M64,28h28v52h-28z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.9"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF"
+        android:pathData="M20,36h68M20,54h68M20,72h68" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,44h12v12h-12z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M58,60h12v12h-12z" />
+</vector>

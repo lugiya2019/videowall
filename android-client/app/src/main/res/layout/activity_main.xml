@@ -3,21 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="@drawable/bg_main_gradient">
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:keepScreenOn="true"
-        app:use_controller="false" />
+        android:background="@drawable/bg_main_gradient"
+        app:use_controller="false"
+        app:surface_type="texture_view"
+        app:resize_mode="fill" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="matrix"
         android:visibility="gone"
+        android:background="@drawable/bg_main_gradient"
         android:contentDescription="image_content" />
 
     <!-- Glass card showing status + version -->
@@ -26,10 +30,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
-        android:layout_margin="16dp"
+        android:layout_margin="18dp"
         android:background="@drawable/bg_info_card"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="14dp">
 
         <TextView
             android:id="@+id/roleBadge"
@@ -76,10 +80,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="IP: --"
-            android:textColor="#9FB4D5"
-            android:textSize="11sp" />
+        android:text="IP: --"
+        android:textColor="#9FB4D5"
+        android:textSize="11sp" />
     </LinearLayout>
+
+    <!-- Idle overlay -->
+    <TextView
+        android:id="@+id/idleOverlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="14dp"
+        android:background="@drawable/bg_info_card"
+        android:text="VideoWall · 就绪"
+        android:textColor="#E6F3FF"
+        android:textSize="18sp"
+        android:elevation="6dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/syncBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_margin="12dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="6dp"
+        android:background="@drawable/bg_badge"
+        android:text="Sync"
+        android:textColor="#0A0A0A"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:elevation="6dp" />
 
     <!-- Bottom control bar -->
     <LinearLayout
@@ -88,9 +121,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:padding="16dp"
+        android:padding="18dp"
         android:gravity="center"
-        android:background="@drawable/bg_bottom_bar">
+        android:background="@drawable/bg_bottom_bar"
+        android:elevation="6dp">
 
         <Button
             android:id="@+id/btnRetry"
@@ -120,6 +154,46 @@
             android:layout_height="44dp"
             android:layout_weight="1"
             android:text="Role" />
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/btnDownloadApk"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:text="下载APK" />
     </LinearLayout>
+
+    <!-- Cache progress (bottom-right) -->
+    <FrameLayout
+        android:id="@+id/cacheProgressWrap"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/cacheProgressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0" />
+
+        <TextView
+            android:id="@+id/cacheProgressText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:text="0%"
+            android:textSize="14sp" />
+    </FrameLayout>
 
 </FrameLayout>

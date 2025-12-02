@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VideoWall · 节目制作</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+    :root {
+      --bg: radial-gradient(circle at 15% 20%, #0f172a, #0a0f1e 45%), radial-gradient(circle at 80% 10%, #111827, #090d18 55%);
+      --panel: rgba(17, 24, 39, 0.8);
+      --panel-strong: rgba(12, 17, 29, 0.95);
+      --line: rgba(148, 163, 184, 0.16);
+      --accent: #3b82f6;
+      --accent-2: #f97316;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --ruler: #243352;
+      --grid: rgba(59, 73, 110, 0.28);
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.38);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 18px 18px 28px;
+      font-family: "Space Grotesk","Microsoft YaHei","PingFang SC",sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    h1 { margin: 0; font-size: 24px; letter-spacing: 0.3px; }
+    h3 { margin: 0; font-size: 16px; letter-spacing: 0.2px; }
+    p  { margin: 0; color: var(--muted); }
+    input, button {
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 8px 10px;
+      outline: none;
+      font-family: inherit;
+    }
+    input:focus { border-color: var(--accent); }
+    button {
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      color: #0b1021;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(59,130,246,0.28);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(59,130,246,0.34); }
+    button.secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1.7fr 0.95fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .panel.tight { padding: 12px 14px; }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 9px;
+      border-radius: 9px;
+      background: rgba(59,130,246,0.14);
+      color: #bfdbfe;
+      font-size: 12px;
+      border: 1px solid rgba(59,130,246,0.32);
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .spec {
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .spec strong { color: var(--text); }
+    /* stage */
+    .stage-card { position: relative; overflow: hidden; }
+    .stage-shell {
+      position: relative;
+      margin-top: 6px;
+      border-radius: 16px;
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      padding: 24px 22px 24px 26px;
+      overflow: hidden;
+    }
+    .stage-shell .ruler-h {
+      position: absolute;
+      top: 0;
+      left: 42px;
+      right: 0;
+      height: 28px;
+      background: #0f172a;
+      border-bottom: 1px solid var(--line);
+      background-image:
+        repeating-linear-gradient(to right, transparent 0, transparent 9px, rgba(255,255,255,0.22) 9px, rgba(255,255,255,0.22) 10px),
+        repeating-linear-gradient(to right, transparent 0, transparent 49px, rgba(255,255,255,0.35) 49px, rgba(255,255,255,0.35) 50px);
+      background-size: 10px 100%, 50px 100%;
+      opacity: 0.9;
+    }
+    .stage-shell .ruler-v {
+      position: absolute;
+      top: 28px;
+      left: 0;
+      bottom: 0;
+      width: 42px;
+      background: #0f172a;
+      border-right: 1px solid var(--line);
+      background-image:
+        repeating-linear-gradient(to bottom, transparent 0, transparent 9px, rgba(255,255,255,0.22) 9px, rgba(255,255,255,0.22) 10px),
+        repeating-linear-gradient(to bottom, transparent 0, transparent 49px, rgba(255,255,255,0.35) 49px, rgba(255,255,255,0.35) 50px);
+      background-size: 100% 10px, 100% 50px;
+      opacity: 0.9;
+    }
+    .stage-canvas {
+      margin-top: 26px;
+      margin-left: 38px;
+      background: radial-gradient(circle at 20% 30%, rgba(59,130,246,0.12), transparent 40%), radial-gradient(circle at 70% 70%, rgba(244,114,182,0.08), transparent 36%), rgba(255,255,255,0.02);
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      padding: 22px 18px 18px;
+      min-height: 360px;
+      display: flex;
+      gap: var(--gap-px, 22px);
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .stage-canvas::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      opacity: 0.32;
+    }
+    .screen {
+      position: relative;
+      border: 2px solid #273348;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #1c2435, #121a29);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.32);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .screen.hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(59,130,246,0.35);
+      transform: translateY(-2px);
+    }
+    .screen .label {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 4px 7px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .screen .fill {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.22), rgba(99,102,241,0.22));
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    .screen .content {
+      position: relative;
+      text-align: center;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--muted);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 10px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: #e2e8f0;
+    }
+    .chip.accent { background: rgba(59,130,246,0.18); border-color: rgba(59,130,246,0.35); color: #bfdbfe; }
+    .chip.warn { background: rgba(249,115,22,0.18); border-color: rgba(249,115,22,0.35); color: #ffd7a3; }
+    .drop-hint { opacity: 0.8; }
+    .material-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      max-height: 640px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+    .material-card {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.24);
+      cursor: grab;
+      transition: transform 0.12s ease, border-color 0.12s ease;
+    }
+    .material-card:active { cursor: grabbing; }
+    .material-card:hover { transform: translateY(-2px); border-color: rgba(59,130,246,0.35); }
+    .thumb {
+      width: 88px;
+      height: 66px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.28) 100%);
+    }
+    .mat-title { font-weight: 700; color: var(--text); }
+    .mat-meta { font-size: 12px; color: var(--muted); }
+    .controls-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .search { flex: 1; min-width: 140px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    /* collapse */
+    .collapsible { margin-top: 14px; }
+    .collapsible .head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .collapsible .chevron {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      transition: transform 0.16s ease;
+      font-size: 12px;
+    }
+    .collapsible.collapsed .chevron { transform: rotate(-90deg); }
+    .collapsible .body { margin-top: 10px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .hidden { display: none !important; }
+    /* modal */
+    .drop-choice {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+    .drop-choice .panel {
+      width: 420px;
+      max-width: 94vw;
+      text-align: center;
+    }
+    .drop-choice h4 { margin: 0 0 8px; }
+    .choice-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+    .note { color: var(--muted); font-size: 12px; margin-top: 10px; }
+    /* bottom info */
+    .timeline-list { display: flex; gap: 10px; flex-wrap: wrap; }
+    .timeline-chip {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px dashed var(--line);
+      background: rgba(255,255,255,0.04);
+      min-width: 140px;
+    }
+    .timeline-chip strong { display: block; color: var(--text); }
+    .timeline-chip small { color: var(--muted); }
+    /* scrollbars */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+    ::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.4); border-radius: 6px; }
+    @media (max-width: 1080px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="panel tight" style="margin-bottom:12px; display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+    <div>
+      <div class="badge" id="programBadge">重新搭建 · 节目制作</div>
+      <h1 style="margin-top:6px;">节目制作台</h1>
+      <p>仅重做节目制作页面，其余控制台保持原样。</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-end; min-width: 320px;">
+      <button class="secondary" style="align-self:flex-end;" onclick="window.location.href='index.html'">返回控制台</button>
+      <div class="spec-grid" style="width:100%;">
+        <div class="spec">左右屏 <strong>32\" 竖</strong> · 9:16<br><small>估算 398×708 mm</small></div>
+        <div class="spec">中屏 <strong>55\" 横</strong> · 16:9<br><small>估算 1218×685 mm</small></div>
+        <div class="spec">
+          默认缝隙/边框 (mm)<br>
+          <div class="controls-row" style="margin-top:6px;">
+            <input id="gapInput" type="number" min="0" value="25" style="width:90px;" />
+            <button class="secondary" id="applyGap" style="padding:8px 10px;">更新预估</button>
+          </div>
+          <small id="scaleLabel" style="color:var(--muted); display:block; margin-top:4px;"></small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel stage-card">
+      <div class="panel-head">
+        <div>
+          <h3>素材编辑区（含标尺）</h3>
+          <p>拖拽素材到指定屏幕；可选择单屏播放或三屏拼接。</p>
+        </div>
+        <div class="controls-row">
+          <button class="secondary" id="clearAll">清空素材</button>
+          <button id="mockPublish">暂存节目</button>
+        </div>
+      </div>
+      <div class="stage-shell">
+        <div class="ruler-h"></div>
+        <div class="ruler-v"></div>
+        <div class="stage-canvas" id="stageCanvas">
+          <div class="screen" data-screen="left">
+            <div class="label">左屏 · 32\" 竖</div>
+            <div class="content">
+              <div class="chip drop-hint">拖拽素材到这里</div>
+              <div class="chip">9:16</div>
+            </div>
+          </div>
+          <div class="screen" data-screen="center">
+            <div class="label">中屏 · 55\" 横</div>
+            <div class="content">
+              <div class="chip drop-hint">支持三屏拼接</div>
+              <div class="chip">16:9</div>
+            </div>
+          </div>
+          <div class="screen" data-screen="right">
+            <div class="label">右屏 · 32\" 竖</div>
+            <div class="content">
+              <div class="chip drop-hint">拖拽素材到这里</div>
+              <div class="chip">9:16</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>素材库（可拖拽）</h3>
+          <p>改成参考样式，直接将素材拖到屏幕。</p>
+        </div>
+        <div class="pill" id="libCount">0 个素材</div>
+      </div>
+      <div class="controls-row" style="margin-bottom:8px;">
+        <input class="search" id="searchInput" placeholder="按名称搜索素材…" />
+      </div>
+      <div class="material-list" id="materialList"></div>
+    </aside>
+  </main>
+
+  <section class="panel collapsible" id="playlistPanel">
+    <div class="head" id="playlistToggle">
+      <div class="chevron" aria-hidden="true">▶</div>
+      <strong>内容轮播</strong>
+      <span style="color:var(--muted); font-size:13px;">点击三角形可折叠/展开节目内容编辑区域</span>
+    </div>
+    <div class="body" id="playlistBody">
+      <div class="timeline-chip">
+        <strong>欢迎字幕 · 8s</strong>
+        <small>默认淡入淡出；对齐中屏底部</small>
+      </div>
+      <div class="timeline-chip">
+        <strong>宣传片段 · 15s</strong>
+        <small>可替换为三屏拼接视频</small>
+      </div>
+      <div class="timeline-chip">
+        <strong>轮播提示 · 6s</strong>
+        <small>内容可在此处继续调整</small>
+      </div>
+      <div class="timeline-chip">
+        <strong>备用静帧 · 10s</strong>
+        <small>为上下线做缓冲</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="drop-choice" id="dropChoice">
+    <div class="panel">
+      <h4>选择投放方式</h4>
+      <p id="choiceTitle" style="margin-bottom:6px;">把素材放到目标屏幕</p>
+      <div class="choice-buttons">
+        <button data-mode="single">单个屏幕播放</button>
+        <button data-mode="triple" style="background:linear-gradient(135deg,#f97316,#f59e0b); color:#0b0f1c;">三屏拼接（后台裁切）</button>
+      </div>
+      <div class="note">三屏拼接：把素材交给后台切割为左/中/右三段后同步播放。</div>
+      <div class="note" id="choiceTip"></div>
+    </div>
+  </div>
+
+  <script>
+    const materials = [
+      { id: "m-city", name: "城市夜景.mp4", info: "4K · 16:9 · 12s", gradient: "linear-gradient(135deg,#0ea5e9,#6366f1)", type: "video" },
+      { id: "m-brand", name: "品牌海报.jpg", info: "2160x3840 · 9:16", gradient: "linear-gradient(135deg,#f59e0b,#ef4444)", type: "image" },
+      { id: "m-food", name: "美食短片.mov", info: "1080p · 16:9 · 18s", gradient: "linear-gradient(135deg,#22d3ee,#a855f7)", type: "video" },
+      { id: "m-grid", name: "展会拼接.mp4", info: "3840x2160 · 16:9", gradient: "linear-gradient(135deg,#14b8a6,#3b82f6)", type: "video" },
+      { id: "m-logo", name: "Logo 占位.png", info: "透明 · 9:16", gradient: "linear-gradient(135deg,#64748b,#0ea5e9)", type: "image" }
+    ];
+
+    const state = {
+      dropTarget: null,
+      dropMaterial: null,
+      assigned: { left: null, center: null, right: null },
+      gapMm: 25
+    };
+
+    const screens = {
+      left:  computeSize(32, true),
+      right: computeSize(32, true),
+      center: computeSize(55, false)
+    };
+
+    function computeSize(diagonalInch, portrait = false) {
+      const ratioW = 16, ratioH = 9;
+      const inchW = diagonalInch * ratioW / Math.sqrt(ratioW * ratioW + ratioH * ratioH);
+      const inchH = diagonalInch * ratioH / Math.sqrt(ratioW * ratioW + ratioH * ratioH);
+      const mmW = inchW * 25.4;
+      const mmH = inchH * 25.4;
+      return portrait ? { w: mmH, h: mmW, diag: diagonalInch } : { w: mmW, h: mmH, diag: diagonalInch };
+    }
+
+    function initMaterials(listData = materials) {
+      const list = document.querySelector("#materialList");
+      list.innerHTML = "";
+      listData.forEach((m) => {
+        const card = document.createElement("div");
+        card.className = "material-card";
+        card.draggable = true;
+        card.dataset.id = m.id;
+        card.innerHTML = `
+          <div class="thumb" style="background:${m.gradient};"></div>
+          <div>
+            <div class="mat-title">${m.name}</div>
+            <div class="mat-meta">${m.info}</div>
+            <div class="tags" style="margin-top:6px;">
+              <span class="chip ${m.type === "video" ? "accent" : ""}">${m.type === "video" ? "视频" : "图片"}</span>
+              <span class="chip">可拖拽</span>
+            </div>
+          </div>
+        `;
+        card.addEventListener("dragstart", onDragStart);
+        list.appendChild(card);
+      });
+      document.querySelector("#libCount").textContent = `${listData.length} 个素材`;
+    }
+
+    function onDragStart(e) {
+      const id = e.currentTarget.dataset.id;
+      e.dataTransfer.setData("text/plain", id);
+      e.dataTransfer.effectAllowed = "copy";
+      document.body.classList.add("dragging");
+    }
+
+    function bindDrops() {
+      document.querySelectorAll(".screen").forEach(el => {
+        el.addEventListener("dragover", e => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = "copy";
+          el.classList.add("hover");
+        });
+        el.addEventListener("dragleave", () => el.classList.remove("hover"));
+        el.addEventListener("drop", e => {
+          e.preventDefault();
+          el.classList.remove("hover");
+          document.body.classList.remove("dragging");
+          const id = e.dataTransfer.getData("text/plain");
+          const mat = materials.find(m => m.id === id);
+          if (!mat) return;
+          state.dropTarget = el.dataset.screen;
+          state.dropMaterial = mat;
+          showChoice(mat, el.dataset.screen);
+        });
+      });
+    }
+
+    function showChoice(mat, target) {
+      const panel = document.querySelector("#dropChoice");
+      document.querySelector("#choiceTitle").textContent = `将「${mat.name}」放到 ${labelOf(target)}？`;
+      document.querySelector("#choiceTip").textContent = `当前选择：${target === "center" ? "中屏" : target === "left" ? "左屏" : "右屏"} · 可选单屏或三屏拼接`;
+      panel.style.display = "flex";
+    }
+
+    function hideChoice() {
+      document.querySelector("#dropChoice").style.display = "none";
+      state.dropMaterial = null;
+      state.dropTarget = null;
+    }
+
+    function labelOf(key) {
+      if (key === "left") return "左屏";
+      if (key === "center") return "中屏";
+      return "右屏";
+    }
+
+    function applyChoice(mode) {
+      if (!state.dropMaterial || !state.dropTarget) return hideChoice();
+      if (mode === "single") {
+        state.assigned[state.dropTarget] = { ...state.dropMaterial, mode: "single" };
+      } else {
+        state.assigned.left = { ...state.dropMaterial, mode: "triple" };
+        state.assigned.center = { ...state.dropMaterial, mode: "triple" };
+        state.assigned.right = { ...state.dropMaterial, mode: "triple" };
+      }
+      renderStage();
+      hideChoice();
+    }
+
+    function renderStage() {
+      ["left","center","right"].forEach(key => {
+        const el = document.querySelector(`.screen[data-screen="${key}"]`);
+        const data = state.assigned[key];
+        if (!el) return;
+        el.querySelector(".content").innerHTML = data
+          ? `<div class="chip accent">${data.mode === "triple" ? "三屏拼接" : "单屏播放"}</div>
+             <div class="chip" style="background:${data.gradient}; border-color:transparent; color:#0b1021; font-weight:700;">${data.name}</div>
+             <div class="chip">${data.info || ""}</div>`
+          : `<div class="chip drop-hint">拖拽素材到这里</div>
+             <div class="chip">${key === "center" ? "16:9" : "9:16"}</div>`;
+        const fill = el.querySelector(".fill");
+        if (data) {
+          if (!fill) {
+            const div = document.createElement("div");
+            div.className = "fill";
+            el.appendChild(div);
+          }
+          el.style.borderColor = data.mode === "triple" ? "rgba(249,115,22,0.8)" : "rgba(59,130,246,0.8)";
+        } else {
+          if (fill) fill.remove();
+          el.style.borderColor = "#273348";
+        }
+      });
+    }
+
+    function layoutStage() {
+      const gapMm = Number(document.querySelector("#gapInput").value || 25);
+      state.gapMm = gapMm;
+      const totalW = screens.left.w + screens.center.w + screens.right.w + gapMm * 2;
+      const maxH = Math.max(screens.left.h, screens.center.h, screens.right.h);
+      const wrap = document.querySelector("#stageCanvas");
+      const usableW = wrap.clientWidth - 12;
+      const scale = Math.min(usableW / totalW, 420 / maxH);
+      document.documentElement.style.setProperty("--gap-px", `${(gapMm) * scale}px`);
+      setScreenSize("left", screens.left, scale);
+      setScreenSize("center", screens.center, scale);
+      setScreenSize("right", screens.right, scale);
+      document.querySelector("#scaleLabel").textContent = `当前估算：左右 398×708 mm，中屏 1218×685 mm，间隙 ${gapMm} mm，显示比例 1mm ≈ ${scale.toFixed(2)}px`;
+    }
+
+    function setScreenSize(key, size, scale) {
+      const el = document.querySelector(`.screen[data-screen="${key}"]`);
+      if (!el) return;
+      el.style.width = `${(size.w * scale).toFixed(1)}px`;
+      el.style.height = `${(size.h * scale).toFixed(1)}px`;
+    }
+
+    function bindChoiceButtons() {
+      document.querySelectorAll(".choice-buttons button").forEach(btn => {
+        btn.addEventListener("click", () => applyChoice(btn.dataset.mode));
+      });
+      document.querySelector("#dropChoice").addEventListener("click", e => {
+        if (e.target.id === "dropChoice") hideChoice();
+      });
+    }
+
+    function bindControls() {
+      document.querySelector("#applyGap").addEventListener("click", layoutStage);
+      document.querySelector("#clearAll").addEventListener("click", () => {
+        state.assigned = { left: null, center: null, right: null };
+        renderStage();
+      });
+      document.querySelector("#mockPublish").addEventListener("click", () => {
+        const chosen = Object.values(state.assigned).filter(Boolean).length;
+        alert(chosen ? `已暂存：${chosen} 个屏幕绑定素材` : "还没有选择任何素材");
+      });
+      document.querySelector("#searchInput").addEventListener("input", e => {
+        const keyword = e.target.value.trim();
+        filterMaterials(keyword);
+      });
+      document.querySelector("#playlistToggle").addEventListener("click", () => {
+        document.querySelector("#playlistPanel").classList.toggle("collapsed");
+        document.querySelector("#playlistBody").classList.toggle("hidden");
+      });
+    }
+
+    function filterMaterials(keyword) {
+      const filtered = materials.filter(m => m.name.toLowerCase().includes(keyword.toLowerCase()));
+      initMaterials(filtered);
+    }
+
+    function initProgramBadge() {
+      const params = new URLSearchParams(location.search);
+      const pid = params.get("programId");
+      if (pid) document.querySelector("#programBadge").textContent = `载入节目：${pid}（等待接入后台）`;
+    }
+
+    function init() {
+      initMaterials();
+      bindDrops();
+      bindChoiceButtons();
+      bindControls();
+      initProgramBadge();
+      layoutStage();
+      renderStage();
+      window.addEventListener("resize", () => layoutStage());
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>

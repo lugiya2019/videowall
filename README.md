@@ -49,6 +49,6 @@ Each program slice carries `checksum` so clients can cache and verify.
 ## Known limits
 - No auth/HTTPS (LAN-only).  
 - Power control is soft (pause/resume).  
-- Upload auto-crops 6000x1920 into L/C/R; no transcoding beyond cropping.
+- Upload auto-crops into left 1080x1920 / center 3840x1920 / right 1080x1920; no transcoding beyond cropping.
 
 See `AGENTS.md` for contribution notes and `README-hand-off.md` for ops tips.

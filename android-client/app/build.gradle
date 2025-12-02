@@ -11,10 +11,10 @@ android {
         applicationId "com.videowall.client"
         minSdk 21
         targetSdk 34
-        versionCode 9
-        versionName "0.4.1"
+        versionCode 36
+        versionName "0.8.0"
         manifestPlaceholders = [ screenOrientation: "landscape" ]
-        buildConfigField "String", "WS_URL", '"ws://192.168.1.10:8088/ws"'
+        buildConfigField "String", "WS_URL", '"ws://192.168.12.193:8088/ws"'
     }
 
     signingConfigs {

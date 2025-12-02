@@ -19,12 +19,11 @@ docker compose up -d --build    # uses docker-compose.yml, mounts ./data and ./p
 - `GET /api/ping` simple health
 - `GET /api/status` version + uptime + counts
 - `GET /api/devices` list online devices
-- `POST /api/broadcast` { programId?, startAtUtcMs?, loop?, screens? }
 - `POST /api/stop` stop playback
 - `POST /api/power` { action }
-- `POST /api/upload` multipart `file` -> auto-slice 6000x1920 into L/C/R
+- `POST /api/control` { action } actions: pause|resume|stop|sync|next-program|prev-program|next-item|prev-item|snapshot
+- `POST /api/upload` multipart `file` -> auto-slice into L(1080x1920) / C(1920x1080) / R(1080x1920)
 - `GET /api/programs` / `GET /api/programs/:id`
-- `POST /api/programs/:id/broadcast` broadcast a program
 - `GET /api/schedule` list entries
 - `POST /api/schedule` create { programId, startAtUtcMs, loop }
 - `DELETE /api/schedule/:id` remove entry
@@ -36,4 +35,4 @@ Media is exposed at `/media/<programId>/left|center|right.<ext>` and includes `c
 - client -> server: `hello { deviceId, role }`, `ping` (JSON) or WebSocket ping frame
 
 ## Frontend
-`public/index.html` provides upload, program list, and manual broadcast tooling.
+`public/index.html` provides upload, material library, playlist editor, packaging preview, schedule setup, and power controls.
