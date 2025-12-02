@@ -154,6 +154,7 @@
     }
     .mode-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b1220; box-shadow:0 8px 18px rgba(168,85,247,0.35); }
     .mode-btn:not(.active):hover { border-color: var(--card-border); background:rgba(255,255,255,0.05); }
+    .version-text { margin-top:8px; text-align:center; color:var(--muted); font-size:12px; }
 
     /* Top bar */
     .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
@@ -223,8 +224,7 @@
       <div class="brand">
         <div class="brand-logo">BOE</div>
         <div class="brand-text">
-          <div class="name">商用图屏发布系统</div>
-          <div class="desc">VideoWall 控制台</div>
+          <div class="name">客厅视频墙控制台</div>
         </div>
       </div>
       <nav class="main-nav actions">
@@ -262,6 +262,7 @@
           <button class="mode-btn" id="modeScreen" onclick="setSystemMode('upload')"><span class="nav-label">画屏</span></button>
           <button class="mode-btn" id="modeSplice" onclick="setSystemMode('programs')"><span class="nav-label">拼接</span></button>
         </div>
+        <div class="version-text" id="serverVersion">v0.8.0</div>
       </div>
     </aside>
 
@@ -281,7 +282,7 @@
         </div>
         <div class="user-chip">
           <span class="dot-online"></span>
-          <span id="serverVersion">v0.8.0</span>
+          <span>在线</span>
         </div>
       </div>
 
