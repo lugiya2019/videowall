@@ -1,8 +1,1 @@
-﻿{
-  "version": "0.7.8",
-  "files": {
-    "left": "/apk/videowall-left-release-v0.7.8-20251130-170021.apk",
-    "center": "/apk/videowall-center-release-v0.7.8-20251130-170021.apk",
-    "right": "/apk/videowall-right-release-v0.7.8-20251130-190059.apk"
-  }
-}
+{"version":"0.8.0","files":{"left":"/apk/videowall-left-release-v0.8.0-20251202-130757.apk","center":"/apk/videowall-center-release-v0.8.0-20251202-130757.apk","right":"/apk/videowall-right-release-v0.8.0-20251202-130757.apk"}}
