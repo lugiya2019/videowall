@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VideoWall ����̨ v0.8.0</title>
+  <title>VideoWall 控制台 v0.8.0</title>
   <style>
     :root {
       --bg: #0d1526;
@@ -96,7 +96,7 @@
       background: transparent;
       color: var(--text);
       border: 1px solid transparent;
-      border-left: none; /* ���ϲ��������� */
+      border-left: none; /* 贴合侧边栏不留缝 */
       border-radius: 0 9px 9px 0;
       box-shadow: none;
       cursor: pointer;
@@ -191,7 +191,7 @@
     /* Collapse states */
     body.sidebar-collapsed .sidebar { transform: translateX(-100%); padding:18px 14px; border:none; box-shadow:none; }
     body.sidebar-collapsed .main-content { margin-left:0; }
-    /* ����ʱֻ������Ļ���ڲ�Ԫ�ر���ԭλ������λ�ƶ��� */
+    /* 收起时只滑出屏幕，内部元素保持原位，避免位移动画 */
 
     /* Animate sidebar using transform */
     body:not(.sidebar-collapsed) .sidebar { transform: translateX(0); }
@@ -206,7 +206,7 @@
     .anim-zoom { animation: zoomIn 0.35s ease; }
     .anim-push { animation: pushIn 0.4s ease; }
     .anim-wipe { animation: wipeIn 0.45s ease; }
-    /* ����������Ԫ��Ϣ */
+    /* 赏析弹窗与元信息 */
     .analysis-panel { width:min(1200px,96vw); }
     .analysis-body { display:flex; gap:14px; align-items:flex-start; min-height:320px; }
     .analysis-left { flex:0 0 44%; background:rgba(255,255,255,0.03); border:1px solid var(--card-border); border-radius:12px; padding:10px; display:flex; align-items:center; justify-content:center; }
@@ -224,49 +224,49 @@
       <div class="brand">
         <div class="brand-logo">BOE</div>
         <div class="brand-text">
-          <div class="name">������Ƶǽ����̨</div>
+          <div class="name">客厅视频墙控制台</div>
         </div>
       </div>
       <nav class="main-nav actions">
         <button class="nav-btn active" data-nav="dashboard" onclick="switchView('dashboard', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="4" rx="1.2"/><rect x="13" y="10" width="7" height="10" rx="1.2"/><rect x="4" y="13" width="7" height="7" rx="1.5"/></svg>
-          <span class="nav-label">��ҳ����</span>
+          <span class="nav-label">首页概览</span>
         </button>
         <button class="nav-btn" data-nav="materials" onclick="switchView('materials', this)">
           <svg viewBox="0 0 24 24"><path d="M3 7h8l2 3h8v9H3Z" stroke-linejoin="round"/><path d="M3 7V5h6l2 2" stroke-linecap="round"/></svg>
-          <span class="nav-label">�زĹ���</span>
+          <span class="nav-label">素材管理</span>
         </button>
         <button class="nav-btn" data-nav="upload" onclick="switchView('upload', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 12h8M12 9v6" stroke-linecap="round"/></svg>
-          <span class="nav-label">��Ŀ��ģ��</span>
+          <span class="nav-label">节目与模板</span>
         </button>
         <button class="nav-btn" data-nav="programs" onclick="switchView('programs', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M9 6v12M15 6v12M4 11h16" stroke-linecap="round"/></svg>
-          <span class="nav-label">��Ŀ��</span>
+          <span class="nav-label">节目库</span>
         </button>
         <button class="nav-btn" data-nav="schedule" onclick="switchView('schedule', this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 9v4l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="nav-label">�ų̹���</span>
+          <span class="nav-label">排程管理</span>
         </button>
         <button class="nav-btn" data-nav="devices" onclick="switchView('devices', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M9 19h6" stroke-linecap="round"/><path d="M10.5 16.5h3" stroke-linecap="round"/></svg>
-          <span class="nav-label">�豸����</span>
+          <span class="nav-label">设备管理</span>
         </button>
         <button class="nav-btn" data-nav="settings" onclick="switchView('settings', this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M4 12h2m12 0h2M12 4v2m0 12v2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6" stroke-linecap="round"/></svg>
-          <span class="nav-label">ϵͳ����</span>
+          <span class="nav-label">系统管理</span>
         </button>
       </nav>
       <div class="side-footer">
         <div class="mode-switch">
-          <button class="mode-btn" id="modeScreen" onclick="setSystemMode('upload')"><span class="nav-label">����</span></button>
-          <button class="mode-btn" id="modeSplice" onclick="setSystemMode('programs')"><span class="nav-label">ƴ��</span></button>
+          <button class="mode-btn" id="modeScreen" onclick="setSystemMode('upload')"><span class="nav-label">画屏</span></button>
+          <button class="mode-btn" id="modeSplice" onclick="setSystemMode('programs')"><span class="nav-label">拼接</span></button>
         </div>
         <div class="version-text" id="serverVersion">v0.8.0</div>
       </div>
     </aside>
 
-    <button id="sidebarToggle" class="sidebar-toggle" onclick="toggleSidebar()" aria-label="��������">
+    <button id="sidebarToggle" class="sidebar-toggle" onclick="toggleSidebar()" aria-label="收起侧边栏">
       <span class="toggle-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 5 7 12l7 7"></path>
@@ -277,92 +277,92 @@
     <div class="main-content">
       <div class="topbar">
         <div>
-          <div class="topbar-title" id="topTitle">��ҳ����</div>
+          <div class="topbar-title" id="topTitle">首页概览</div>
         </div>
         <div class="user-chip">
           <span class="dot-online"></span>
-          <span>����</span>
+          <span>在线</span>
         </div>
       </div>
 
       <div id="dashboard" class="view dashboard-view">
         <div class="stat-grid">
           <div class="stat-card">
-            <div class="stat-icon"><img src="/img/dashboard-1.png" alt="�豸"></div>
+            <div class="stat-icon"><img src="/img/dashboard-1.png" alt="设备"></div>
             <div>
-              <div class="stat-meta">�豸����</div>
+              <div class="stat-meta">设备数量</div>
               <div class="stat-value" id="statDevicesTotal">0</div>
-              <div class="stat-meta" id="statDevicesOnline">���� 0 ̨</div>
+              <div class="stat-meta" id="statDevicesOnline">在线 0 台</div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon"><img src="/img/dashboard-2.png" alt="��Ŀ"></div>
+            <div class="stat-icon"><img src="/img/dashboard-2.png" alt="节目"></div>
             <div>
-              <div class="stat-meta">��Ŀ����</div>
+              <div class="stat-meta">节目数量</div>
               <div class="stat-value" id="statPrograms">0</div>
-              <div class="stat-meta">������� <span id="statProgramsUpdated">-</span></div>
+              <div class="stat-meta">最近更新 <span id="statProgramsUpdated">-</span></div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon"><img src="/img/dashboard-3.png" alt="�ƻ�"></div>
+            <div class="stat-icon"><img src="/img/dashboard-3.png" alt="计划"></div>
             <div>
-              <div class="stat-meta">�ƻ�����</div>
+              <div class="stat-meta">计划数量</div>
               <div class="stat-value" id="statSchedules">0</div>
-              <div class="stat-meta" id="statNextSchedule">��һ�Σ�-</div>
+              <div class="stat-meta" id="statNextSchedule">下一次：-</div>
             </div>
           </div>
         </div>
 
         <div class="panel-grid">
           <section class="card">
-            <div class="panel-title">�豸״̬</div>
+            <div class="panel-title">设备状态</div>
             <div class="ring-wrap">
               <canvas id="deviceRing" width="200" height="200"></canvas>
               <div class="ring-center">
                 <div class="big" id="deviceRingTotal">0</div>
-                <div class="muted-text">̨</div>
+                <div class="muted-text">台</div>
               </div>
             </div>
             <ul class="legend">
-              <li><span class="swatch" style="background:#3b82f6"></span>���� <span id="legendOnline" style="margin-left:auto;">0</span></li>
-              <li><span class="swatch" style="background:#64748b"></span>���� <span id="legendOffline" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#3b82f6"></span>在线 <span id="legendOnline" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#64748b"></span>离线 <span id="legendOffline" style="margin-left:auto;">0</span></li>
             </ul>
           </section>
 
           <section class="card">
-            <div class="panel-title">�ز���Դ</div>
+            <div class="panel-title">素材资源</div>
             <div class="ring-wrap">
               <canvas id="materialRing" width="200" height="200"></canvas>
               <div class="ring-center">
                 <div class="big" id="materialRingTotal">0</div>
-                <div class="muted-text">����</div>
+                <div class="muted-text">总量</div>
               </div>
             </div>
             <ul class="legend">
-              <li><span class="swatch" style="background:#f59e0b"></span>ͼƬ <span id="legendPic" style="margin-left:auto;">0</span></li>
-              <li><span class="swatch" style="background:#22c55e"></span>��Ƶ <span id="legendVideo" style="margin-left:auto;">0</span></li>
-              <li><span class="swatch" style="background:#a855f7"></span>��Ƶ/���� <span id="legendAudio" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#f59e0b"></span>图片 <span id="legendPic" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#22c55e"></span>视频 <span id="legendVideo" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#a855f7"></span>音频/其他 <span id="legendAudio" style="margin-left:auto;">0</span></li>
             </ul>
           </section>
 
           <section class="card">
-            <div class="panel-title">�豸�ֲ�</div>
+            <div class="panel-title">设备分布</div>
             <div class="bar-chart" id="deviceBar"></div>
           </section>
         </div>
 
         <div class="panel-grid">
           <section class="card">
-            <div class="panel-title">�ƻ��������</div>
+            <div class="panel-title">计划审核提醒</div>
             <table id="scheduleReminder" style="width:100%; border-collapse:collapse; font-size:14px;">
               <thead>
-                <tr><th style="text-align:left;">���</th><th style="text-align:left;">�ƻ�����</th><th style="text-align:left;">�ƻ�״̬</th><th style="text-align:left;">��ʼʱ��</th><th style="text-align:left;">����</th></tr>
+                <tr><th style="text-align:left;">序号</th><th style="text-align:left;">计划名称</th><th style="text-align:left;">计划状态</th><th style="text-align:left;">开始时间</th><th style="text-align:left;">操作</th></tr>
               </thead>
               <tbody></tbody>
             </table>
           </section>
           <section class="card">
-            <div class="panel-title">�¼���¼</div>
+            <div class="panel-title">事件记录</div>
             <div class="event-list" id="eventList"></div>
           </section>
         </div>
@@ -370,10 +370,10 @@
 
       <div id="confirmModal" class="modal">
         <div class="panel" style="max-width:360px;">
-          <div id="confirmText" style="margin-bottom:12px;">ȷ�ϣ�</div>
+          <div id="confirmText" style="margin-bottom:12px;">确认？</div>
           <div class="actions" style="justify-content:flex-end;">
-            <button class="secondary" onclick="closeConfirm()">ȡ��</button>
-            <button onclick="runConfirm()">ȷ��</button>
+            <button class="secondary" onclick="closeConfirm()">取消</button>
+            <button onclick="runConfirm()">确定</button>
           </div>
         </div>
       </div>
@@ -384,13 +384,13 @@
     <div style="display:flex; gap:12px; align-items:stretch; flex:1; min-height:0;">
       <div style="width:240px; min-width:240px; display:flex; flex-direction:column; gap:8px; min-height:0;">
         <div class="card" style="background:rgba(255,255,255,0.03); flex:1; display:flex; flex-direction:column; min-height:0;">
-          <div style="font-weight:700; margin-bottom:6px;">Ŀ¼</div>
+          <div style="font-weight:700; margin-bottom:6px;">目录</div>
           <div id="mediaTree" style="flex:1; overflow:auto; display:flex; flex-direction:column; gap:2px;"></div>
         </div>
         <div class="card" style="background:rgba(255,255,255,0.03); flex:0 0 240px; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <div>Ԥ��</div>
-            <span id="mediaSelLabel" class="badge">δѡ��</span>
+            <div>预览</div>
+            <span id="mediaSelLabel" class="badge">未选择</span>
           </div>
           <div id="mediaPreview" style="flex:1; min-height:180px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.35); border:1px solid var(--card-border); border-radius:8px; overflow:hidden;"></div>
         </div>
@@ -401,7 +401,7 @@
           <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px;">
             <div id="mediaBreadcrumb" style="color:var(--muted); font-size:12px;">/media</div>
             <div style="display:flex; align-items:center; gap:6px;">
-              <button class="secondary" id="btnGenThumbs" onclick="generateThumbsForCurrent()">��������ͼ</button>
+              <button class="secondary" id="btnGenThumbs" onclick="generateThumbsForCurrent()">生成缩略图</button>
               <div id="thumbProgress" style="color:var(--muted); font-size:12px; min-width:140px;"></div>
             </div>
           </div>
@@ -409,18 +409,18 @@
         </div>
         <div class="card" style="background:rgba(255,255,255,0.03); width:320px; min-width:260px; max-width:360px; padding:10px; display:flex; flex-direction:column; gap:6px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div style="font-weight:700;">������Ϣ</div>
+            <div style="font-weight:700;">画作信息</div>
             <span id="metaStatus" style="color:var(--muted); font-size:12px;"></span>
           </div>
           <div id="metaTitle" style="font-size:14px; font-weight:700;"></div>
           <div id="metaArtist" style="color:var(--muted); font-size:13px;"></div>
           <div id="metaFields" style="display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:12px;"></div>
-          <div class="badge" style="background:rgba(255,255,255,0.05);">���</div>
+          <div class="badge" style="background:rgba(255,255,255,0.05);">简介</div>
           <div id="metaIntro" style="color:#e5e7eb; font-size:13px; line-height:1.5; white-space:pre-wrap;"></div>
-          <div class="badge" style="background:rgba(255,255,255,0.05);">����ժҪ</div>
+          <div class="badge" style="background:rgba(255,255,255,0.05);">赏析摘要</div>
           <div id="metaAnalysisPreview" style="color:#cbd5e1; font-size:13px; line-height:1.4; max-height:90px; overflow:hidden;"></div>
           <div class="actions" style="justify-content:flex-start; gap:6px;">
-            <button class="secondary" id="btnOpenAnalysis" style="display:none;" onclick="openAnalysisModal(mediaSelected, currentAnalysisInfo)">����������</button>
+            <button class="secondary" id="btnOpenAnalysis" style="display:none;" onclick="openAnalysisModal(mediaSelected, currentAnalysisInfo)">打开赏析弹窗</button>
           </div>
           <div id="metaExtra" style="color:#94a3b8; font-size:12px;"></div>
         </div>
@@ -433,10 +433,10 @@
   <div class="panel analysis-panel">
     <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
       <div>
-        <div id="analysisTitle" style="font-weight:800; font-size:18px; letter-spacing:0.3px;">����</div>
+        <div id="analysisTitle" style="font-weight:800; font-size:18px; letter-spacing:0.3px;">赏析</div>
         <div id="analysisSubtitle" style="color:var(--muted); font-size:13px;"></div>
       </div>
-      <button class="secondary" onclick="closeAnalysisModal()">�ر�</button>
+      <button class="secondary" onclick="closeAnalysisModal()">关闭</button>
     </div>
     <div class="analysis-body">
       <div class="analysis-left" id="analysisMedia"></div>
@@ -449,18 +449,18 @@
 
 <div id="devices" class="view" style="display:none;">
     <section class="card">
-      <h3>�����豸</h3>
+      <h3>连接设备</h3>
       <table id="deviceTable2">
-        <thead><tr><th>ID</th><th>��ɫ</th><th>IP</th><th>״̬</th><th>���ʱ��</th></tr></thead>
+        <thead><tr><th>ID</th><th>角色</th><th>IP</th><th>状态</th><th>最近时间</th></tr></thead>
         <tbody></tbody>
       </table>
       <div class="actions" style="margin-top:8px;">
-        <button onclick="loadDevices(true)">ˢ���豸</button>
+        <button onclick="loadDevices(true)">刷新设备</button>
       </div>
     </section>
   </div>
 
-  <!-- �㲥ҳ�����Ƴ���������ҳ���ٹ㲥 -->
+  <!-- 广播页面已移除，保留首页快速广播 -->
   <div id="upload" class="view" style="display:none;">
     <section class="card" style="padding:0; overflow:hidden;">
       <iframe id="builderFrame" src="program-builder.html" style="width:100%; min-height: calc(100vh - 180px); border:0; display:block;"></iframe>
@@ -470,44 +470,44 @@
   <div id="editModal" class="modal">
     <div class="panel">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-        <h4>�ز�΢�� / ����</h4>
-        <button class="secondary" onclick="closeEditModal()">�ر�</button>
+        <h4>素材微调 / 裁切</h4>
+        <button class="secondary" onclick="closeEditModal()">关闭</button>
       </div>
       <div class="preview-stage" id="editStage"></div>
       <div class="range-row">
-        ͼƬͣ��(��)��<input type="number" id="editDuration" value="5" min="1" style="width:90px">
-        ת��Ч����
+        图片停留(秒)：<input type="number" id="editDuration" value="5" min="1" style="width:90px">
+        转场效果：
         <select id="editEffect" onchange="renderEditPreview()">
-          <option value="random">���</option>
-          <option value="fade">���뵭��</option>
-          <option value="slide">����</option>
-          <option value="zoom">����</option>
-          <option value="push">����</option>
-          <option value="wipe">��Ҷ</option>
+          <option value="random">随机</option>
+          <option value="fade">淡入淡出</option>
+          <option value="slide">滑动</option>
+          <option value="zoom">缩放</option>
+          <option value="push">推拉</option>
+          <option value="wipe">百叶</option>
         </select>
       </div>
       <div class="range-row">
-        ����ƫ�� X��<input type="range" id="editOffsetX" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
+        裁切偏移 X：<input type="range" id="editOffsetX" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
         <span id="editOffsetXVal" style="min-width:50px;">0</span>
-        ����ƫ�� Y��<input type="range" id="editOffsetY" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
+        裁切偏移 Y：<input type="range" id="editOffsetY" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
         <span id="editOffsetYVal" style="min-width:50px;">0</span>
       </div>
       <div class="actions" style="justify-content:flex-end;">
-        <button onclick="applyEdit()">����</button>
+        <button onclick="applyEdit()">保存</button>
       </div>
     </div>
   </div>
 
   <div id="programs" class="view" style="display:none;">
     <section class="card">
-      <h3>��Ŀ�б�</h3>
+      <h3>节目列表</h3>
       <div class="row">
-        <input id="customTitle" placeholder="��Ŀ����" style="flex:1;min-width:160px">
-        <button class="secondary" onclick="saveCustom()">���浱ǰ����Ϊ��Ŀ</button>
-        <button class="secondary" onclick="refreshFromDisk()">���¶�ȡ��ĿĿ¼</button>
+        <input id="customTitle" placeholder="节目标题" style="flex:1;min-width:160px">
+        <button class="secondary" onclick="saveCustom()">保存当前三屏为节目</button>
+        <button class="secondary" onclick="refreshFromDisk()">重新读取节目目录</button>
       </div>
       <table id="programTable">
-        <thead><tr><th>ID</th><th>����</th><th>����ʱ��</th><th>����</th></tr></thead>
+        <thead><tr><th>ID</th><th>标题</th><th>创建时间</th><th>操作</th></tr></thead>
         <tbody></tbody>
       </table>
     </section>
@@ -515,14 +515,14 @@
 
   <div id="schedule" class="view" style="display:none;">
     <section class="card">
-      <h3>�ų�</h3>
-      <div class="row">��ĿID��<input id="schedProgramId" placeholder="program id"> ��ʼUTC���룺<input id="schedStart" size="20" placeholder="Date.now()+10000"></div>
+      <h3>排程</h3>
+      <div class="row">节目ID：<input id="schedProgramId" placeholder="program id"> 开始UTC毫秒：<input id="schedStart" size="20" placeholder="Date.now()+10000"></div>
       <div class="actions">
-        <button onclick="addSchedule()">����ų�</button>
-        <button class="secondary" onclick="loadSchedule()">ˢ���ų�</button>
+        <button onclick="addSchedule()">添加排程</button>
+        <button class="secondary" onclick="loadSchedule()">刷新排程</button>
       </div>
       <table id="scheduleTable">
-        <thead><tr><th>ID</th><th>��Ŀ</th><th>��ʼ</th><th>����</th></tr></thead>
+        <thead><tr><th>ID</th><th>节目</th><th>开始</th><th>操作</th></tr></thead>
         <tbody></tbody>
       </table>
     </section>
@@ -530,23 +530,23 @@
 
   <div id="power" class="view" style="display:none;">
     <section class="card">
-      <h3>��Դ����</h3>
+      <h3>电源控制</h3>
       <div class="actions">
-        <button onclick="power('sleep')">Ϩ��/��ͣ</button>
-        <button class="secondary" onclick="power('wake')">����</button>
-        <button class="secondary" onclick="power('reboot')">����</button>
+        <button onclick="power('sleep')">熄屏/暂停</button>
+        <button class="secondary" onclick="power('wake')">唤醒</button>
+        <button class="secondary" onclick="power('reboot')">重启</button>
       </div>
     </section>
   </div>
 
   <div id="settings" class="view" style="display:none;">
     <section class="card">
-      <h3>�ͻ��� IP ����</h3>
-      <div class="row">���� IP��<input id="ipLeft" size="18" placeholder="192.168.x.x"></div>
-      <div class="row">���� IP��<input id="ipCenter" size="18" placeholder="192.168.x.x"></div>
-      <div class="row">���� IP��<input id="ipRight" size="18" placeholder="192.168.x.x"></div>
+      <h3>客户端 IP 配置</h3>
+      <div class="row">左屏 IP：<input id="ipLeft" size="18" placeholder="192.168.x.x"></div>
+      <div class="row">中屏 IP：<input id="ipCenter" size="18" placeholder="192.168.x.x"></div>
+      <div class="row">右屏 IP：<input id="ipRight" size="18" placeholder="192.168.x.x"></div>
       <div class="actions">
-        <button onclick="saveClientIps()">����</button>
+        <button onclick="saveClientIps()">保存</button>
         <span id="ipSaveStatus" style="color:var(--success);"></span>
       </div>
     </section>
@@ -608,15 +608,15 @@ function startPreview() {
   }
   if (previewVideo.canPlayType("application/vnd.apple.mpegurl")) {
     previewVideo.src = src;
-    previewVideo.play().then(()=>{ if(status) status.textContent="������"; }).catch(()=>{ if(status) status.textContent="�����ʼ"; });
+    previewVideo.play().then(()=>{ if(status) status.textContent="播放中"; }).catch(()=>{ if(status) status.textContent="点击开始"; });
   } else if (window.Hls) {
     hlsPlayer = new Hls({ lowLatencyMode: true, maxBufferLength: 4, backBufferLength: 0, fragLoadingTimeOut: 4000 });
     hlsPlayer.loadSource(src);
     hlsPlayer.attachMedia(previewVideo);
-    hlsPlayer.on(Hls.Events.MANIFEST_PARSED, ()=>{ previewVideo.play().then(()=>{ if(status) status.textContent="������"; }); });
-    hlsPlayer.on(Hls.Events.ERROR, (_, data)=>{ if(data.fatal && status) status.textContent="Ԥ����������"; });
+    hlsPlayer.on(Hls.Events.MANIFEST_PARSED, ()=>{ previewVideo.play().then(()=>{ if(status) status.textContent="播放中"; }); });
+    hlsPlayer.on(Hls.Events.ERROR, (_, data)=>{ if(data.fatal && status) status.textContent="预览错误，重试"; });
   } else {
-    if (status) status.textContent = "��֧�� HLS";
+    if (status) status.textContent = "不支持 HLS";
   }
 }
 
@@ -624,7 +624,7 @@ function stopPreview() {
   if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
   if (!previewVideo) previewVideo = document.querySelector("#previewVideo");
   if (previewVideo) { previewVideo.pause(); previewVideo.removeAttribute("src"); previewVideo.load(); }
-  const status = document.querySelector("#previewStatus"); if (status) status.textContent = "��ֹͣ";
+  const status = document.querySelector("#previewStatus"); if (status) status.textContent = "已停止";
 }
 
 function refreshPreview() {
@@ -642,12 +642,12 @@ async function sendControl(action) {
     });
     const data = await res.json();
     if (data.ok) {
-      if (status) status.textContent = `�ѷ��ͣ�${action} �� ${new Date(data.serverTime || Date.now()).toLocaleTimeString()}`;
+      if (status) status.textContent = `已发送：${action} · ${new Date(data.serverTime || Date.now()).toLocaleTimeString()}`;
     } else {
-      if (status) status.textContent = data.error || "����ʧ��";
+      if (status) status.textContent = data.error || "发送失败";
     }
   } catch (e) {
-    if (status) status.textContent = "�������";
+    if (status) status.textContent = "网络错误";
   }
 }
 
@@ -659,7 +659,7 @@ function resetProgram() {
   document.querySelector("#programTagChips").innerHTML = "";
   document.querySelector("#totalDuration").textContent = "0s";
   const badge = document.querySelector("#currentProgBadge");
-  if (badge) badge.textContent = "��ǰ��Ŀ��δ����";
+  if (badge) badge.textContent = "当前节目：未命名";
   renderSlidesList();
 }
 
@@ -684,9 +684,9 @@ function switchView(id, btn, opts = {}) {
     }
   }
   if (id === "dashboard") startPreview(); else stopPreview();
-  const titles = { dashboard:"��ҳ����", devices:"�豸����", materials:"�زĹ���", upload:"��Ŀ��ģ��", programs:"��Ŀ��", schedule:"�ų̹���", power:"��Դ����", settings:"ϵͳ����" };
+  const titles = { dashboard:"首页概览", devices:"设备管理", materials:"素材管理", upload:"节目与模板", programs:"节目库", schedule:"排程管理", power:"电源控制", settings:"系统管理" };
   const titleEl = document.querySelector("#topTitle");
-  if (titleEl) titleEl.textContent = titles[id] || "����̨";
+  if (titleEl) titleEl.textContent = titles[id] || "控制台";
 }
 
 function refreshSidebarToggle() {
@@ -694,7 +694,7 @@ function refreshSidebarToggle() {
   if (!btn) return;
   const icon = btn.querySelector(".toggle-icon svg");
   if (icon) icon.style.transform = sidebarCollapsed ? "rotate(180deg)" : "rotate(0deg)";
-  btn.setAttribute("aria-label", sidebarCollapsed ? "չ�������" : "��������");
+  btn.setAttribute("aria-label", sidebarCollapsed ? "展开侧边栏" : "收起侧边栏");
 }
 
 function applySidebarState() {
@@ -729,12 +729,12 @@ async function safeFetch(url, opts = {}) {
     if (!res.ok) throw new Error(res.status + " " + res.statusText);
     return res;
   } catch (e) {
-    log("����ʧ��: " + e.message);
+    log("请求失败: " + e.message);
     return null;
   }
 }
 
-// -------- �ļ����زĹ����֧��ͬ�� JSON / Ŀ¼ meta�� --------
+// -------- 文件树素材管理（支持同名 JSON / 目录 meta） --------
 async function loadMediaTree(path = mediaCurrentPath || "") {
   mediaCurrentPath = path;
   const params = new URLSearchParams();
@@ -771,7 +771,7 @@ function renderMediaTree(path="") {
     row.onmouseenter = ()=> row.style.background = "rgba(255,255,255,0.04)";
     row.onmouseleave = ()=> row.style.background = "transparent";
     const open = mediaTreeOpen.has(node.path || "");
-    const caret = document.createElement("span"); caret.textContent = open ? "��" : "?"; caret.style.color="var(--muted)";
+    const caret = document.createElement("span"); caret.textContent = open ? "▼" : "▶"; caret.style.color="var(--muted)";
     const name = document.createElement("span"); name.textContent = node.name || (node.path?node.path.split("/").pop():"media"); name.style.color = node.path===path ? "var(--accent)" : "#fff";
     row.appendChild(caret); row.appendChild(name);
     row.onclick = () => { if (open) mediaTreeOpen.delete(node.path||""); else mediaTreeOpen.add(node.path||""); loadMediaTree(node.path||""); };
@@ -794,20 +794,20 @@ function renderMediaFiles(){
     if (!(isImage||isVideo)) return;
     items.push({ type:"file", name:f.name, path:f.path, mtime:f.mtime, size:f.size, isMedia:true });
   });
-  if (!items.length) { const p=document.createElement("div"); p.style.color="var(--muted)"; p.textContent="��Ŀ¼�������ļ�"; grid.appendChild(p); return; }
+  if (!items.length) { const p=document.createElement("div"); p.style.color="var(--muted)"; p.textContent="该目录下暂无文件"; grid.appendChild(p); return; }
   items.forEach(item=>{
     const card=document.createElement("div"); card.className="media-card";
     if (item.type === "dir") card.onclick=()=>loadMediaTree(item.path); else { card.onclick=()=>selectMediaFile(item); }
     const thumbWrap=document.createElement("div"); thumbWrap.style.width="100%"; thumbWrap.style.height="100px"; thumbWrap.style.borderRadius="6px"; thumbWrap.style.overflow="hidden"; thumbWrap.style.background="rgba(255,255,255,0.04)";
     if (item.type === "dir") {
-      thumbWrap.textContent = "??"; thumbWrap.style.display="flex"; thumbWrap.style.alignItems="center"; thumbWrap.style.justifyContent="center"; thumbWrap.style.fontSize="32px";
+      thumbWrap.textContent = "📁"; thumbWrap.style.display="flex"; thumbWrap.style.alignItems="center"; thumbWrap.style.justifyContent="center"; thumbWrap.style.fontSize="32px";
     } else {
       const thumb=document.createElement("img"); thumb.className="media-thumb"; thumb.loading="lazy"; thumb.dataset.src = getLocalThumbUrl(item);
       thumb.onerror = ()=>{ thumbWrap.textContent=item.name.split('.').pop(); thumbWrap.style.display='flex'; thumbWrap.style.alignItems='center'; thumbWrap.style.justifyContent='center'; };
       thumbWrap.appendChild(thumb); observeThumb(thumb);
     }
     const title=document.createElement("div"); title.style.fontWeight="700"; title.style.color="var(--accent)"; title.textContent=item.name;
-    const meta=document.createElement("div"); meta.style.color="var(--muted)"; meta.style.fontSize="12px"; meta.textContent = item.type==='dir' ? '�ļ���' : humanSize(item.size||0);
+    const meta=document.createElement("div"); meta.style.color="var(--muted)"; meta.style.fontSize="12px"; meta.textContent = item.type==='dir' ? '文件夹' : humanSize(item.size||0);
     card.appendChild(thumbWrap); card.appendChild(title); card.appendChild(meta); grid.appendChild(card);
   });
 }
@@ -815,16 +815,16 @@ function getLocalThumbUrl(item){ const pathStr=item.path||""; const parts=pathSt
 function ensureThumbObserver(){ if(!("IntersectionObserver" in window)){ thumbObserver=null; return; } if(thumbObserver) return; thumbObserver = new IntersectionObserver((entries)=>{ entries.forEach(entry=>{ if(!entry.isIntersecting) return; const el=entry.target; const src=el.dataset?.src; if(src){ el.src=src; delete el.dataset.src; } thumbObserver.unobserve(el); }); }, { rootMargin:"200px 0px" }); }
 function observeThumb(el){ if(thumbObserver && el?.dataset?.src) thumbObserver.observe(el); else if(el?.dataset?.src){ el.src = el.dataset.src; delete el.dataset.src; } }
 async function syncThumbsForCurrent(){ const path=mediaCurrentPath||""; if(thumbSyncingPath===path) return; thumbSyncingPath=path; const res=await safeFetch("/api/media/thumbs/sync",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path})}); thumbSyncingPath=null; if(res){ const data=await res.json(); if(data?.changed) loadMediaTree(path); } loadMetaForCurrent(); }
-async function loadMetaForCurrent(force=false){ const path=mediaCurrentPath||""; if(!force && metaCache[path]) return metaCache[path]; const metaPath = path ? `/ext-media/${encodeURIComponent(path + '/.thumbs/meta.json').replace(/%2F/g,'/')}` : "/ext-media/.thumbs/meta.json"; const status=document.querySelector("#metaStatus"); if(status) status.textContent="������..."; try { const res=await fetch(metaPath,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); let normalized={}; if(data?.["�����б�"] && Array.isArray(data["�����б�"])) { data["�����б�"].forEach(entry=>{ const fname=entry?.meta_data?.["�ļ�����"]; if(!fname) return; normalized[fname]={ meta: entry.meta_data||{}, intro: entry["���"]||"", analysis: entry["����"]||"" }; }); } metaCache[path]=normalized; if(status) status.textContent="������"; return metaCache[path]; } catch(e){ metaCache[path]={}; if(status) status.textContent="��Ԫ����"; return {}; } }
-async function loadSidecarForFile(file){ if(!file?.path) return null; const key=file.path; if(Object.prototype.hasOwnProperty.call(sidecarCache, key)) return sidecarCache[key]; const base=file.path.replace(/\.[^.]+$/,''); const url=`/ext-media/${encodeURIComponent(base + '.json').replace(/%2F/g,'/')}`; try { const res=await fetch(url,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); const meta=data["Ԫ��Ϣ"]||data.meta_data||data.meta||{}; const intro=data["���"]||data.intro||""; const analysis=data["����"]||data.analysis||""; const norm={ meta,intro,analysis,__source:"sidecar",__file:file.path }; sidecarCache[key]=norm; return norm; } catch(e){ sidecarCache[key]=null; return null; } }
-function normalizeAnalysis(raw){ if(!raw) return {title:"", content:""}; if(typeof raw === "string") return { title:"����", content: raw }; return { title: raw["����"]||raw["title"]||raw.title||"����", content: raw["����"]||raw["����"]||raw.content||"" }; }
+async function loadMetaForCurrent(force=false){ const path=mediaCurrentPath||""; if(!force && metaCache[path]) return metaCache[path]; const metaPath = path ? `/ext-media/${encodeURIComponent(path + '/.thumbs/meta.json').replace(/%2F/g,'/')}` : "/ext-media/.thumbs/meta.json"; const status=document.querySelector("#metaStatus"); if(status) status.textContent="载入中..."; try { const res=await fetch(metaPath,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); let normalized={}; if(data?.["画作列表"] && Array.isArray(data["画作列表"])) { data["画作列表"].forEach(entry=>{ const fname=entry?.meta_data?.["文件名称"]; if(!fname) return; normalized[fname]={ meta: entry.meta_data||{}, intro: entry["简介"]||"", analysis: entry["赏析"]||"" }; }); } metaCache[path]=normalized; if(status) status.textContent="已载入"; return metaCache[path]; } catch(e){ metaCache[path]={}; if(status) status.textContent="无元数据"; return {}; } }
+async function loadSidecarForFile(file){ if(!file?.path) return null; const key=file.path; if(Object.prototype.hasOwnProperty.call(sidecarCache, key)) return sidecarCache[key]; const base=file.path.replace(/\.[^.]+$/,''); const url=`/ext-media/${encodeURIComponent(base + '.json').replace(/%2F/g,'/')}`; try { const res=await fetch(url,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); const meta=data["元信息"]||data.meta_data||data.meta||{}; const intro=data["简介"]||data.intro||""; const analysis=data["赏析"]||data.analysis||""; const norm={ meta,intro,analysis,__source:"sidecar",__file:file.path }; sidecarCache[key]=norm; return norm; } catch(e){ sidecarCache[key]=null; return null; } }
+function normalizeAnalysis(raw){ if(!raw) return {title:"", content:""}; if(typeof raw === "string") return { title:"赏析", content: raw }; return { title: raw["标题"]||raw["title"]||raw.title||"赏析", content: raw["内容"]||raw["正文"]||raw.content||"" }; }
 function truncateText(str="", max=180){ if(!str) return ""; const clean=str.replace(/\s+/g," ").trim(); return clean.length>max ? clean.slice(0,max) + "..." : clean; }
 function escapeHtml(str=""){ return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function markdownToHtml(md=""){ if(!md) return ""; const txt=escapeHtml(md).replace(/\r?\n/g,"\\n"); const lines=txt.split("\\n"); const htmlLines=lines.map(line=>{ if(/^###\\s+/.test(line)) return `<h4>${line.replace(/^###\\s+/,"")}</h4>`; if(/^##\\s+/.test(line)) return `<h3>${line.replace(/^##\\s+/,"")}</h3>`; if(/^#\\s+/.test(line)) return `<h2>${line.replace(/^#\\s+/,"")}</h2>`; if(/^\\s*[-*]\\s+/.test(line)) return `<li>${line.replace(/^\\s*[-*]\\s+/,"")}</li>`; if(!line.trim()) return ""; return `<p>${line}</p>`; }); let html=htmlLines.join(""); html = html.replace(/(?:<li>.*?<\/li>)+/gs, m=>`<ul>${m}</ul>`); return html; }
-async function showMetaForFile(file){ const titleEl=document.querySelector("#metaTitle"); const artistEl=document.querySelector("#metaArtist"); const fieldsEl=document.querySelector("#metaFields"); const introEl=document.querySelector("#metaIntro"); const extraEl=document.querySelector("#metaExtra"); const analysisPreviewEl=document.querySelector("#metaAnalysisPreview"); const analysisBtn=document.querySelector("#btnOpenAnalysis"); const statusEl=document.querySelector("#metaStatus"); if(!titleEl) return; if(!file){ titleEl.textContent="δѡ��"; if(artistEl) artistEl.textContent=""; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent=""; if(analysisBtn) analysisBtn.style.display="none"; currentAnalysisInfo=null; return; } const folderMeta = await loadMetaForCurrent(); let info = folderMeta?.[file.name] || null; let source = info ? "folder" : ""; if(!info){ const sidecar = await loadSidecarForFile(file); if(sidecar){ info=sidecar; source="sidecar"; } } if(!info){ titleEl.textContent=file.name; if(artistEl) artistEl.textContent="����Ԫ����"; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent="��������"; if(analysisBtn) analysisBtn.style.display="none"; if(statusEl) statusEl.textContent="��Ԫ����"; currentAnalysisInfo=null; return; } const md = info.meta || {}; const title = md["��Ʒ����"]||md["�ļ�����"]||md["������"]||file.name; const artist = md["����"]||""; const year=md["����ʱ��"]||""; const nation=md["����"]||""; titleEl.textContent = title; if(artistEl) artistEl.textContent = [artist,year].filter(Boolean).join(" �� ") || nation || ""; if(fieldsEl){ fieldsEl.innerHTML=""; const pairs=[["����/���", md["����"]||md["�������"]],["����", md["����"]],["����", md["����"]],["��Ʒ����", md["��Ʒ����"]],["�ߴ�", md["�ߴ�"]],["�ļ���ʽ", md["�ļ���ʽ"]],["�ղػ���", md["�ղػ���"]]]; pairs.forEach(([k,v])=>{ if(!v) return; const chip=document.createElement("span"); chip.className="badge"; chip.textContent=`${k}: ${v}`; fieldsEl.appendChild(chip); }); } const introText = info.intro || md["���"] || ""; if(introEl) introEl.textContent = introText || ""; const analysisData = normalizeAnalysis(info.analysis); if(analysisPreviewEl) analysisPreviewEl.textContent = analysisData.content ? truncateText(analysisData.content, 200) : "��������"; if(analysisBtn){ if(analysisData.content){ analysisBtn.style.display="inline-flex"; analysisBtn.disabled=false; analysisBtn.onclick=()=>openAnalysisModal(file, info); } else analysisBtn.style.display="none"; } currentAnalysisInfo = info; if(extraEl){ const wiki = md["�����ٿ�"]||md["�ٿ�"]||""; extraEl.textContent = wiki; } if(statusEl) statusEl.textContent = source==="sidecar" ? "����ͬ�� JSON" : "Ŀ¼Ԫ����"; }
-function setMediaPreview(file){ const box=document.querySelector("#mediaPreview"); if(!box) return; box.innerHTML=""; if(!file){ box.textContent="δѡ��"; box.style.color="var(--muted)"; showMetaForFile(null); return; } const url=`/ext-media/${file.path}`; const ext=(file.name||"").toLowerCase(); if(ext.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.muted=true; v.loop=true; v.style.width="100%"; v.style.maxHeight="260px"; v.style.objectFit="contain"; box.appendChild(v);} else if(ext.match(/\\.jpg|\\.jpeg|\\.png|\\.webp|\\.gif|\\.bmp|\\.tif|\\.tiff|\\.heic/)){ const img=document.createElement("img"); img.src=url; img.style.maxWidth="100%"; img.style.maxHeight="260px"; img.style.objectFit="contain"; box.appendChild(img);} else { const a=document.createElement("a"); a.href=url; a.textContent="����/��"; a.style.color="var(--accent)"; a.target="_blank"; box.appendChild(a);} }
-function selectMediaFile(file){ mediaSelected=file; const label=document.querySelector("#mediaSelLabel"); if(label) label.textContent=file?.name||"δѡ��"; setMediaPreview(file); showMetaForFile(file); }
-function openAnalysisModal(file=mediaSelected, info=currentAnalysisInfo){ if(!file) return; const modal=document.querySelector("#analysisModal"); const mediaBox=document.querySelector("#analysisMedia"); const contentEl=document.querySelector("#analysisContent"); const titleEl=document.querySelector("#analysisTitle"); const subEl=document.querySelector("#analysisSubtitle"); if(!modal||!mediaBox||!contentEl||!titleEl) return; const data=info||{}; const analysis=normalizeAnalysis(data.analysis); const md=data.meta||{}; titleEl.textContent = analysis.title || md["��Ʒ����"] || md["������"] || file.name; if(subEl){ const subtitle=[md["����"], md["����ʱ��"], md["����"]||md["�������"]].filter(Boolean).join(" �� "); subEl.textContent = subtitle; } mediaBox.innerHTML=""; const url=`/ext-media/${encodeURIComponent(file.path).replace(/%2F/g,'/')}`; const lower=(file.name||"").toLowerCase(); if(lower.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.autoplay=true; v.loop=true; v.muted=true; v.style.width="100%"; v.style.maxHeight="70vh"; v.style.objectFit="contain"; mediaBox.appendChild(v);} else { const img=document.createElement("img"); img.src=url; img.alt=file.name||"analysis"; img.style.width="100%"; img.style.maxHeight="70vh"; img.style.objectFit="contain"; mediaBox.appendChild(img);} contentEl.innerHTML = analysis.content ? markdownToHtml(analysis.content) : "<p style=\\\"color:var(--muted);\\\">��������</p>"; modal.style.display="flex"; }
+async function showMetaForFile(file){ const titleEl=document.querySelector("#metaTitle"); const artistEl=document.querySelector("#metaArtist"); const fieldsEl=document.querySelector("#metaFields"); const introEl=document.querySelector("#metaIntro"); const extraEl=document.querySelector("#metaExtra"); const analysisPreviewEl=document.querySelector("#metaAnalysisPreview"); const analysisBtn=document.querySelector("#btnOpenAnalysis"); const statusEl=document.querySelector("#metaStatus"); if(!titleEl) return; if(!file){ titleEl.textContent="未选择"; if(artistEl) artistEl.textContent=""; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent=""; if(analysisBtn) analysisBtn.style.display="none"; currentAnalysisInfo=null; return; } const folderMeta = await loadMetaForCurrent(); let info = folderMeta?.[file.name] || null; let source = info ? "folder" : ""; if(!info){ const sidecar = await loadSidecarForFile(file); if(sidecar){ info=sidecar; source="sidecar"; } } if(!info){ titleEl.textContent=file.name; if(artistEl) artistEl.textContent="暂无元数据"; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent="暂无赏析"; if(analysisBtn) analysisBtn.style.display="none"; if(statusEl) statusEl.textContent="无元数据"; currentAnalysisInfo=null; return; } const md = info.meta || {}; const title = md["作品名称"]||md["文件名称"]||md["画作名"]||file.name; const artist = md["作者"]||""; const year=md["创作时间"]||""; const nation=md["国籍"]||""; titleEl.textContent = title; if(artistEl) artistEl.textContent = [artist,year].filter(Boolean).join(" · ") || nation || ""; if(fieldsEl){ fieldsEl.innerHTML=""; const pairs=[["画派/风格", md["画派"]||md["风格流派"]],["国籍", md["国籍"]],["材质", md["材质"]],["作品类型", md["作品类型"]],["尺寸", md["尺寸"]],["文件格式", md["文件格式"]],["收藏机构", md["收藏机构"]]]; pairs.forEach(([k,v])=>{ if(!v) return; const chip=document.createElement("span"); chip.className="badge"; chip.textContent=`${k}: ${v}`; fieldsEl.appendChild(chip); }); } const introText = info.intro || md["简介"] || ""; if(introEl) introEl.textContent = introText || ""; const analysisData = normalizeAnalysis(info.analysis); if(analysisPreviewEl) analysisPreviewEl.textContent = analysisData.content ? truncateText(analysisData.content, 200) : "暂无赏析"; if(analysisBtn){ if(analysisData.content){ analysisBtn.style.display="inline-flex"; analysisBtn.disabled=false; analysisBtn.onclick=()=>openAnalysisModal(file, info); } else analysisBtn.style.display="none"; } currentAnalysisInfo = info; if(extraEl){ const wiki = md["画作百科"]||md["百科"]||""; extraEl.textContent = wiki; } if(statusEl) statusEl.textContent = source==="sidecar" ? "来自同名 JSON" : "目录元数据"; }
+function setMediaPreview(file){ const box=document.querySelector("#mediaPreview"); if(!box) return; box.innerHTML=""; if(!file){ box.textContent="未选择"; box.style.color="var(--muted)"; showMetaForFile(null); return; } const url=`/ext-media/${file.path}`; const ext=(file.name||"").toLowerCase(); if(ext.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.muted=true; v.loop=true; v.style.width="100%"; v.style.maxHeight="260px"; v.style.objectFit="contain"; box.appendChild(v);} else if(ext.match(/\\.jpg|\\.jpeg|\\.png|\\.webp|\\.gif|\\.bmp|\\.tif|\\.tiff|\\.heic/)){ const img=document.createElement("img"); img.src=url; img.style.maxWidth="100%"; img.style.maxHeight="260px"; img.style.objectFit="contain"; box.appendChild(img);} else { const a=document.createElement("a"); a.href=url; a.textContent="下载/打开"; a.style.color="var(--accent)"; a.target="_blank"; box.appendChild(a);} }
+function selectMediaFile(file){ mediaSelected=file; const label=document.querySelector("#mediaSelLabel"); if(label) label.textContent=file?.name||"未选择"; setMediaPreview(file); showMetaForFile(file); }
+function openAnalysisModal(file=mediaSelected, info=currentAnalysisInfo){ if(!file) return; const modal=document.querySelector("#analysisModal"); const mediaBox=document.querySelector("#analysisMedia"); const contentEl=document.querySelector("#analysisContent"); const titleEl=document.querySelector("#analysisTitle"); const subEl=document.querySelector("#analysisSubtitle"); if(!modal||!mediaBox||!contentEl||!titleEl) return; const data=info||{}; const analysis=normalizeAnalysis(data.analysis); const md=data.meta||{}; titleEl.textContent = analysis.title || md["作品名称"] || md["画作名"] || file.name; if(subEl){ const subtitle=[md["作者"], md["创作时间"], md["画派"]||md["风格流派"]].filter(Boolean).join(" · "); subEl.textContent = subtitle; } mediaBox.innerHTML=""; const url=`/ext-media/${encodeURIComponent(file.path).replace(/%2F/g,'/')}`; const lower=(file.name||"").toLowerCase(); if(lower.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.autoplay=true; v.loop=true; v.muted=true; v.style.width="100%"; v.style.maxHeight="70vh"; v.style.objectFit="contain"; mediaBox.appendChild(v);} else { const img=document.createElement("img"); img.src=url; img.alt=file.name||"analysis"; img.style.width="100%"; img.style.maxHeight="70vh"; img.style.objectFit="contain"; mediaBox.appendChild(img);} contentEl.innerHTML = analysis.content ? markdownToHtml(analysis.content) : "<p style=\\\"color:var(--muted);\\\">暂无赏析</p>"; modal.style.display="flex"; }
 function closeAnalysisModal(){ const modal=document.querySelector("#analysisModal"); if(modal) modal.style.display="none"; }
 
 function humanSize(bytes = 0) {
@@ -879,18 +879,18 @@ function renderSummary() {
   const totalDevices = statusCache?.devices?.total ?? devicesCache.length;
   const onlineDevices = statusCache?.devices?.online ?? devicesCache.filter(d => d.online).length;
   setText("statDevicesTotal", totalDevices || 0);
-  setText("statDevicesOnline", `���� ${onlineDevices || 0} ̨`);
+  setText("statDevicesOnline", `在线 ${onlineDevices || 0} 台`);
   setText("deviceRingTotal", totalDevices || 0);
 
   const programCount = statusCache?.programs ?? programsCache.length;
   setText("statPrograms", programCount || 0);
   const latestProgram = programsCache?.reduce((a, b) => (a?.createdAt || 0) > (b?.createdAt || 0) ? a : b, null);
-  setText("statProgramsUpdated", latestProgram?.createdAt ? humanTime(latestProgram.createdAt) : "��");
+  setText("statProgramsUpdated", latestProgram?.createdAt ? humanTime(latestProgram.createdAt) : "无");
 
   const schedCount = statusCache?.schedules ?? schedulesCache.length;
   setText("statSchedules", schedCount || 0);
   const upcoming = schedulesCache.filter(s => (s.startAtUtcMs || 0) > Date.now()).sort((a,b)=>a.startAtUtcMs - b.startAtUtcMs)[0];
-  setText("statNextSchedule", upcoming ? `��һ�Σ�${humanTime(upcoming.startAtUtcMs)}` : "��һ�Σ�-");
+  setText("statNextSchedule", upcoming ? `下一次：${humanTime(upcoming.startAtUtcMs)}` : "下一次：-");
 }
 
 function renderDeviceRing() {
@@ -926,12 +926,12 @@ function renderDeviceBars() {
   if (!wrap) return;
   wrap.innerHTML = "";
   if (!devicesCache.length) {
-    wrap.innerHTML = `<div class="muted-text">�����豸</div>`;
+    wrap.innerHTML = `<div class="muted-text">暂无设备</div>`;
     return;
   }
   const groups = {};
   devicesCache.forEach(d => {
-    const role = d.role || "δ����";
+    const role = d.role || "未分组";
     groups[role] = (groups[role] || 0) + 1;
   });
   const max = Math.max(...Object.values(groups), 1);
@@ -952,19 +952,19 @@ function renderScheduleReminder() {
   tbody.innerHTML = "";
   if (!schedulesCache.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="5" class="muted-text">�����ų�</td>`;
+    tr.innerHTML = `<td colspan="5" class="muted-text">暂无排程</td>`;
     tbody.appendChild(tr);
     return;
   }
   const sorted = [...schedulesCache].sort((a, b) => (a.startAtUtcMs || 0) - (b.startAtUtcMs || 0));
   sorted.slice(0, 6).forEach((s, idx) => {
-    const status = (s.startAtUtcMs || 0) > Date.now() ? "������" : "�Ѵ���/����";
+    const status = (s.startAtUtcMs || 0) > Date.now() ? "待播放" : "已触发/过期";
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${idx + 1}</td>
       <td>${s.programId || s.id}</td>
       <td>${status}</td>
       <td>${humanTime(s.startAtUtcMs)}</td>
-      <td><button class="secondary" onclick="deleteSchedule('${s.id}')">ɾ��</button></td>`;
+      <td><button class="secondary" onclick="deleteSchedule('${s.id}')">删除</button></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -973,10 +973,10 @@ function renderEventList() {
   const wrap = document.querySelector("#eventList");
   if (!wrap) return;
   const items = [];
-  devicesCache.forEach(d => items.push({ time: d.lastSeen || Date.now(), text: `�豸 ${d.id || d.role || ""} ${d.online ? "����" : "����"}` }));
-  schedulesCache.forEach(s => items.push({ time: s.startAtUtcMs || 0, text: `�ų� ${s.programId || s.id} ������` }));
+  devicesCache.forEach(d => items.push({ time: d.lastSeen || Date.now(), text: `设备 ${d.id || d.role || ""} ${d.online ? "在线" : "离线"}` }));
+  schedulesCache.forEach(s => items.push({ time: s.startAtUtcMs || 0, text: `排程 ${s.programId || s.id} 将播放` }));
   if (!items.length) {
-    wrap.innerHTML = `<div class="muted-text">�����¼�</div>`;
+    wrap.innerHTML = `<div class="muted-text">暂无事件</div>`;
     return;
   }
   items.sort((a, b) => b.time - a.time);
@@ -1012,7 +1012,7 @@ async function loadMaterials(folderId = currentFolderId) {
   if (selectedMaterial) {
     const found = materials.find(m=>m.id===selectedMaterial.id);
     if (found) { selectedMaterial = found; renderTags(); }
-    else { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="δѡ��"; renderTags(); }
+    else { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="未选择"; renderTags(); }
   }
   updateDashboard();
 }
@@ -1040,12 +1040,12 @@ function renderMaterials() {
     const tdOps = document.createElement("td");
     const btnRename = document.createElement("button");
     btnRename.className = "secondary";
-    btnRename.textContent = "������";
+    btnRename.textContent = "重命名";
     btnRename.onclick = (e) => { e.stopPropagation(); renameMaterial(m.id); };
     const btnDel = document.createElement("button");
     btnDel.className = "secondary";
     btnDel.style.marginLeft = "6px";
-    btnDel.textContent = "ɾ��";
+    btnDel.textContent = "删除";
     btnDel.onclick = (e) => { e.stopPropagation(); deleteMaterial(m.id); };
     tdOps.appendChild(btnRename); tdOps.appendChild(btnDel);
     tr.appendChild(tdOps);
@@ -1054,13 +1054,13 @@ function renderMaterials() {
   });
   if (!materials.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">�����زģ����ϴ���</td>`;
+    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">暂无素材，先上传。</td>`;
     tbody.appendChild(tr);
     return;
   }
   if (!filtered.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">δ�ҵ�ƥ���������Ը������������</td>`;
+    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">未找到匹配结果，试试更宽泛的搜索。</td>`;
     tbody.appendChild(tr);
   }
 }
@@ -1075,7 +1075,7 @@ function renderTagFilters() {
     const sel = document.querySelector(selector);
     if (sel) {
       const current = materialSearchTag;
-      sel.innerHTML = `<option value="">ȫ����ǩ</option>` + tags.map(t=>`<option value="${t}">${t}</option>`).join("");
+      sel.innerHTML = `<option value="">全部标签</option>` + tags.map(t=>`<option value="${t}">${t}</option>`).join("");
       sel.value = current || "";
     }
   });
@@ -1085,20 +1085,20 @@ function renderTagFilters() {
 
 async function uploadMaterial() {
   const f = document.querySelector("#materialFile");
-  if (!f?.files?.length) { alert("��ѡ���ļ�"); return; }
+  if (!f?.files?.length) { alert("请选择文件"); return; }
   const form = new FormData();
   form.append("file", f.files[0]);
   form.append("folderId", currentFolderId || "root");
-  document.querySelector("#materialStatus").textContent = "�ϴ���...";
+  document.querySelector("#materialStatus").textContent = "上传中...";
   const res = await safeFetch("/api/materials", { method: "POST", body: form });
-  if (!res) { document.querySelector("#materialStatus").textContent = "�ϴ�ʧ��"; return; }
+  if (!res) { document.querySelector("#materialStatus").textContent = "上传失败"; return; }
   const data = await res.json();
   if (data.ok) {
-    document.querySelector("#materialStatus").textContent = "�ϴ��ɹ�";
+    document.querySelector("#materialStatus").textContent = "上传成功";
     f.value = "";
     loadMaterials();
   } else {
-    document.querySelector("#materialStatus").textContent = data.error || "ʧ��";
+    document.querySelector("#materialStatus").textContent = data.error || "失败";
   }
   setTimeout(()=>document.querySelector("#materialStatus").textContent="",1800);
 }
@@ -1106,17 +1106,17 @@ async function uploadMaterial() {
 async function renameMaterial(id) {
   const m = materials.find(x=>x.id===id);
   if (!m) return;
-  const name = prompt("������������", m.name);
+  const name = prompt("请输入新名字", m.name);
   if (!name) return;
   const res = await safeFetch(`/api/materials/${id}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name }) });
   if (res) loadMaterials(currentFolderId);
 }
 
 async function deleteMaterial(id) {
-  showConfirm("ȷ��ɾ�����زģ�", async () => {
+  showConfirm("确定删除该素材？", async () => {
     const res = await safeFetch(`/api/materials/${id}`, { method:"DELETE" });
     if (res) {
-      if (selectedMaterial?.id === id) { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="δѡ��"; }
+      if (selectedMaterial?.id === id) { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="未选择"; }
       loadMaterials(currentFolderId);
     }
   });
@@ -1151,11 +1151,11 @@ function selectMaterial(id) {
   } else {
     const a = document.createElement("a");
     a.href = m.url;
-    a.textContent = "����/�鿴";
+    a.textContent = "下载/查看";
     a.style.color = "var(--accent)";
     box.appendChild(a);
   }
-  // �����б���
+  // 高亮列表行
   document.querySelectorAll("#materialTable tbody tr").forEach(tr=>{
     if (tr.dataset.id === m.id) tr.classList.add("row-selected");
     else tr.classList.remove("row-selected");
@@ -1198,7 +1198,7 @@ function renderMaterialsUpload() {
     item.style.cursor = "pointer";
     const open = openFolders.has(f.id);
     item.style.background = f.id === currentFolderId ? "rgba(56,189,248,0.18)" : "rgba(255,255,255,0.04)";
-    item.innerHTML = `<span>${open ? "?" : "?"}</span><span>${f.name}</span>`;
+    item.innerHTML = `<span>${open ? "▾" : "▸"}</span><span>${f.name}</span>`;
     item.onclick = () => { 
       if (open) openFolders.delete(f.id); else openFolders.add(f.id);
       currentFolderId = f.id;
@@ -1229,14 +1229,14 @@ function renderMaterialsUpload() {
         const row = document.createElement("div");
         row.style.padding="4px 8px";
         row.style.color="var(--muted)";
-        row.textContent = "���ļ��������ز�";
+        row.textContent = "该文件夹暂无素材";
         ul.appendChild(row);
       }
       tree.appendChild(ul);
     }
   });
 
-  // ƽ���б����ǰ�۵�״̬�µĿɼ��زģ�
+  // 平铺列表（当前折叠状态下的可见素材）
   const visibleMats = materials.filter((m)=>openFolders.has(m.folderId));
   const filtered = visibleMats.filter((m)=>{
     const byName = materialSearchName ? m.name.toLowerCase().includes(materialSearchName.toLowerCase()) : true;
@@ -1262,10 +1262,10 @@ function renderMaterialsUpload() {
   if (!filtered.length) {
     const tip=document.createElement("div");
     tip.style.color="var(--muted)";
-    tip.textContent="û�пɼ��زģ������ļ��л����ɸѡ��";
+    tip.textContent="没有可见素材，换个文件夹或清空筛选。";
     listWrap.appendChild(tip);
   }
-  // ͬ������������ǩ
+  // 同步搜索下拉标签
   renderTagFilters();
   if (selectedMaterial) highlightUploadMaterial(selectedMaterial.id);
 }
@@ -1295,11 +1295,11 @@ function renderSelectedPreview(m) {
     poster.style.width="100%"; poster.style.height="160px";
     poster.style.background="radial-gradient(circle at 30% 30%, rgba(56,189,248,0.25), rgba(0,0,0,0.6))";
     poster.style.display="flex"; poster.style.alignItems="center"; poster.style.justifyContent="center";
-    poster.style.borderRadius="10px"; poster.style.color="#9ca3af"; poster.textContent="������ƵԤ����...";
+    poster.style.borderRadius="10px"; poster.style.color="#9ca3af"; poster.textContent="加载视频预览中...";
     v.oncanplay = ()=>{ if (poster.parentNode) poster.parentNode.replaceChild(v, poster); };
     box.appendChild(poster);
   } else {
-    const a=document.createElement("a"); a.href=m.url; a.textContent="����/�鿴"; a.style.color="var(--accent)";
+    const a=document.createElement("a"); a.href=m.url; a.textContent="下载/查看"; a.style.color="var(--accent)";
     box.appendChild(a);
   }
 }
@@ -1319,32 +1319,32 @@ function syncFolderSelects() {
 }
 
 async function newFolder() {
-  const name = prompt("�ļ�������");
+  const name = prompt("文件夹名称");
   if (!name) return;
   const res = await safeFetch("/api/materials/folders", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name }) });
   if (res) loadMaterials(currentFolderId);
-  else document.querySelector("#materialStatus").textContent = "�½�ʧ�ܣ��������Ƿ�����";
+  else document.querySelector("#materialStatus").textContent = "新建失败，检查服务是否重启";
 }
 
 async function renameFolder() {
-  if (!currentFolderId || currentFolderId === "root") { alert("��ѡ������������ļ���"); return; }
+  if (!currentFolderId || currentFolderId === "root") { alert("请选择可重命名的文件夹"); return; }
   const folder = materialFolders.find(f=>f.id===currentFolderId);
-  const name = prompt("������", folder?.name || "");
+  const name = prompt("新名称", folder?.name || "");
   if (!name) return;
   const res = await safeFetch(`/api/materials/folders/${currentFolderId}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name }) });
   if (res) loadMaterials(currentFolderId);
 }
 
 async function deleteFolder() {
-  if (!currentFolderId || currentFolderId === "root") { alert("����ɾ�����ļ���"); return; }
-  showConfirm("ɾ�����ļ����ƶ�����Ŀ¼��ȷ�ϣ�", async () => {
+  if (!currentFolderId || currentFolderId === "root") { alert("不能删除根文件夹"); return; }
+  showConfirm("删除后文件将移动到根目录，确认？", async () => {
     const res = await safeFetch(`/api/materials/folders/${currentFolderId}`, { method:"DELETE" });
     if (res) { currentFolderId = "root"; loadMaterials("root"); }
   });
 }
 
 async function moveMaterial() {
-  if (!selectedMaterial) { alert("��ѡ���ز�"); return; }
+  if (!selectedMaterial) { alert("先选择素材"); return; }
   const folderId = document.querySelector("#moveFolderSelect").value || "root";
   const res = await safeFetch(`/api/materials/${selectedMaterial.id}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ folderId }) });
   if (res) loadMaterials(folderId);
@@ -1358,7 +1358,7 @@ function renderTags() {
   (selectedMaterial?.tags || []).forEach((t) => {
     const chip = document.createElement("span");
     chip.className = "badge";
-    chip.textContent = t + " ?";
+    chip.textContent = t + " ✕";
     chip.style.cursor = "pointer";
     chip.onclick = () => removeTag(t);
     wrap.appendChild(chip);
@@ -1368,7 +1368,7 @@ function renderTags() {
     programTags.forEach((t) => {
       const chip = document.createElement("span");
       chip.className = "badge";
-      chip.textContent = t + " ?";
+      chip.textContent = t + " ✕";
       chip.style.cursor = "pointer";
       chip.onclick = () => removeProgramTag(t);
       wrapSel.appendChild(chip);
@@ -1377,7 +1377,7 @@ function renderTags() {
 }
 
 async function addTag() {
-  if (!selectedMaterial) { alert("��ѡ���ز�"); return; }
+  if (!selectedMaterial) { alert("先选择素材"); return; }
   const input = document.querySelector("#tagInput");
   const val = (input.value || "").trim();
   if (!val) return;
@@ -1412,7 +1412,7 @@ function renderDevices(selector, list = []) {
   tbody.innerHTML = "";
   list.forEach((d) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${d.id}</td><td>${d.role}</td><td>${d.ip || ""}</td><td>${d.online ? "����" : "����"}</td><td>${new Date(d.lastSeen || 0).toLocaleTimeString()}</td>`;
+    tr.innerHTML = `<td>${d.id}</td><td>${d.role}</td><td>${d.ip || ""}</td><td>${d.online ? "在线" : "离线"}</td><td>${new Date(d.lastSeen || 0).toLocaleTimeString()}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -1467,20 +1467,20 @@ async function power(action) {
 
 async function doUpload() {
   const fileInput = document.querySelector("#uploadFile");
-  if (!fileInput.files.length) { alert("��ѡ���ļ�"); return; }
+  if (!fileInput.files.length) { alert("请选择文件"); return; }
   const form = new FormData();
   form.append("file", fileInput.files[0]);
   form.append("mode", document.querySelector("#mode").value);
   form.append("gap1", document.querySelector("#gap1").value || "0");
   form.append("gap2", document.querySelector("#gap2").value || "0");
-  document.querySelector("#uploadStatus").textContent = "�ϴ���...";
+  document.querySelector("#uploadStatus").textContent = "上传中...";
   document.querySelector("#previewArea").style.display = "none";
   const res = await safeFetch("/api/upload", { method: "POST", body: form });
   if (!res) return;
   const data = await res.json();
   if (data.ok) {
     const p = data.program;
-    document.querySelector("#uploadStatus").textContent = `���ɽ�Ŀ ${p.id}`;
+    document.querySelector("#uploadStatus").textContent = `生成节目 ${p.id}`;
     document.querySelector("#previewArea").style.display = "block";
     document.querySelector("#prevLeft").src = p.slices.left.preview;
     document.querySelector("#prevCenter").src = p.slices.center.preview;
@@ -1488,16 +1488,16 @@ async function doUpload() {
     window.__lastProgramId = p.id;
     loadPrograms();
     lastUploadSlices = { left: p.slices.left.url, center: p.slices.center.url, right: p.slices.right.url, preview: p.slices.center.preview };
-    document.querySelector("#currentProgBadge").textContent = `��ǰ��Ŀ��${p.id}`;
+    document.querySelector("#currentProgBadge").textContent = `当前节目：${p.id}`;
     addSlideFromUpload();
   } else {
-    document.querySelector("#uploadStatus").textContent = `ʧ��: ${data.error}`;
+    document.querySelector("#uploadStatus").textContent = `失败: ${data.error}`;
   }
 }
 
 async function confirmBroadcast() {
   const pid = window.__lastProgramId;
-  if (!pid) { alert("û�пɷ����Ľ�Ŀ"); return; }
+  if (!pid) { alert("没有可发布的节目"); return; }
   const res = await safeFetch(`/api/programs/${pid}/broadcast`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ startAtUtcMs: Date.now() + 5000 }) });
   if (!res) return;
   const data = await res.json();
@@ -1514,7 +1514,7 @@ async function loadPrograms() {
   (data.programs || []).forEach((p) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${p.id}</td><td>${p.title || ""}</td><td>${new Date(p.createdAt).toLocaleString()}</td>
-    <td><button onclick=\"broadcastProgram('${p.id}')\">����</button> <button class=\"secondary\" onclick=\"loadSequence('${p.id}')\">��������</button></td>`;
+    <td><button onclick=\"broadcastProgram('${p.id}')\">播放</button> <button class=\"secondary\" onclick=\"loadSequence('${p.id}')\">载入制作</button></td>`;
     tbody.appendChild(tr);
   });
   updateDashboard();
@@ -1547,28 +1547,28 @@ async function loadProgramsForEditor() {
     row.onclick = ()=>loadSequence(p.id);
     row.innerHTML = `<div><div style="color:var(--accent);">${p.title||p.id}</div><div style="color:var(--muted);font-size:12px;">${p.id}</div></div>`;
     const ops = document.createElement("div");
-    const btnRen = document.createElement("button"); btnRen.className="secondary"; btnRen.textContent="������"; btnRen.onclick=(e)=>{ e.stopPropagation(); renameProgram(p.id); };
-    const btnDel = document.createElement("button"); btnDel.className="secondary"; btnDel.style.marginLeft="6px"; btnDel.textContent="ɾ��"; btnDel.onclick=(e)=>{ e.stopPropagation(); deleteProgram(p.id); };
+    const btnRen = document.createElement("button"); btnRen.className="secondary"; btnRen.textContent="重命名"; btnRen.onclick=(e)=>{ e.stopPropagation(); renameProgram(p.id); };
+    const btnDel = document.createElement("button"); btnDel.className="secondary"; btnDel.style.marginLeft="6px"; btnDel.textContent="删除"; btnDel.onclick=(e)=>{ e.stopPropagation(); deleteProgram(p.id); };
     ops.appendChild(btnRen); ops.appendChild(btnDel);
     row.appendChild(ops);
     wrap.appendChild(row);
   });
   if (!programsCache.length) {
-    const tip=document.createElement("div"); tip.style.color="var(--muted)"; tip.textContent="���޽�Ŀ���ȱ���һ���ɡ�";
+    const tip=document.createElement("div"); tip.style.color="var(--muted)"; tip.textContent="暂无节目，先保存一个吧。";
     wrap.appendChild(tip);
   }
 }
 
 async function renameProgram(id) {
   const p = programsCache.find(x=>x.id===id);
-  const name = prompt("�½�Ŀ����", p?.title || id);
+  const name = prompt("新节目名称", p?.title || id);
   if (!name) return;
   const res = await safeFetch(`/api/programs/${id}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ title: name }) });
   if (res) { loadPrograms(); loadProgramsForEditor(); }
 }
 
 async function deleteProgram(id) {
-  showConfirm("ȷ��ɾ���ý�Ŀ��", async () => {
+  showConfirm("确定删除该节目？", async () => {
     const res = await safeFetch(`/api/programs/${id}`, { method:"DELETE" });
     if (res) { 
       loadPrograms(); 
@@ -1594,7 +1594,7 @@ function runConfirm() {
 }
 
 function loadSequence(id) {
-  // ��Ŀ������Ǩ�Ƶ�����ҳ��
+  // 节目制作已迁移到独立页面
   window.location.href = `program-builder.html?programId=${encodeURIComponent(id)}`;
 }
 
@@ -1605,14 +1605,14 @@ async function saveCustom() {
   const res = await safeFetch("/api/programs/custom", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, title, slices }) });
   if (!res) return;
   const data = await res.json();
-  if (data.ok) { loadPrograms(); log(`�ѱ����Ŀ ${id}`); } else { log(`����ʧ��: ${data.error}`); }
+  if (data.ok) { loadPrograms(); log(`已保存节目 ${id}`); } else { log(`保存失败: ${data.error}`); }
 }
 
 async function refreshFromDisk() {
   const res = await safeFetch("/api/programs/reload", { method: "POST" });
   if (!res) return;
   const data = await res.json();
-  if (data.ok) { loadPrograms(); log(`�ѴӴ���ˢ�£���ǰ��Ŀ�� ${data.count}`); } else { log(`ˢ��ʧ��: ${data.error}`); }
+  if (data.ok) { loadPrograms(); log(`已从磁盘刷新，当前节目数 ${data.count}`); } else { log(`刷新失败: ${data.error}`); }
 }
 
 async function addSchedule() {
@@ -1634,7 +1634,7 @@ async function loadSchedule() {
   (data.schedules || []).forEach((s) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${s.id}</td><td>${s.programId}</td><td>${new Date(s.startAtUtcMs).toLocaleString()}</td>
-    <td><button onclick=\"deleteSchedule('${s.id}')\">ɾ��</button></td>`;
+    <td><button onclick=\"deleteSchedule('${s.id}')\">删除</button></td>`;
     tbody.appendChild(tr);
   });
   updateDashboard();
@@ -1663,24 +1663,24 @@ async function saveClientIps() {
   const res = await safeFetch("/api/client-ips", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res) return;
   const data = await res.json();
-  document.querySelector("#ipSaveStatus").textContent = data.ok ? "�ѱ���" : (data.error || "ʧ��");
+  document.querySelector("#ipSaveStatus").textContent = data.ok ? "已保存" : (data.error || "失败");
   setTimeout(() => (document.querySelector("#ipSaveStatus").textContent = ""), 2000);
 }
 
 function updateGapPreview() {
   const gap1El = document.querySelector("#gap1");
   const gap2El = document.querySelector("#gap2");
-  if (!gap1El || !gap2El) return; // �ɽ�Ŀ������ͼ������/�Ƴ�ʱ���ⱨ��
+  if (!gap1El || !gap2El) return; // 旧节目制作视图已隐藏/移除时避免报错
   const gap1 = Number(gap1El.value || 0);
   const gap2 = Number(gap2El.value || 0);
   const total = 1080 + gap1 + 3840 + gap2 + 1080;
   const scale = 600 / total;
   const segs = [
-    { w: 1080, color: "#38bdf8", label: "����" },
-    { w: gap1, color: "#f59e0b", label: `��1 ${gap1}px` },
-    { w: 3840, color: "#22c55e", label: "����" },
-    { w: gap2, color: "#f59e0b", label: `��2 ${gap2}px` },
-    { w: 1080, color: "#38bdf8", label: "����" },
+    { w: 1080, color: "#38bdf8", label: "左屏" },
+    { w: gap1, color: "#f59e0b", label: `缝1 ${gap1}px` },
+    { w: 3840, color: "#22c55e", label: "中屏" },
+    { w: gap2, color: "#f59e0b", label: `缝2 ${gap2}px` },
+    { w: 1080, color: "#38bdf8", label: "右屏" },
   ];
   const viz = document.querySelector("#gapViz");
   if (viz) {
@@ -1700,7 +1700,7 @@ function updateGapPreview() {
     });
   }
   const gapLabel = document.querySelector("#gapLabel");
-  if (gapLabel) gapLabel.textContent = `�ܿ� ${total}px������Ԥ�� 600px����϶������ѹ�����������ʵ��ƴ��ڱߡ�`;
+  if (gapLabel) gapLabel.textContent = `总宽 ${total}px，缩放预览 600px；缝隙将被“压缩”掉，避免实际拼缝黑边。`;
   buildPreviewStage(gap1, gap2);
   buildEditStage();
 }
@@ -1709,7 +1709,7 @@ function newProgram() {
   slides = [];
   lastUploadSlices = null;
   document.querySelector("#timelineName").value = `program_${Date.now()}`;
-  document.querySelector("#currentProgBadge").textContent = "��ǰ��Ŀ��δ����";
+  document.querySelector("#currentProgBadge").textContent = "当前节目：未命名";
   renderSlidesList();
 }
 
@@ -1733,7 +1733,7 @@ function renderSlidesList() {
     info.style.flex = "1";
     const dur = getSlideDuration(s);
     info.innerHTML = `<div>#${idx + 1} ${s.type.toUpperCase()} ${s.title || ""}</div>
-      <div style=\"font-size:12px;color:var(--muted);\">ʱ��: ${dur}s �� ��Դ: ${s.sourceName||""}</div>`;
+      <div style=\"font-size:12px;color:var(--muted);\">时长: ${dur}s · 来源: ${s.sourceName||""}</div>`;
     row.appendChild(info);
     const ctrls = document.createElement("div");
     ctrls.style.display="flex"; ctrls.style.gap="6px"; ctrls.style.alignItems="center";
@@ -1741,7 +1741,7 @@ function renderSlidesList() {
     durInput.type="number"; durInput.min="1"; durInput.style.width="70px"; durInput.value = s.duration || (s.type==="image"? Number(document.querySelector("#defaultImageDur").value||5):dur);
     durInput.onchange = ()=>{ s.duration = Number(durInput.value)||dur; updateTotalDuration(); renderSlidesList(); };
     ctrls.appendChild(durInput);
-    ["��","��","ɾ"].forEach((txt,i)=>{
+    ["↑","↓","删"].forEach((txt,i)=>{
       const b=document.createElement("button"); b.textContent=txt;
       b.onclick=()=>{ if(i===0) moveSlide(idx,-1); else if(i===1) moveSlide(idx,1); else deleteSlide(idx); };
       ctrls.appendChild(b);
@@ -1752,7 +1752,7 @@ function renderSlidesList() {
   if (!slides.length) {
     const tip = document.createElement("div");
     tip.style.color = "var(--muted)";
-    tip.textContent = "�����زģ��Ҳ�ѡ���زĺ�㡰�����Ŀ����";
+    tip.textContent = "暂无素材，右侧选择素材后点“加入节目”。";
     wrap.appendChild(tip);
   }
   updateTotalDuration();
@@ -1781,7 +1781,7 @@ function applyDefaults() {
   renderSlidesList();
 }
 function addSlideFromUpload() {
-  if (!lastUploadSlices) { alert("���ϴ��ز�"); return; }
+  if (!lastUploadSlices) { alert("先上传素材"); return; }
   const type = lastUploadSlices.center.toLowerCase().match(/\.mp4|\.mov|\.webm/) ? "video" : "image";
   slides.push({ type, title: document.querySelector("#timelineName").value || "upload", urlLeft: lastUploadSlices.left, urlCenter: lastUploadSlices.center, urlRight: lastUploadSlices.right, preview: lastUploadSlices.preview || lastUploadSlices.center, effect: "random", duration: 5, offsetX:0, offsetY:0 });
   renderSlidesList();
@@ -1790,7 +1790,7 @@ function addSlideFromUpload() {
 let currentEditIndex = -1;
 
 function addSelectedToTimeline() {
-  if (!selectedMaterial) { alert("�����Ҳ�ѡ���ز�"); return; }
+  if (!selectedMaterial) { alert("先在右侧选择素材"); return; }
   const isVideo = (selectedMaterial.mime || "").startsWith("video");
   const slide = {
     id: "s_" + Date.now(),
@@ -1961,7 +1961,7 @@ function effectClass(effect){
 function playSlide(idx) {
   clearTimeout(timelineTimer);
   const s = slides[idx];
-  document.querySelector("#previewLabel").textContent = `�� ${idx+1}/${slides.length} �� ${s.title||""} �� ת�� ${s.effect||"random"}`;
+  document.querySelector("#previewLabel").textContent = `第 ${idx+1}/${slides.length} · ${s.title||""} · 转场 ${s.effect||"random"}`;
   setStageMedia(document.querySelector("#stageLeft"), document.querySelector("#stageLeftImg"), s.urlLeft, s.effect, { x: s.offsetX||0, y: s.offsetY||0 });
   setStageMedia(document.querySelector("#stageCenter"), document.querySelector("#stageCenterImg"), s.urlCenter, s.effect, { x: s.offsetX||0, y: s.offsetY||0 });
   setStageMedia(document.querySelector("#stageRight"), document.querySelector("#stageRightImg"), s.urlRight, s.effect, { x: s.offsetX||0, y: s.offsetY||0 });
@@ -1969,9 +1969,9 @@ function playSlide(idx) {
   const durMs = getSlideDuration(s) * 1000;
   timelineTimer = setTimeout(()=>{ timelineIndex = (timelineIndex+1)%slides.length; playSlide(timelineIndex); }, durMs);
 }
-function previewTimeline() { if (!slides.length) { alert("������ز�"); return; } timelinePlaying = true; timelineIndex = 0; document.querySelector("#timelinePreviewPanel").style.display="block"; document.querySelector("#btnPlay").textContent="��ͣ"; playSlide(timelineIndex); }
+function previewTimeline() { if (!slides.length) { alert("先添加素材"); return; } timelinePlaying = true; timelineIndex = 0; document.querySelector("#timelinePreviewPanel").style.display="block"; document.querySelector("#btnPlay").textContent="暂停"; playSlide(timelineIndex); }
 function stopTimelinePreview() { timelinePlaying=false; clearTimeout(timelineTimer); document.querySelector("#timelinePreviewPanel").style.display="none"; }
-function togglePlay(){ timelinePlaying=!timelinePlaying; document.querySelector("#btnPlay").textContent= timelinePlaying? "��ͣ":"����"; if(timelinePlaying) playSlide(timelineIndex);} 
+function togglePlay(){ timelinePlaying=!timelinePlaying; document.querySelector("#btnPlay").textContent= timelinePlaying? "暂停":"播放"; if(timelinePlaying) playSlide(timelineIndex);} 
 function prevSlide(){ if(!slides.length)return; timelineIndex=(timelineIndex-1+slides.length)%slides.length; playSlide(timelineIndex);} 
 function nextSlide(){ if(!slides.length)return; timelineIndex=(timelineIndex+1)%slides.length; playSlide(timelineIndex);} 
 function fastForward(){ if(!slides.length)return; timelineIndex=(timelineIndex+2)%slides.length; playSlide(timelineIndex);} 
@@ -1987,7 +1987,7 @@ function updateTotalDuration() {
 }
 
 async function saveTimeline() {
-  if (!slides.length) { alert("������ز�"); return; }
+  if (!slides.length) { alert("先添加素材"); return; }
   const name = document.querySelector("#timelineName").value || `program_${Date.now()}`;
   const first = slides[0];
   const sequence = slides.map((s)=>({ ...s, duration: getSlideDuration(s) }));
@@ -1996,12 +1996,12 @@ async function saveTimeline() {
   const res = await safeFetch("/api/programs/custom", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res) return;
   const data = await res.json();
-  document.querySelector("#timelineStatus").textContent = data.ok ? "�ѱ����Ŀ" : (data.error || "ʧ��");
+  document.querySelector("#timelineStatus").textContent = data.ok ? "已保存节目" : (data.error || "失败");
   loadPrograms();
   setTimeout(()=>document.querySelector("#timelineStatus").textContent="",2000);
 }
 
-// ��ʼ����
+// 初始加载
 sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "1";
 applySidebarState();
 systemMode = localStorage.getItem("systemMode") || "upload";
