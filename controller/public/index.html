@@ -1,9 +1,9 @@
-<!doctype html>
+ï»¿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VideoWall ¿ØÖÆÌ¨ v0.8.0</title>
+  <title>VideoWall ï¿½ï¿½ï¿½ï¿½Ì¨ v0.8.0</title>
   <style>
     :root {
       --bg: #0d1526;
@@ -96,7 +96,7 @@
       background: transparent;
       color: var(--text);
       border: 1px solid transparent;
-      border-left: none; /* ÌùºÏ²à±ßÀ¸²»Áô·ì */
+      border-left: none; /* ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
       border-radius: 0 9px 9px 0;
       box-shadow: none;
       cursor: pointer;
@@ -191,7 +191,7 @@
     /* Collapse states */
     body.sidebar-collapsed .sidebar { transform: translateX(-100%); padding:18px 14px; border:none; box-shadow:none; }
     body.sidebar-collapsed .main-content { margin-left:0; }
-    /* ÊÕÆðÊ±Ö»»¬³öÆÁÄ»£¬ÄÚ²¿ÔªËØ±£³ÖÔ­Î»£¬±ÜÃâÎ»ÒÆ¶¯»­ */
+    /* ï¿½ï¿½ï¿½ï¿½Ê±Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ú²ï¿½Ôªï¿½Ø±ï¿½ï¿½ï¿½Ô­Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Æ¶ï¿½ï¿½ï¿½ */
 
     /* Animate sidebar using transform */
     body:not(.sidebar-collapsed) .sidebar { transform: translateX(0); }
@@ -206,7 +206,7 @@
     .anim-zoom { animation: zoomIn 0.35s ease; }
     .anim-push { animation: pushIn 0.4s ease; }
     .anim-wipe { animation: wipeIn 0.45s ease; }
-    /* ÉÍÎöµ¯´°ÓëÔªÐÅÏ¢ */
+    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½Ï¢ */
     .analysis-panel { width:min(1200px,96vw); }
     .analysis-body { display:flex; gap:14px; align-items:flex-start; min-height:320px; }
     .analysis-left { flex:0 0 44%; background:rgba(255,255,255,0.03); border:1px solid var(--card-border); border-radius:12px; padding:10px; display:flex; align-items:center; justify-content:center; }
@@ -224,49 +224,49 @@
       <div class="brand">
         <div class="brand-logo">BOE</div>
         <div class="brand-text">
-          <div class="name">¿ÍÌüÊÓÆµÇ½¿ØÖÆÌ¨</div>
+          <div class="name">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆµÇ½ï¿½ï¿½ï¿½ï¿½Ì¨</div>
         </div>
       </div>
       <nav class="main-nav actions">
         <button class="nav-btn active" data-nav="dashboard" onclick="switchView('dashboard', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="4" rx="1.2"/><rect x="13" y="10" width="7" height="10" rx="1.2"/><rect x="4" y="13" width="7" height="7" rx="1.5"/></svg>
-          <span class="nav-label">Ê×Ò³¸ÅÀÀ</span>
+          <span class="nav-label">ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½</span>
         </button>
         <button class="nav-btn" data-nav="materials" onclick="switchView('materials', this)">
           <svg viewBox="0 0 24 24"><path d="M3 7h8l2 3h8v9H3Z" stroke-linejoin="round"/><path d="M3 7V5h6l2 2" stroke-linecap="round"/></svg>
-          <span class="nav-label">ËØ²Ä¹ÜÀí</span>
+          <span class="nav-label">ï¿½Ø²Ä¹ï¿½ï¿½ï¿½</span>
         </button>
         <button class="nav-btn" data-nav="upload" onclick="switchView('upload', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 12h8M12 9v6" stroke-linecap="round"/></svg>
-          <span class="nav-label">½ÚÄ¿ÓëÄ£°å</span>
+          <span class="nav-label">ï¿½ï¿½Ä¿ï¿½ï¿½Ä£ï¿½ï¿½</span>
         </button>
         <button class="nav-btn" data-nav="programs" onclick="switchView('programs', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M9 6v12M15 6v12M4 11h16" stroke-linecap="round"/></svg>
-          <span class="nav-label">½ÚÄ¿¿â</span>
+          <span class="nav-label">ï¿½ï¿½Ä¿ï¿½ï¿½</span>
         </button>
         <button class="nav-btn" data-nav="schedule" onclick="switchView('schedule', this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 9v4l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="nav-label">ÅÅ³Ì¹ÜÀí</span>
+          <span class="nav-label">ï¿½Å³Ì¹ï¿½ï¿½ï¿½</span>
         </button>
         <button class="nav-btn" data-nav="devices" onclick="switchView('devices', this)">
           <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M9 19h6" stroke-linecap="round"/><path d="M10.5 16.5h3" stroke-linecap="round"/></svg>
-          <span class="nav-label">Éè±¸¹ÜÀí</span>
+          <span class="nav-label">ï¿½è±¸ï¿½ï¿½ï¿½ï¿½</span>
         </button>
         <button class="nav-btn" data-nav="settings" onclick="switchView('settings', this)">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M4 12h2m12 0h2M12 4v2m0 12v2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6" stroke-linecap="round"/></svg>
-          <span class="nav-label">ÏµÍ³¹ÜÀí</span>
+          <span class="nav-label">ÏµÍ³ï¿½ï¿½ï¿½ï¿½</span>
         </button>
       </nav>
       <div class="side-footer">
         <div class="mode-switch">
-          <button class="mode-btn" id="modeScreen" onclick="setSystemMode('upload')"><span class="nav-label">»­ÆÁ</span></button>
-          <button class="mode-btn" id="modeSplice" onclick="setSystemMode('programs')"><span class="nav-label">Æ´½Ó</span></button>
+          <button class="mode-btn" id="modeScreen" onclick="setSystemMode('upload')"><span class="nav-label">ï¿½ï¿½ï¿½ï¿½</span></button>
+          <button class="mode-btn" id="modeSplice" onclick="setSystemMode('programs')"><span class="nav-label">Æ´ï¿½ï¿½</span></button>
         </div>
         <div class="version-text" id="serverVersion">v0.8.0</div>
       </div>
     </aside>
 
-    <button id="sidebarToggle" class="sidebar-toggle" onclick="toggleSidebar()" aria-label="ÊÕÆð²à±ßÀ¸">
+    <button id="sidebarToggle" class="sidebar-toggle" onclick="toggleSidebar()" aria-label="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½">
       <span class="toggle-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 5 7 12l7 7"></path>
@@ -277,45 +277,45 @@
     <div class="main-content">
       <div class="topbar">
         <div>
-          <div class="topbar-title" id="topTitle">Ê×Ò³¸ÅÀÀ</div>
+          <div class="topbar-title" id="topTitle">ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½</div>
         </div>
         <div class="user-chip">
           <span class="dot-online"></span>
-          <span>ÔÚÏß</span>
+          <span>ï¿½ï¿½ï¿½ï¿½</span>
         </div>
       </div>
 
       <div id="dashboard" class="view dashboard-view">
         <div class="stat-grid">
           <div class="stat-card">
-            <div class="stat-icon"><img src="/img/dashboard-1.png" alt="Éè±¸"></div>
+            <div class="stat-icon"><img src="/img/dashboard-1.png" alt="ï¿½è±¸"></div>
             <div>
-              <div class="stat-meta">Éè±¸ÊýÁ¿</div>
+              <div class="stat-meta">ï¿½è±¸ï¿½ï¿½ï¿½ï¿½</div>
               <div class="stat-value" id="statDevicesTotal">0</div>
-              <div class="stat-meta" id="statDevicesOnline">ÔÚÏß 0 Ì¨</div>
+              <div class="stat-meta" id="statDevicesOnline">ï¿½ï¿½ï¿½ï¿½ 0 Ì¨</div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon"><img src="/img/dashboard-2.png" alt="½ÚÄ¿"></div>
+            <div class="stat-icon"><img src="/img/dashboard-2.png" alt="ï¿½ï¿½Ä¿"></div>
             <div>
-              <div class="stat-meta">½ÚÄ¿ÊýÁ¿</div>
+              <div class="stat-meta">ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½</div>
               <div class="stat-value" id="statPrograms">0</div>
-              <div class="stat-meta">×î½ü¸üÐÂ <span id="statProgramsUpdated">-</span></div>
+              <div class="stat-meta">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <span id="statProgramsUpdated">-</span></div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon"><img src="/img/dashboard-3.png" alt="¼Æ»®"></div>
+            <div class="stat-icon"><img src="/img/dashboard-3.png" alt="ï¿½Æ»ï¿½"></div>
             <div>
-              <div class="stat-meta">¼Æ»®ÊýÁ¿</div>
+              <div class="stat-meta">ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½</div>
               <div class="stat-value" id="statSchedules">0</div>
-              <div class="stat-meta" id="statNextSchedule">ÏÂÒ»´Î£º-</div>
+              <div class="stat-meta" id="statNextSchedule">ï¿½ï¿½Ò»ï¿½Î£ï¿½-</div>
             </div>
           </div>
         </div>
 
         <div class="panel-grid">
           <section class="card">
-            <div class="panel-title">Éè±¸×´Ì¬</div>
+            <div class="panel-title">ï¿½è±¸×´Ì¬</div>
             <div class="ring-wrap">
               <canvas id="deviceRing" width="200" height="200"></canvas>
               <div class="ring-center">
@@ -324,45 +324,45 @@
               </div>
             </div>
             <ul class="legend">
-              <li><span class="swatch" style="background:#3b82f6"></span>ÔÚÏß <span id="legendOnline" style="margin-left:auto;">0</span></li>
-              <li><span class="swatch" style="background:#64748b"></span>ÀëÏß <span id="legendOffline" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#3b82f6"></span>ï¿½ï¿½ï¿½ï¿½ <span id="legendOnline" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#64748b"></span>ï¿½ï¿½ï¿½ï¿½ <span id="legendOffline" style="margin-left:auto;">0</span></li>
             </ul>
           </section>
 
           <section class="card">
-            <div class="panel-title">ËØ²Ä×ÊÔ´</div>
+            <div class="panel-title">ï¿½Ø²ï¿½ï¿½ï¿½Ô´</div>
             <div class="ring-wrap">
               <canvas id="materialRing" width="200" height="200"></canvas>
               <div class="ring-center">
                 <div class="big" id="materialRingTotal">0</div>
-                <div class="muted-text">×ÜÁ¿</div>
+                <div class="muted-text">ï¿½ï¿½ï¿½ï¿½</div>
               </div>
             </div>
             <ul class="legend">
               <li><span class="swatch" style="background:#f59e0b"></span>Í¼Æ¬ <span id="legendPic" style="margin-left:auto;">0</span></li>
-              <li><span class="swatch" style="background:#22c55e"></span>ÊÓÆµ <span id="legendVideo" style="margin-left:auto;">0</span></li>
-              <li><span class="swatch" style="background:#a855f7"></span>ÒôÆµ/ÆäËû <span id="legendAudio" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#22c55e"></span>ï¿½ï¿½Æµ <span id="legendVideo" style="margin-left:auto;">0</span></li>
+              <li><span class="swatch" style="background:#a855f7"></span>ï¿½ï¿½Æµ/ï¿½ï¿½ï¿½ï¿½ <span id="legendAudio" style="margin-left:auto;">0</span></li>
             </ul>
           </section>
 
           <section class="card">
-            <div class="panel-title">Éè±¸·Ö²¼</div>
+            <div class="panel-title">ï¿½è±¸ï¿½Ö²ï¿½</div>
             <div class="bar-chart" id="deviceBar"></div>
           </section>
         </div>
 
         <div class="panel-grid">
           <section class="card">
-            <div class="panel-title">¼Æ»®ÉóºËÌáÐÑ</div>
+            <div class="panel-title">ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</div>
             <table id="scheduleReminder" style="width:100%; border-collapse:collapse; font-size:14px;">
               <thead>
-                <tr><th style="text-align:left;">ÐòºÅ</th><th style="text-align:left;">¼Æ»®Ãû³Æ</th><th style="text-align:left;">¼Æ»®×´Ì¬</th><th style="text-align:left;">¿ªÊ¼Ê±¼ä</th><th style="text-align:left;">²Ù×÷</th></tr>
+                <tr><th style="text-align:left;">ï¿½ï¿½ï¿½</th><th style="text-align:left;">ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½</th><th style="text-align:left;">ï¿½Æ»ï¿½×´Ì¬</th><th style="text-align:left;">ï¿½ï¿½Ê¼Ê±ï¿½ï¿½</th><th style="text-align:left;">ï¿½ï¿½ï¿½ï¿½</th></tr>
               </thead>
               <tbody></tbody>
             </table>
           </section>
           <section class="card">
-            <div class="panel-title">ÊÂ¼þ¼ÇÂ¼</div>
+            <div class="panel-title">ï¿½Â¼ï¿½ï¿½ï¿½Â¼</div>
             <div class="event-list" id="eventList"></div>
           </section>
         </div>
@@ -370,10 +370,10 @@
 
       <div id="confirmModal" class="modal">
         <div class="panel" style="max-width:360px;">
-          <div id="confirmText" style="margin-bottom:12px;">È·ÈÏ£¿</div>
+          <div id="confirmText" style="margin-bottom:12px;">È·ï¿½Ï£ï¿½</div>
           <div class="actions" style="justify-content:flex-end;">
-            <button class="secondary" onclick="closeConfirm()">È¡Ïû</button>
-            <button onclick="runConfirm()">È·¶¨</button>
+            <button class="secondary" onclick="closeConfirm()">È¡ï¿½ï¿½</button>
+            <button onclick="runConfirm()">È·ï¿½ï¿½</button>
           </div>
         </div>
       </div>
@@ -389,8 +389,8 @@
         </div>
         <div class="card" style="background:rgba(255,255,255,0.03); flex:0 0 240px; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <div>Ô¤ÀÀ</div>
-            <span id="mediaSelLabel" class="badge">Î´Ñ¡Ôñ</span>
+            <div>Ô¤ï¿½ï¿½</div>
+            <span id="mediaSelLabel" class="badge">Î´Ñ¡ï¿½ï¿½</span>
           </div>
           <div id="mediaPreview" style="flex:1; min-height:180px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.35); border:1px solid var(--card-border); border-radius:8px; overflow:hidden;"></div>
         </div>
@@ -401,7 +401,7 @@
           <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px;">
             <div id="mediaBreadcrumb" style="color:var(--muted); font-size:12px;">/media</div>
             <div style="display:flex; align-items:center; gap:6px;">
-              <button class="secondary" id="btnGenThumbs" onclick="generateThumbsForCurrent()">Éú³ÉËõÂÔÍ¼</button>
+              <button class="secondary" id="btnGenThumbs" onclick="generateThumbsForCurrent()">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼</button>
               <div id="thumbProgress" style="color:var(--muted); font-size:12px; min-width:140px;"></div>
             </div>
           </div>
@@ -409,18 +409,18 @@
         </div>
         <div class="card" style="background:rgba(255,255,255,0.03); width:320px; min-width:260px; max-width:360px; padding:10px; display:flex; flex-direction:column; gap:6px;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div style="font-weight:700;">»­×÷ÐÅÏ¢</div>
+            <div style="font-weight:700;">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢</div>
             <span id="metaStatus" style="color:var(--muted); font-size:12px;"></span>
           </div>
           <div id="metaTitle" style="font-size:14px; font-weight:700;"></div>
           <div id="metaArtist" style="color:var(--muted); font-size:13px;"></div>
           <div id="metaFields" style="display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:12px;"></div>
-          <div class="badge" style="background:rgba(255,255,255,0.05);">¼ò½é</div>
+          <div class="badge" style="background:rgba(255,255,255,0.05);">ï¿½ï¿½ï¿½</div>
           <div id="metaIntro" style="color:#e5e7eb; font-size:13px; line-height:1.5; white-space:pre-wrap;"></div>
-          <div class="badge" style="background:rgba(255,255,255,0.05);">ÉÍÎöÕªÒª</div>
+          <div class="badge" style="background:rgba(255,255,255,0.05);">ï¿½ï¿½ï¿½ï¿½ÕªÒª</div>
           <div id="metaAnalysisPreview" style="color:#cbd5e1; font-size:13px; line-height:1.4; max-height:90px; overflow:hidden;"></div>
           <div class="actions" style="justify-content:flex-start; gap:6px;">
-            <button class="secondary" id="btnOpenAnalysis" style="display:none;" onclick="openAnalysisModal(mediaSelected, currentAnalysisInfo)">´ò¿ªÉÍÎöµ¯´°</button>
+            <button class="secondary" id="btnOpenAnalysis" style="display:none;" onclick="openAnalysisModal(mediaSelected, currentAnalysisInfo)">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</button>
           </div>
           <div id="metaExtra" style="color:#94a3b8; font-size:12px;"></div>
         </div>
@@ -433,10 +433,10 @@
   <div class="panel analysis-panel">
     <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
       <div>
-        <div id="analysisTitle" style="font-weight:800; font-size:18px; letter-spacing:0.3px;">ÉÍÎö</div>
+        <div id="analysisTitle" style="font-weight:800; font-size:18px; letter-spacing:0.3px;">ï¿½ï¿½ï¿½ï¿½</div>
         <div id="analysisSubtitle" style="color:var(--muted); font-size:13px;"></div>
       </div>
-      <button class="secondary" onclick="closeAnalysisModal()">¹Ø±Õ</button>
+      <button class="secondary" onclick="closeAnalysisModal()">ï¿½Ø±ï¿½</button>
     </div>
     <div class="analysis-body">
       <div class="analysis-left" id="analysisMedia"></div>
@@ -449,18 +449,18 @@
 
 <div id="devices" class="view" style="display:none;">
     <section class="card">
-      <h3>Á¬½ÓÉè±¸</h3>
+      <h3>ï¿½ï¿½ï¿½ï¿½ï¿½è±¸</h3>
       <table id="deviceTable2">
-        <thead><tr><th>ID</th><th>½ÇÉ«</th><th>IP</th><th>×´Ì¬</th><th>×î½üÊ±¼ä</th></tr></thead>
+        <thead><tr><th>ID</th><th>ï¿½ï¿½É«</th><th>IP</th><th>×´Ì¬</th><th>ï¿½ï¿½ï¿½Ê±ï¿½ï¿½</th></tr></thead>
         <tbody></tbody>
       </table>
       <div class="actions" style="margin-top:8px;">
-        <button onclick="loadDevices(true)">Ë¢ÐÂÉè±¸</button>
+        <button onclick="loadDevices(true)">Ë¢ï¿½ï¿½ï¿½è±¸</button>
       </div>
     </section>
   </div>
 
-  <!-- ¹ã²¥Ò³ÃæÒÑÒÆ³ý£¬±£ÁôÊ×Ò³¿ìËÙ¹ã²¥ -->
+  <!-- ï¿½ã²¥Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ù¹ã²¥ -->
   <div id="upload" class="view" style="display:none;">
     <section class="card" style="padding:0; overflow:hidden;">
       <iframe id="builderFrame" src="program-builder.html" style="width:100%; min-height: calc(100vh - 180px); border:0; display:block;"></iframe>
@@ -470,44 +470,44 @@
   <div id="editModal" class="modal">
     <div class="panel">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-        <h4>ËØ²ÄÎ¢µ÷ / ²ÃÇÐ</h4>
-        <button class="secondary" onclick="closeEditModal()">¹Ø±Õ</button>
+        <h4>ï¿½Ø²ï¿½Î¢ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½</h4>
+        <button class="secondary" onclick="closeEditModal()">ï¿½Ø±ï¿½</button>
       </div>
       <div class="preview-stage" id="editStage"></div>
       <div class="range-row">
-        Í¼Æ¬Í£Áô(Ãë)£º<input type="number" id="editDuration" value="5" min="1" style="width:90px">
-        ×ª³¡Ð§¹û£º
+        Í¼Æ¬Í£ï¿½ï¿½(ï¿½ï¿½)ï¿½ï¿½<input type="number" id="editDuration" value="5" min="1" style="width:90px">
+        ×ªï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½
         <select id="editEffect" onchange="renderEditPreview()">
-          <option value="random">Ëæ»ú</option>
-          <option value="fade">µ­Èëµ­³ö</option>
-          <option value="slide">»¬¶¯</option>
-          <option value="zoom">Ëõ·Å</option>
-          <option value="push">ÍÆÀ­</option>
-          <option value="wipe">°ÙÒ¶</option>
+          <option value="random">ï¿½ï¿½ï¿½</option>
+          <option value="fade">ï¿½ï¿½ï¿½ëµ­ï¿½ï¿½</option>
+          <option value="slide">ï¿½ï¿½ï¿½ï¿½</option>
+          <option value="zoom">ï¿½ï¿½ï¿½ï¿½</option>
+          <option value="push">ï¿½ï¿½ï¿½ï¿½</option>
+          <option value="wipe">ï¿½ï¿½Ò¶</option>
         </select>
       </div>
       <div class="range-row">
-        ²ÃÇÐÆ«ÒÆ X£º<input type="range" id="editOffsetX" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
+        ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ Xï¿½ï¿½<input type="range" id="editOffsetX" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
         <span id="editOffsetXVal" style="min-width:50px;">0</span>
-        ²ÃÇÐÆ«ÒÆ Y£º<input type="range" id="editOffsetY" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
+        ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ Yï¿½ï¿½<input type="range" id="editOffsetY" min="-400" max="400" step="2" value="0" oninput="renderEditPreview()">
         <span id="editOffsetYVal" style="min-width:50px;">0</span>
       </div>
       <div class="actions" style="justify-content:flex-end;">
-        <button onclick="applyEdit()">±£´æ</button>
+        <button onclick="applyEdit()">ï¿½ï¿½ï¿½ï¿½</button>
       </div>
     </div>
   </div>
 
   <div id="programs" class="view" style="display:none;">
     <section class="card">
-      <h3>½ÚÄ¿ÁÐ±í</h3>
+      <h3>ï¿½ï¿½Ä¿ï¿½Ð±ï¿½</h3>
       <div class="row">
-        <input id="customTitle" placeholder="½ÚÄ¿±êÌâ" style="flex:1;min-width:160px">
-        <button class="secondary" onclick="saveCustom()">±£´æµ±Ç°ÈýÆÁÎª½ÚÄ¿</button>
-        <button class="secondary" onclick="refreshFromDisk()">ÖØÐÂ¶ÁÈ¡½ÚÄ¿Ä¿Â¼</button>
+        <input id="customTitle" placeholder="ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½" style="flex:1;min-width:160px">
+        <button class="secondary" onclick="saveCustom()">ï¿½ï¿½ï¿½æµ±Ç°ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ä¿</button>
+        <button class="secondary" onclick="refreshFromDisk()">ï¿½ï¿½ï¿½Â¶ï¿½È¡ï¿½ï¿½Ä¿Ä¿Â¼</button>
       </div>
       <table id="programTable">
-        <thead><tr><th>ID</th><th>±êÌâ</th><th>´´½¨Ê±¼ä</th><th>²Ù×÷</th></tr></thead>
+        <thead><tr><th>ID</th><th>ï¿½ï¿½ï¿½ï¿½</th><th>ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½</th><th>ï¿½ï¿½ï¿½ï¿½</th></tr></thead>
         <tbody></tbody>
       </table>
     </section>
@@ -515,14 +515,14 @@
 
   <div id="schedule" class="view" style="display:none;">
     <section class="card">
-      <h3>ÅÅ³Ì</h3>
-      <div class="row">½ÚÄ¿ID£º<input id="schedProgramId" placeholder="program id"> ¿ªÊ¼UTCºÁÃë£º<input id="schedStart" size="20" placeholder="Date.now()+10000"></div>
+      <h3>ï¿½Å³ï¿½</h3>
+      <div class="row">ï¿½ï¿½Ä¿IDï¿½ï¿½<input id="schedProgramId" placeholder="program id"> ï¿½ï¿½Ê¼UTCï¿½ï¿½ï¿½ë£º<input id="schedStart" size="20" placeholder="Date.now()+10000"></div>
       <div class="actions">
-        <button onclick="addSchedule()">Ìí¼ÓÅÅ³Ì</button>
-        <button class="secondary" onclick="loadSchedule()">Ë¢ÐÂÅÅ³Ì</button>
+        <button onclick="addSchedule()">ï¿½ï¿½ï¿½ï¿½Å³ï¿½</button>
+        <button class="secondary" onclick="loadSchedule()">Ë¢ï¿½ï¿½ï¿½Å³ï¿½</button>
       </div>
       <table id="scheduleTable">
-        <thead><tr><th>ID</th><th>½ÚÄ¿</th><th>¿ªÊ¼</th><th>²Ù×÷</th></tr></thead>
+        <thead><tr><th>ID</th><th>ï¿½ï¿½Ä¿</th><th>ï¿½ï¿½Ê¼</th><th>ï¿½ï¿½ï¿½ï¿½</th></tr></thead>
         <tbody></tbody>
       </table>
     </section>
@@ -530,23 +530,23 @@
 
   <div id="power" class="view" style="display:none;">
     <section class="card">
-      <h3>µçÔ´¿ØÖÆ</h3>
+      <h3>ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½</h3>
       <div class="actions">
-        <button onclick="power('sleep')">Ï¨ÆÁ/ÔÝÍ£</button>
-        <button class="secondary" onclick="power('wake')">»½ÐÑ</button>
-        <button class="secondary" onclick="power('reboot')">ÖØÆô</button>
+        <button onclick="power('sleep')">Ï¨ï¿½ï¿½/ï¿½ï¿½Í£</button>
+        <button class="secondary" onclick="power('wake')">ï¿½ï¿½ï¿½ï¿½</button>
+        <button class="secondary" onclick="power('reboot')">ï¿½ï¿½ï¿½ï¿½</button>
       </div>
     </section>
   </div>
 
   <div id="settings" class="view" style="display:none;">
     <section class="card">
-      <h3>¿Í»§¶Ë IP ÅäÖÃ</h3>
-      <div class="row">×óÆÁ IP£º<input id="ipLeft" size="18" placeholder="192.168.x.x"></div>
-      <div class="row">ÖÐÆÁ IP£º<input id="ipCenter" size="18" placeholder="192.168.x.x"></div>
-      <div class="row">ÓÒÆÁ IP£º<input id="ipRight" size="18" placeholder="192.168.x.x"></div>
+      <h3>ï¿½Í»ï¿½ï¿½ï¿½ IP ï¿½ï¿½ï¿½ï¿½</h3>
+      <div class="row">ï¿½ï¿½ï¿½ï¿½ IPï¿½ï¿½<input id="ipLeft" size="18" placeholder="192.168.x.x"></div>
+      <div class="row">ï¿½ï¿½ï¿½ï¿½ IPï¿½ï¿½<input id="ipCenter" size="18" placeholder="192.168.x.x"></div>
+      <div class="row">ï¿½ï¿½ï¿½ï¿½ IPï¿½ï¿½<input id="ipRight" size="18" placeholder="192.168.x.x"></div>
       <div class="actions">
-        <button onclick="saveClientIps()">±£´æ</button>
+        <button onclick="saveClientIps()">ï¿½ï¿½ï¿½ï¿½</button>
         <span id="ipSaveStatus" style="color:var(--success);"></span>
       </div>
     </section>
@@ -608,15 +608,15 @@ function startPreview() {
   }
   if (previewVideo.canPlayType("application/vnd.apple.mpegurl")) {
     previewVideo.src = src;
-    previewVideo.play().then(()=>{ if(status) status.textContent="²¥·ÅÖÐ"; }).catch(()=>{ if(status) status.textContent="µã»÷¿ªÊ¼"; });
+    previewVideo.play().then(()=>{ if(status) status.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; }).catch(()=>{ if(status) status.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼"; });
   } else if (window.Hls) {
     hlsPlayer = new Hls({ lowLatencyMode: true, maxBufferLength: 4, backBufferLength: 0, fragLoadingTimeOut: 4000 });
     hlsPlayer.loadSource(src);
     hlsPlayer.attachMedia(previewVideo);
-    hlsPlayer.on(Hls.Events.MANIFEST_PARSED, ()=>{ previewVideo.play().then(()=>{ if(status) status.textContent="²¥·ÅÖÐ"; }); });
-    hlsPlayer.on(Hls.Events.ERROR, (_, data)=>{ if(data.fatal && status) status.textContent="Ô¤ÀÀ´íÎó£¬ÖØÊÔ"; });
+    hlsPlayer.on(Hls.Events.MANIFEST_PARSED, ()=>{ previewVideo.play().then(()=>{ if(status) status.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; }); });
+    hlsPlayer.on(Hls.Events.ERROR, (_, data)=>{ if(data.fatal && status) status.textContent="Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; });
   } else {
-    if (status) status.textContent = "²»Ö§³Ö HLS";
+    if (status) status.textContent = "ï¿½ï¿½Ö§ï¿½ï¿½ HLS";
   }
 }
 
@@ -624,7 +624,7 @@ function stopPreview() {
   if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
   if (!previewVideo) previewVideo = document.querySelector("#previewVideo");
   if (previewVideo) { previewVideo.pause(); previewVideo.removeAttribute("src"); previewVideo.load(); }
-  const status = document.querySelector("#previewStatus"); if (status) status.textContent = "ÒÑÍ£Ö¹";
+  const status = document.querySelector("#previewStatus"); if (status) status.textContent = "ï¿½ï¿½Í£Ö¹";
 }
 
 function refreshPreview() {
@@ -642,12 +642,12 @@ async function sendControl(action) {
     });
     const data = await res.json();
     if (data.ok) {
-      if (status) status.textContent = `ÒÑ·¢ËÍ£º${action} ¡¤ ${new Date(data.serverTime || Date.now()).toLocaleTimeString()}`;
+      if (status) status.textContent = `ï¿½Ñ·ï¿½ï¿½Í£ï¿½${action} ï¿½ï¿½ ${new Date(data.serverTime || Date.now()).toLocaleTimeString()}`;
     } else {
-      if (status) status.textContent = data.error || "·¢ËÍÊ§°Ü";
+      if (status) status.textContent = data.error || "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½";
     }
   } catch (e) {
-    if (status) status.textContent = "ÍøÂç´íÎó";
+    if (status) status.textContent = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
   }
 }
 
@@ -659,7 +659,7 @@ function resetProgram() {
   document.querySelector("#programTagChips").innerHTML = "";
   document.querySelector("#totalDuration").textContent = "0s";
   const badge = document.querySelector("#currentProgBadge");
-  if (badge) badge.textContent = "µ±Ç°½ÚÄ¿£ºÎ´ÃüÃû";
+  if (badge) badge.textContent = "ï¿½ï¿½Ç°ï¿½ï¿½Ä¿ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½";
   renderSlidesList();
 }
 
@@ -684,9 +684,9 @@ function switchView(id, btn, opts = {}) {
     }
   }
   if (id === "dashboard") startPreview(); else stopPreview();
-  const titles = { dashboard:"Ê×Ò³¸ÅÀÀ", devices:"Éè±¸¹ÜÀí", materials:"ËØ²Ä¹ÜÀí", upload:"½ÚÄ¿ÓëÄ£°å", programs:"½ÚÄ¿¿â", schedule:"ÅÅ³Ì¹ÜÀí", power:"µçÔ´¿ØÖÆ", settings:"ÏµÍ³¹ÜÀí" };
+  const titles = { dashboard:"ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½", devices:"ï¿½è±¸ï¿½ï¿½ï¿½ï¿½", materials:"ï¿½Ø²Ä¹ï¿½ï¿½ï¿½", upload:"ï¿½ï¿½Ä¿ï¿½ï¿½Ä£ï¿½ï¿½", programs:"ï¿½ï¿½Ä¿ï¿½ï¿½", schedule:"ï¿½Å³Ì¹ï¿½ï¿½ï¿½", power:"ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½", settings:"ÏµÍ³ï¿½ï¿½ï¿½ï¿½" };
   const titleEl = document.querySelector("#topTitle");
-  if (titleEl) titleEl.textContent = titles[id] || "¿ØÖÆÌ¨";
+  if (titleEl) titleEl.textContent = titles[id] || "ï¿½ï¿½ï¿½ï¿½Ì¨";
 }
 
 function refreshSidebarToggle() {
@@ -694,7 +694,7 @@ function refreshSidebarToggle() {
   if (!btn) return;
   const icon = btn.querySelector(".toggle-icon svg");
   if (icon) icon.style.transform = sidebarCollapsed ? "rotate(180deg)" : "rotate(0deg)";
-  btn.setAttribute("aria-label", sidebarCollapsed ? "Õ¹¿ª²à±ßÀ¸" : "ÊÕÆð²à±ßÀ¸");
+  btn.setAttribute("aria-label", sidebarCollapsed ? "Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 }
 
 function applySidebarState() {
@@ -729,12 +729,12 @@ async function safeFetch(url, opts = {}) {
     if (!res.ok) throw new Error(res.status + " " + res.statusText);
     return res;
   } catch (e) {
-    log("ÇëÇóÊ§°Ü: " + e.message);
+    log("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: " + e.message);
     return null;
   }
 }
 
-// -------- ÎÄ¼þÊ÷ËØ²Ä¹ÜÀí£¨Ö§³ÖÍ¬Ãû JSON / Ä¿Â¼ meta£© --------
+// -------- ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ø²Ä¹ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½Í¬ï¿½ï¿½ JSON / Ä¿Â¼ metaï¿½ï¿½ --------
 async function loadMediaTree(path = mediaCurrentPath || "") {
   mediaCurrentPath = path;
   const params = new URLSearchParams();
@@ -771,7 +771,7 @@ function renderMediaTree(path="") {
     row.onmouseenter = ()=> row.style.background = "rgba(255,255,255,0.04)";
     row.onmouseleave = ()=> row.style.background = "transparent";
     const open = mediaTreeOpen.has(node.path || "");
-    const caret = document.createElement("span"); caret.textContent = open ? "¨‹" : "?"; caret.style.color="var(--muted)";
+    const caret = document.createElement("span"); caret.textContent = open ? "ï¿½ï¿½" : "?"; caret.style.color="var(--muted)";
     const name = document.createElement("span"); name.textContent = node.name || (node.path?node.path.split("/").pop():"media"); name.style.color = node.path===path ? "var(--accent)" : "#fff";
     row.appendChild(caret); row.appendChild(name);
     row.onclick = () => { if (open) mediaTreeOpen.delete(node.path||""); else mediaTreeOpen.add(node.path||""); loadMediaTree(node.path||""); };
@@ -794,7 +794,7 @@ function renderMediaFiles(){
     if (!(isImage||isVideo)) return;
     items.push({ type:"file", name:f.name, path:f.path, mtime:f.mtime, size:f.size, isMedia:true });
   });
-  if (!items.length) { const p=document.createElement("div"); p.style.color="var(--muted)"; p.textContent="¸ÃÄ¿Â¼ÏÂÔÝÎÞÎÄ¼þ"; grid.appendChild(p); return; }
+  if (!items.length) { const p=document.createElement("div"); p.style.color="var(--muted)"; p.textContent="ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½"; grid.appendChild(p); return; }
   items.forEach(item=>{
     const card=document.createElement("div"); card.className="media-card";
     if (item.type === "dir") card.onclick=()=>loadMediaTree(item.path); else { card.onclick=()=>selectMediaFile(item); }
@@ -807,7 +807,7 @@ function renderMediaFiles(){
       thumbWrap.appendChild(thumb); observeThumb(thumb);
     }
     const title=document.createElement("div"); title.style.fontWeight="700"; title.style.color="var(--accent)"; title.textContent=item.name;
-    const meta=document.createElement("div"); meta.style.color="var(--muted)"; meta.style.fontSize="12px"; meta.textContent = item.type==='dir' ? 'ÎÄ¼þ¼Ð' : humanSize(item.size||0);
+    const meta=document.createElement("div"); meta.style.color="var(--muted)"; meta.style.fontSize="12px"; meta.textContent = item.type==='dir' ? 'ï¿½Ä¼ï¿½ï¿½ï¿½' : humanSize(item.size||0);
     card.appendChild(thumbWrap); card.appendChild(title); card.appendChild(meta); grid.appendChild(card);
   });
 }
@@ -815,16 +815,16 @@ function getLocalThumbUrl(item){ const pathStr=item.path||""; const parts=pathSt
 function ensureThumbObserver(){ if(!("IntersectionObserver" in window)){ thumbObserver=null; return; } if(thumbObserver) return; thumbObserver = new IntersectionObserver((entries)=>{ entries.forEach(entry=>{ if(!entry.isIntersecting) return; const el=entry.target; const src=el.dataset?.src; if(src){ el.src=src; delete el.dataset.src; } thumbObserver.unobserve(el); }); }, { rootMargin:"200px 0px" }); }
 function observeThumb(el){ if(thumbObserver && el?.dataset?.src) thumbObserver.observe(el); else if(el?.dataset?.src){ el.src = el.dataset.src; delete el.dataset.src; } }
 async function syncThumbsForCurrent(){ const path=mediaCurrentPath||""; if(thumbSyncingPath===path) return; thumbSyncingPath=path; const res=await safeFetch("/api/media/thumbs/sync",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({path})}); thumbSyncingPath=null; if(res){ const data=await res.json(); if(data?.changed) loadMediaTree(path); } loadMetaForCurrent(); }
-async function loadMetaForCurrent(force=false){ const path=mediaCurrentPath||""; if(!force && metaCache[path]) return metaCache[path]; const metaPath = path ? `/ext-media/${encodeURIComponent(path + '/.thumbs/meta.json').replace(/%2F/g,'/')}` : "/ext-media/.thumbs/meta.json"; const status=document.querySelector("#metaStatus"); if(status) status.textContent="ÔØÈëÖÐ..."; try { const res=await fetch(metaPath,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); let normalized={}; if(data?.["»­×÷ÁÐ±í"] && Array.isArray(data["»­×÷ÁÐ±í"])) { data["»­×÷ÁÐ±í"].forEach(entry=>{ const fname=entry?.meta_data?.["ÎÄ¼þÃû³Æ"]; if(!fname) return; normalized[fname]={ meta: entry.meta_data||{}, intro: entry["¼ò½é"]||"", analysis: entry["ÉÍÎö"]||"" }; }); } metaCache[path]=normalized; if(status) status.textContent="ÒÑÔØÈë"; return metaCache[path]; } catch(e){ metaCache[path]={}; if(status) status.textContent="ÎÞÔªÊý¾Ý"; return {}; } }
-async function loadSidecarForFile(file){ if(!file?.path) return null; const key=file.path; if(Object.prototype.hasOwnProperty.call(sidecarCache, key)) return sidecarCache[key]; const base=file.path.replace(/\.[^.]+$/,''); const url=`/ext-media/${encodeURIComponent(base + '.json').replace(/%2F/g,'/')}`; try { const res=await fetch(url,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); const meta=data["ÔªÐÅÏ¢"]||data.meta_data||data.meta||{}; const intro=data["¼ò½é"]||data.intro||""; const analysis=data["ÉÍÎö"]||data.analysis||""; const norm={ meta,intro,analysis,__source:"sidecar",__file:file.path }; sidecarCache[key]=norm; return norm; } catch(e){ sidecarCache[key]=null; return null; } }
-function normalizeAnalysis(raw){ if(!raw) return {title:"", content:""}; if(typeof raw === "string") return { title:"ÉÍÎö", content: raw }; return { title: raw["±êÌâ"]||raw["title"]||raw.title||"ÉÍÎö", content: raw["ÄÚÈÝ"]||raw["ÕýÎÄ"]||raw.content||"" }; }
+async function loadMetaForCurrent(force=false){ const path=mediaCurrentPath||""; if(!force && metaCache[path]) return metaCache[path]; const metaPath = path ? `/ext-media/${encodeURIComponent(path + '/.thumbs/meta.json').replace(/%2F/g,'/')}` : "/ext-media/.thumbs/meta.json"; const status=document.querySelector("#metaStatus"); if(status) status.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..."; try { const res=await fetch(metaPath,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); let normalized={}; if(data?.["ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½"] && Array.isArray(data["ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½"])) { data["ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½"].forEach(entry=>{ const fname=entry?.meta_data?.["ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½"]; if(!fname) return; normalized[fname]={ meta: entry.meta_data||{}, intro: entry["ï¿½ï¿½ï¿½"]||"", analysis: entry["ï¿½ï¿½ï¿½ï¿½"]||"" }; }); } metaCache[path]=normalized; if(status) status.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; return metaCache[path]; } catch(e){ metaCache[path]={}; if(status) status.textContent="ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½"; return {}; } }
+async function loadSidecarForFile(file){ if(!file?.path) return null; const key=file.path; if(Object.prototype.hasOwnProperty.call(sidecarCache, key)) return sidecarCache[key]; const base=file.path.replace(/\.[^.]+$/,''); const url=`/ext-media/${encodeURIComponent(base + '.json').replace(/%2F/g,'/')}`; try { const res=await fetch(url,{cache:"no-store"}); if(!res.ok) throw new Error(res.statusText); const data=await res.json(); const meta=data["Ôªï¿½ï¿½Ï¢"]||data.meta_data||data.meta||{}; const intro=data["ï¿½ï¿½ï¿½"]||data.intro||""; const analysis=data["ï¿½ï¿½ï¿½ï¿½"]||data.analysis||""; const norm={ meta,intro,analysis,__source:"sidecar",__file:file.path }; sidecarCache[key]=norm; return norm; } catch(e){ sidecarCache[key]=null; return null; } }
+function normalizeAnalysis(raw){ if(!raw) return {title:"", content:""}; if(typeof raw === "string") return { title:"ï¿½ï¿½ï¿½ï¿½", content: raw }; return { title: raw["ï¿½ï¿½ï¿½ï¿½"]||raw["title"]||raw.title||"ï¿½ï¿½ï¿½ï¿½", content: raw["ï¿½ï¿½ï¿½ï¿½"]||raw["ï¿½ï¿½ï¿½ï¿½"]||raw.content||"" }; }
 function truncateText(str="", max=180){ if(!str) return ""; const clean=str.replace(/\s+/g," ").trim(); return clean.length>max ? clean.slice(0,max) + "..." : clean; }
 function escapeHtml(str=""){ return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function markdownToHtml(md=""){ if(!md) return ""; const txt=escapeHtml(md).replace(/\r?\n/g,"\\n"); const lines=txt.split("\\n"); const htmlLines=lines.map(line=>{ if(/^###\\s+/.test(line)) return `<h4>${line.replace(/^###\\s+/,"")}</h4>`; if(/^##\\s+/.test(line)) return `<h3>${line.replace(/^##\\s+/,"")}</h3>`; if(/^#\\s+/.test(line)) return `<h2>${line.replace(/^#\\s+/,"")}</h2>`; if(/^\\s*[-*]\\s+/.test(line)) return `<li>${line.replace(/^\\s*[-*]\\s+/,"")}</li>`; if(!line.trim()) return ""; return `<p>${line}</p>`; }); let html=htmlLines.join(""); html = html.replace(/(?:<li>.*?<\/li>)+/gs, m=>`<ul>${m}</ul>`); return html; }
-async function showMetaForFile(file){ const titleEl=document.querySelector("#metaTitle"); const artistEl=document.querySelector("#metaArtist"); const fieldsEl=document.querySelector("#metaFields"); const introEl=document.querySelector("#metaIntro"); const extraEl=document.querySelector("#metaExtra"); const analysisPreviewEl=document.querySelector("#metaAnalysisPreview"); const analysisBtn=document.querySelector("#btnOpenAnalysis"); const statusEl=document.querySelector("#metaStatus"); if(!titleEl) return; if(!file){ titleEl.textContent="Î´Ñ¡Ôñ"; if(artistEl) artistEl.textContent=""; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent=""; if(analysisBtn) analysisBtn.style.display="none"; currentAnalysisInfo=null; return; } const folderMeta = await loadMetaForCurrent(); let info = folderMeta?.[file.name] || null; let source = info ? "folder" : ""; if(!info){ const sidecar = await loadSidecarForFile(file); if(sidecar){ info=sidecar; source="sidecar"; } } if(!info){ titleEl.textContent=file.name; if(artistEl) artistEl.textContent="ÔÝÎÞÔªÊý¾Ý"; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent="ÔÝÎÞÉÍÎö"; if(analysisBtn) analysisBtn.style.display="none"; if(statusEl) statusEl.textContent="ÎÞÔªÊý¾Ý"; currentAnalysisInfo=null; return; } const md = info.meta || {}; const title = md["×÷Æ·Ãû³Æ"]||md["ÎÄ¼þÃû³Æ"]||md["»­×÷Ãû"]||file.name; const artist = md["×÷Õß"]||""; const year=md["´´×÷Ê±¼ä"]||""; const nation=md["¹ú¼®"]||""; titleEl.textContent = title; if(artistEl) artistEl.textContent = [artist,year].filter(Boolean).join(" ¡¤ ") || nation || ""; if(fieldsEl){ fieldsEl.innerHTML=""; const pairs=[["»­ÅÉ/·ç¸ñ", md["»­ÅÉ"]||md["·ç¸ñÁ÷ÅÉ"]],["¹ú¼®", md["¹ú¼®"]],["²ÄÖÊ", md["²ÄÖÊ"]],["×÷Æ·ÀàÐÍ", md["×÷Æ·ÀàÐÍ"]],["³ß´ç", md["³ß´ç"]],["ÎÄ¼þ¸ñÊ½", md["ÎÄ¼þ¸ñÊ½"]],["ÊÕ²Ø»ú¹¹", md["ÊÕ²Ø»ú¹¹"]]]; pairs.forEach(([k,v])=>{ if(!v) return; const chip=document.createElement("span"); chip.className="badge"; chip.textContent=`${k}: ${v}`; fieldsEl.appendChild(chip); }); } const introText = info.intro || md["¼ò½é"] || ""; if(introEl) introEl.textContent = introText || ""; const analysisData = normalizeAnalysis(info.analysis); if(analysisPreviewEl) analysisPreviewEl.textContent = analysisData.content ? truncateText(analysisData.content, 200) : "ÔÝÎÞÉÍÎö"; if(analysisBtn){ if(analysisData.content){ analysisBtn.style.display="inline-flex"; analysisBtn.disabled=false; analysisBtn.onclick=()=>openAnalysisModal(file, info); } else analysisBtn.style.display="none"; } currentAnalysisInfo = info; if(extraEl){ const wiki = md["»­×÷°Ù¿Æ"]||md["°Ù¿Æ"]||""; extraEl.textContent = wiki; } if(statusEl) statusEl.textContent = source==="sidecar" ? "À´×ÔÍ¬Ãû JSON" : "Ä¿Â¼ÔªÊý¾Ý"; }
-function setMediaPreview(file){ const box=document.querySelector("#mediaPreview"); if(!box) return; box.innerHTML=""; if(!file){ box.textContent="Î´Ñ¡Ôñ"; box.style.color="var(--muted)"; showMetaForFile(null); return; } const url=`/ext-media/${file.path}`; const ext=(file.name||"").toLowerCase(); if(ext.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.muted=true; v.loop=true; v.style.width="100%"; v.style.maxHeight="260px"; v.style.objectFit="contain"; box.appendChild(v);} else if(ext.match(/\\.jpg|\\.jpeg|\\.png|\\.webp|\\.gif|\\.bmp|\\.tif|\\.tiff|\\.heic/)){ const img=document.createElement("img"); img.src=url; img.style.maxWidth="100%"; img.style.maxHeight="260px"; img.style.objectFit="contain"; box.appendChild(img);} else { const a=document.createElement("a"); a.href=url; a.textContent="ÏÂÔØ/´ò¿ª"; a.style.color="var(--accent)"; a.target="_blank"; box.appendChild(a);} }
-function selectMediaFile(file){ mediaSelected=file; const label=document.querySelector("#mediaSelLabel"); if(label) label.textContent=file?.name||"Î´Ñ¡Ôñ"; setMediaPreview(file); showMetaForFile(file); }
-function openAnalysisModal(file=mediaSelected, info=currentAnalysisInfo){ if(!file) return; const modal=document.querySelector("#analysisModal"); const mediaBox=document.querySelector("#analysisMedia"); const contentEl=document.querySelector("#analysisContent"); const titleEl=document.querySelector("#analysisTitle"); const subEl=document.querySelector("#analysisSubtitle"); if(!modal||!mediaBox||!contentEl||!titleEl) return; const data=info||{}; const analysis=normalizeAnalysis(data.analysis); const md=data.meta||{}; titleEl.textContent = analysis.title || md["×÷Æ·Ãû³Æ"] || md["»­×÷Ãû"] || file.name; if(subEl){ const subtitle=[md["×÷Õß"], md["´´×÷Ê±¼ä"], md["»­ÅÉ"]||md["·ç¸ñÁ÷ÅÉ"]].filter(Boolean).join(" ¡¤ "); subEl.textContent = subtitle; } mediaBox.innerHTML=""; const url=`/ext-media/${encodeURIComponent(file.path).replace(/%2F/g,'/')}`; const lower=(file.name||"").toLowerCase(); if(lower.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.autoplay=true; v.loop=true; v.muted=true; v.style.width="100%"; v.style.maxHeight="70vh"; v.style.objectFit="contain"; mediaBox.appendChild(v);} else { const img=document.createElement("img"); img.src=url; img.alt=file.name||"analysis"; img.style.width="100%"; img.style.maxHeight="70vh"; img.style.objectFit="contain"; mediaBox.appendChild(img);} contentEl.innerHTML = analysis.content ? markdownToHtml(analysis.content) : "<p style=\\\"color:var(--muted);\\\">ÔÝÎÞÉÍÎö</p>"; modal.style.display="flex"; }
+async function showMetaForFile(file){ const titleEl=document.querySelector("#metaTitle"); const artistEl=document.querySelector("#metaArtist"); const fieldsEl=document.querySelector("#metaFields"); const introEl=document.querySelector("#metaIntro"); const extraEl=document.querySelector("#metaExtra"); const analysisPreviewEl=document.querySelector("#metaAnalysisPreview"); const analysisBtn=document.querySelector("#btnOpenAnalysis"); const statusEl=document.querySelector("#metaStatus"); if(!titleEl) return; if(!file){ titleEl.textContent="Î´Ñ¡ï¿½ï¿½"; if(artistEl) artistEl.textContent=""; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent=""; if(analysisBtn) analysisBtn.style.display="none"; currentAnalysisInfo=null; return; } const folderMeta = await loadMetaForCurrent(); let info = folderMeta?.[file.name] || null; let source = info ? "folder" : ""; if(!info){ const sidecar = await loadSidecarForFile(file); if(sidecar){ info=sidecar; source="sidecar"; } } if(!info){ titleEl.textContent=file.name; if(artistEl) artistEl.textContent="ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½"; if(fieldsEl) fieldsEl.innerHTML=""; if(introEl) introEl.textContent=""; if(extraEl) extraEl.textContent=""; if(analysisPreviewEl) analysisPreviewEl.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; if(analysisBtn) analysisBtn.style.display="none"; if(statusEl) statusEl.textContent="ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½"; currentAnalysisInfo=null; return; } const md = info.meta || {}; const title = md["ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½"]||md["ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½"]||md["ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"]||file.name; const artist = md["ï¿½ï¿½ï¿½ï¿½"]||""; const year=md["ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½"]||""; const nation=md["ï¿½ï¿½ï¿½ï¿½"]||""; titleEl.textContent = title; if(artistEl) artistEl.textContent = [artist,year].filter(Boolean).join(" ï¿½ï¿½ ") || nation || ""; if(fieldsEl){ fieldsEl.innerHTML=""; const pairs=[["ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½", md["ï¿½ï¿½ï¿½ï¿½"]||md["ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"]],["ï¿½ï¿½ï¿½ï¿½", md["ï¿½ï¿½ï¿½ï¿½"]],["ï¿½ï¿½ï¿½ï¿½", md["ï¿½ï¿½ï¿½ï¿½"]],["ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½", md["ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½"]],["ï¿½ß´ï¿½", md["ï¿½ß´ï¿½"]],["ï¿½Ä¼ï¿½ï¿½ï¿½Ê½", md["ï¿½Ä¼ï¿½ï¿½ï¿½Ê½"]],["ï¿½Õ²Ø»ï¿½ï¿½ï¿½", md["ï¿½Õ²Ø»ï¿½ï¿½ï¿½"]]]; pairs.forEach(([k,v])=>{ if(!v) return; const chip=document.createElement("span"); chip.className="badge"; chip.textContent=`${k}: ${v}`; fieldsEl.appendChild(chip); }); } const introText = info.intro || md["ï¿½ï¿½ï¿½"] || ""; if(introEl) introEl.textContent = introText || ""; const analysisData = normalizeAnalysis(info.analysis); if(analysisPreviewEl) analysisPreviewEl.textContent = analysisData.content ? truncateText(analysisData.content, 200) : "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; if(analysisBtn){ if(analysisData.content){ analysisBtn.style.display="inline-flex"; analysisBtn.disabled=false; analysisBtn.onclick=()=>openAnalysisModal(file, info); } else analysisBtn.style.display="none"; } currentAnalysisInfo = info; if(extraEl){ const wiki = md["ï¿½ï¿½ï¿½ï¿½ï¿½Ù¿ï¿½"]||md["ï¿½Ù¿ï¿½"]||""; extraEl.textContent = wiki; } if(statusEl) statusEl.textContent = source==="sidecar" ? "ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ JSON" : "Ä¿Â¼Ôªï¿½ï¿½ï¿½ï¿½"; }
+function setMediaPreview(file){ const box=document.querySelector("#mediaPreview"); if(!box) return; box.innerHTML=""; if(!file){ box.textContent="Î´Ñ¡ï¿½ï¿½"; box.style.color="var(--muted)"; showMetaForFile(null); return; } const url=`/ext-media/${file.path}`; const ext=(file.name||"").toLowerCase(); if(ext.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.muted=true; v.loop=true; v.style.width="100%"; v.style.maxHeight="260px"; v.style.objectFit="contain"; box.appendChild(v);} else if(ext.match(/\\.jpg|\\.jpeg|\\.png|\\.webp|\\.gif|\\.bmp|\\.tif|\\.tiff|\\.heic/)){ const img=document.createElement("img"); img.src=url; img.style.maxWidth="100%"; img.style.maxHeight="260px"; img.style.objectFit="contain"; box.appendChild(img);} else { const a=document.createElement("a"); a.href=url; a.textContent="ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½"; a.style.color="var(--accent)"; a.target="_blank"; box.appendChild(a);} }
+function selectMediaFile(file){ mediaSelected=file; const label=document.querySelector("#mediaSelLabel"); if(label) label.textContent=file?.name||"Î´Ñ¡ï¿½ï¿½"; setMediaPreview(file); showMetaForFile(file); }
+function openAnalysisModal(file=mediaSelected, info=currentAnalysisInfo){ if(!file) return; const modal=document.querySelector("#analysisModal"); const mediaBox=document.querySelector("#analysisMedia"); const contentEl=document.querySelector("#analysisContent"); const titleEl=document.querySelector("#analysisTitle"); const subEl=document.querySelector("#analysisSubtitle"); if(!modal||!mediaBox||!contentEl||!titleEl) return; const data=info||{}; const analysis=normalizeAnalysis(data.analysis); const md=data.meta||{}; titleEl.textContent = analysis.title || md["ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½"] || md["ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"] || file.name; if(subEl){ const subtitle=[md["ï¿½ï¿½ï¿½ï¿½"], md["ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½"], md["ï¿½ï¿½ï¿½ï¿½"]||md["ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"]].filter(Boolean).join(" ï¿½ï¿½ "); subEl.textContent = subtitle; } mediaBox.innerHTML=""; const url=`/ext-media/${encodeURIComponent(file.path).replace(/%2F/g,'/')}`; const lower=(file.name||"").toLowerCase(); if(lower.match(/\\.mp4|\\.mov|\\.mkv|\\.webm|\\.avi/)){ const v=document.createElement("video"); v.src=url; v.controls=true; v.autoplay=true; v.loop=true; v.muted=true; v.style.width="100%"; v.style.maxHeight="70vh"; v.style.objectFit="contain"; mediaBox.appendChild(v);} else { const img=document.createElement("img"); img.src=url; img.alt=file.name||"analysis"; img.style.width="100%"; img.style.maxHeight="70vh"; img.style.objectFit="contain"; mediaBox.appendChild(img);} contentEl.innerHTML = analysis.content ? markdownToHtml(analysis.content) : "<p style=\\\"color:var(--muted);\\\">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</p>"; modal.style.display="flex"; }
 function closeAnalysisModal(){ const modal=document.querySelector("#analysisModal"); if(modal) modal.style.display="none"; }
 
 function humanSize(bytes = 0) {
@@ -879,18 +879,18 @@ function renderSummary() {
   const totalDevices = statusCache?.devices?.total ?? devicesCache.length;
   const onlineDevices = statusCache?.devices?.online ?? devicesCache.filter(d => d.online).length;
   setText("statDevicesTotal", totalDevices || 0);
-  setText("statDevicesOnline", `ÔÚÏß ${onlineDevices || 0} Ì¨`);
+  setText("statDevicesOnline", `ï¿½ï¿½ï¿½ï¿½ ${onlineDevices || 0} Ì¨`);
   setText("deviceRingTotal", totalDevices || 0);
 
   const programCount = statusCache?.programs ?? programsCache.length;
   setText("statPrograms", programCount || 0);
   const latestProgram = programsCache?.reduce((a, b) => (a?.createdAt || 0) > (b?.createdAt || 0) ? a : b, null);
-  setText("statProgramsUpdated", latestProgram?.createdAt ? humanTime(latestProgram.createdAt) : "ÎÞ");
+  setText("statProgramsUpdated", latestProgram?.createdAt ? humanTime(latestProgram.createdAt) : "ï¿½ï¿½");
 
   const schedCount = statusCache?.schedules ?? schedulesCache.length;
   setText("statSchedules", schedCount || 0);
   const upcoming = schedulesCache.filter(s => (s.startAtUtcMs || 0) > Date.now()).sort((a,b)=>a.startAtUtcMs - b.startAtUtcMs)[0];
-  setText("statNextSchedule", upcoming ? `ÏÂÒ»´Î£º${humanTime(upcoming.startAtUtcMs)}` : "ÏÂÒ»´Î£º-");
+  setText("statNextSchedule", upcoming ? `ï¿½ï¿½Ò»ï¿½Î£ï¿½${humanTime(upcoming.startAtUtcMs)}` : "ï¿½ï¿½Ò»ï¿½Î£ï¿½-");
 }
 
 function renderDeviceRing() {
@@ -926,12 +926,12 @@ function renderDeviceBars() {
   if (!wrap) return;
   wrap.innerHTML = "";
   if (!devicesCache.length) {
-    wrap.innerHTML = `<div class="muted-text">ÔÝÎÞÉè±¸</div>`;
+    wrap.innerHTML = `<div class="muted-text">ï¿½ï¿½ï¿½ï¿½ï¿½è±¸</div>`;
     return;
   }
   const groups = {};
   devicesCache.forEach(d => {
-    const role = d.role || "Î´·Ö×é";
+    const role = d.role || "Î´ï¿½ï¿½ï¿½ï¿½";
     groups[role] = (groups[role] || 0) + 1;
   });
   const max = Math.max(...Object.values(groups), 1);
@@ -952,19 +952,19 @@ function renderScheduleReminder() {
   tbody.innerHTML = "";
   if (!schedulesCache.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="5" class="muted-text">ÔÝÎÞÅÅ³Ì</td>`;
+    tr.innerHTML = `<td colspan="5" class="muted-text">ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½</td>`;
     tbody.appendChild(tr);
     return;
   }
   const sorted = [...schedulesCache].sort((a, b) => (a.startAtUtcMs || 0) - (b.startAtUtcMs || 0));
   sorted.slice(0, 6).forEach((s, idx) => {
-    const status = (s.startAtUtcMs || 0) > Date.now() ? "´ý²¥·Å" : "ÒÑ´¥·¢/¹ýÆÚ";
+    const status = (s.startAtUtcMs || 0) > Date.now() ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : "ï¿½Ñ´ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½";
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${idx + 1}</td>
       <td>${s.programId || s.id}</td>
       <td>${status}</td>
       <td>${humanTime(s.startAtUtcMs)}</td>
-      <td><button class="secondary" onclick="deleteSchedule('${s.id}')">É¾³ý</button></td>`;
+      <td><button class="secondary" onclick="deleteSchedule('${s.id}')">É¾ï¿½ï¿½</button></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -973,10 +973,10 @@ function renderEventList() {
   const wrap = document.querySelector("#eventList");
   if (!wrap) return;
   const items = [];
-  devicesCache.forEach(d => items.push({ time: d.lastSeen || Date.now(), text: `Éè±¸ ${d.id || d.role || ""} ${d.online ? "ÔÚÏß" : "ÀëÏß"}` }));
-  schedulesCache.forEach(s => items.push({ time: s.startAtUtcMs || 0, text: `ÅÅ³Ì ${s.programId || s.id} ½«²¥·Å` }));
+  devicesCache.forEach(d => items.push({ time: d.lastSeen || Date.now(), text: `ï¿½è±¸ ${d.id || d.role || ""} ${d.online ? "ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½"}` }));
+  schedulesCache.forEach(s => items.push({ time: s.startAtUtcMs || 0, text: `ï¿½Å³ï¿½ ${s.programId || s.id} ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½` }));
   if (!items.length) {
-    wrap.innerHTML = `<div class="muted-text">ÔÝÎÞÊÂ¼þ</div>`;
+    wrap.innerHTML = `<div class="muted-text">ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½</div>`;
     return;
   }
   items.sort((a, b) => b.time - a.time);
@@ -1012,7 +1012,7 @@ async function loadMaterials(folderId = currentFolderId) {
   if (selectedMaterial) {
     const found = materials.find(m=>m.id===selectedMaterial.id);
     if (found) { selectedMaterial = found; renderTags(); }
-    else { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="Î´Ñ¡Ôñ"; renderTags(); }
+    else { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="Î´Ñ¡ï¿½ï¿½"; renderTags(); }
   }
   updateDashboard();
 }
@@ -1040,12 +1040,12 @@ function renderMaterials() {
     const tdOps = document.createElement("td");
     const btnRename = document.createElement("button");
     btnRename.className = "secondary";
-    btnRename.textContent = "ÖØÃüÃû";
+    btnRename.textContent = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
     btnRename.onclick = (e) => { e.stopPropagation(); renameMaterial(m.id); };
     const btnDel = document.createElement("button");
     btnDel.className = "secondary";
     btnDel.style.marginLeft = "6px";
-    btnDel.textContent = "É¾³ý";
+    btnDel.textContent = "É¾ï¿½ï¿½";
     btnDel.onclick = (e) => { e.stopPropagation(); deleteMaterial(m.id); };
     tdOps.appendChild(btnRename); tdOps.appendChild(btnDel);
     tr.appendChild(tdOps);
@@ -1054,13 +1054,13 @@ function renderMaterials() {
   });
   if (!materials.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">ÔÝÎÞËØ²Ä£¬ÏÈÉÏ´«¡£</td>`;
+    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">ï¿½ï¿½ï¿½ï¿½ï¿½Ø²Ä£ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½</td>`;
     tbody.appendChild(tr);
     return;
   }
   if (!filtered.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">Î´ÕÒµ½Æ¥Åä½á¹û£¬ÊÔÊÔ¸ü¿í·ºµÄËÑË÷¡£</td>`;
+    tr.innerHTML = `<td colspan="6" style="color:var(--muted);">Î´ï¿½Òµï¿½Æ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</td>`;
     tbody.appendChild(tr);
   }
 }
@@ -1075,7 +1075,7 @@ function renderTagFilters() {
     const sel = document.querySelector(selector);
     if (sel) {
       const current = materialSearchTag;
-      sel.innerHTML = `<option value="">È«²¿±êÇ©</option>` + tags.map(t=>`<option value="${t}">${t}</option>`).join("");
+      sel.innerHTML = `<option value="">È«ï¿½ï¿½ï¿½ï¿½Ç©</option>` + tags.map(t=>`<option value="${t}">${t}</option>`).join("");
       sel.value = current || "";
     }
   });
@@ -1085,20 +1085,20 @@ function renderTagFilters() {
 
 async function uploadMaterial() {
   const f = document.querySelector("#materialFile");
-  if (!f?.files?.length) { alert("ÇëÑ¡ÔñÎÄ¼þ"); return; }
+  if (!f?.files?.length) { alert("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ä¼ï¿½"); return; }
   const form = new FormData();
   form.append("file", f.files[0]);
   form.append("folderId", currentFolderId || "root");
-  document.querySelector("#materialStatus").textContent = "ÉÏ´«ÖÐ...";
+  document.querySelector("#materialStatus").textContent = "ï¿½Ï´ï¿½ï¿½ï¿½...";
   const res = await safeFetch("/api/materials", { method: "POST", body: form });
-  if (!res) { document.querySelector("#materialStatus").textContent = "ÉÏ´«Ê§°Ü"; return; }
+  if (!res) { document.querySelector("#materialStatus").textContent = "ï¿½Ï´ï¿½Ê§ï¿½ï¿½"; return; }
   const data = await res.json();
   if (data.ok) {
-    document.querySelector("#materialStatus").textContent = "ÉÏ´«³É¹¦";
+    document.querySelector("#materialStatus").textContent = "ï¿½Ï´ï¿½ï¿½É¹ï¿½";
     f.value = "";
     loadMaterials();
   } else {
-    document.querySelector("#materialStatus").textContent = data.error || "Ê§°Ü";
+    document.querySelector("#materialStatus").textContent = data.error || "Ê§ï¿½ï¿½";
   }
   setTimeout(()=>document.querySelector("#materialStatus").textContent="",1800);
 }
@@ -1106,17 +1106,17 @@ async function uploadMaterial() {
 async function renameMaterial(id) {
   const m = materials.find(x=>x.id===id);
   if (!m) return;
-  const name = prompt("ÇëÊäÈëÐÂÃû×Ö", m.name);
+  const name = prompt("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", m.name);
   if (!name) return;
   const res = await safeFetch(`/api/materials/${id}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name }) });
   if (res) loadMaterials(currentFolderId);
 }
 
 async function deleteMaterial(id) {
-  showConfirm("È·¶¨É¾³ý¸ÃËØ²Ä£¿", async () => {
+  showConfirm("È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø²Ä£ï¿½", async () => {
     const res = await safeFetch(`/api/materials/${id}`, { method:"DELETE" });
     if (res) {
-      if (selectedMaterial?.id === id) { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="Î´Ñ¡Ôñ"; }
+      if (selectedMaterial?.id === id) { selectedMaterial = null; document.querySelector("#materialPreview").innerHTML=""; document.querySelector("#materialName").textContent="Î´Ñ¡ï¿½ï¿½"; }
       loadMaterials(currentFolderId);
     }
   });
@@ -1151,11 +1151,11 @@ function selectMaterial(id) {
   } else {
     const a = document.createElement("a");
     a.href = m.url;
-    a.textContent = "ÏÂÔØ/²é¿´";
+    a.textContent = "ï¿½ï¿½ï¿½ï¿½/ï¿½é¿´";
     a.style.color = "var(--accent)";
     box.appendChild(a);
   }
-  // ¸ßÁÁÁÐ±íÐÐ
+  // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½
   document.querySelectorAll("#materialTable tbody tr").forEach(tr=>{
     if (tr.dataset.id === m.id) tr.classList.add("row-selected");
     else tr.classList.remove("row-selected");
@@ -1229,14 +1229,14 @@ function renderMaterialsUpload() {
         const row = document.createElement("div");
         row.style.padding="4px 8px";
         row.style.color="var(--muted)";
-        row.textContent = "¸ÃÎÄ¼þ¼ÐÔÝÎÞËØ²Ä";
+        row.textContent = "ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½";
         ul.appendChild(row);
       }
       tree.appendChild(ul);
     }
   });
 
-  // Æ½ÆÌÁÐ±í£¨µ±Ç°ÕÛµþ×´Ì¬ÏÂµÄ¿É¼ûËØ²Ä£©
+  // Æ½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ûµï¿½×´Ì¬ï¿½ÂµÄ¿É¼ï¿½ï¿½Ø²Ä£ï¿½
   const visibleMats = materials.filter((m)=>openFolders.has(m.folderId));
   const filtered = visibleMats.filter((m)=>{
     const byName = materialSearchName ? m.name.toLowerCase().includes(materialSearchName.toLowerCase()) : true;
@@ -1262,10 +1262,10 @@ function renderMaterialsUpload() {
   if (!filtered.length) {
     const tip=document.createElement("div");
     tip.style.color="var(--muted)";
-    tip.textContent="Ã»ÓÐ¿É¼ûËØ²Ä£¬»»¸öÎÄ¼þ¼Ð»òÇå¿ÕÉ¸Ñ¡¡£";
+    tip.textContent="Ã»ï¿½Ð¿É¼ï¿½ï¿½Ø²Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½É¸Ñ¡ï¿½ï¿½";
     listWrap.appendChild(tip);
   }
-  // Í¬²½ËÑË÷ÏÂÀ­±êÇ©
+  // Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
   renderTagFilters();
   if (selectedMaterial) highlightUploadMaterial(selectedMaterial.id);
 }
@@ -1295,11 +1295,11 @@ function renderSelectedPreview(m) {
     poster.style.width="100%"; poster.style.height="160px";
     poster.style.background="radial-gradient(circle at 30% 30%, rgba(56,189,248,0.25), rgba(0,0,0,0.6))";
     poster.style.display="flex"; poster.style.alignItems="center"; poster.style.justifyContent="center";
-    poster.style.borderRadius="10px"; poster.style.color="#9ca3af"; poster.textContent="¼ÓÔØÊÓÆµÔ¤ÀÀÖÐ...";
+    poster.style.borderRadius="10px"; poster.style.color="#9ca3af"; poster.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆµÔ¤ï¿½ï¿½ï¿½ï¿½...";
     v.oncanplay = ()=>{ if (poster.parentNode) poster.parentNode.replaceChild(v, poster); };
     box.appendChild(poster);
   } else {
-    const a=document.createElement("a"); a.href=m.url; a.textContent="ÏÂÔØ/²é¿´"; a.style.color="var(--accent)";
+    const a=document.createElement("a"); a.href=m.url; a.textContent="ï¿½ï¿½ï¿½ï¿½/ï¿½é¿´"; a.style.color="var(--accent)";
     box.appendChild(a);
   }
 }
@@ -1319,32 +1319,32 @@ function syncFolderSelects() {
 }
 
 async function newFolder() {
-  const name = prompt("ÎÄ¼þ¼ÐÃû³Æ");
+  const name = prompt("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
   if (!name) return;
   const res = await safeFetch("/api/materials/folders", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name }) });
   if (res) loadMaterials(currentFolderId);
-  else document.querySelector("#materialStatus").textContent = "ÐÂ½¨Ê§°Ü£¬¼ì²é·þÎñÊÇ·ñÖØÆô";
+  else document.querySelector("#materialStatus").textContent = "ï¿½Â½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½";
 }
 
 async function renameFolder() {
-  if (!currentFolderId || currentFolderId === "root") { alert("ÇëÑ¡Ôñ¿ÉÖØÃüÃûµÄÎÄ¼þ¼Ð"); return; }
+  if (!currentFolderId || currentFolderId === "root") { alert("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½"); return; }
   const folder = materialFolders.find(f=>f.id===currentFolderId);
-  const name = prompt("ÐÂÃû³Æ", folder?.name || "");
+  const name = prompt("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", folder?.name || "");
   if (!name) return;
   const res = await safeFetch(`/api/materials/folders/${currentFolderId}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name }) });
   if (res) loadMaterials(currentFolderId);
 }
 
 async function deleteFolder() {
-  if (!currentFolderId || currentFolderId === "root") { alert("²»ÄÜÉ¾³ý¸ùÎÄ¼þ¼Ð"); return; }
-  showConfirm("É¾³ýºóÎÄ¼þ½«ÒÆ¶¯µ½¸ùÄ¿Â¼£¬È·ÈÏ£¿", async () => {
+  if (!currentFolderId || currentFolderId === "root") { alert("ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½"); return; }
+  showConfirm("É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½È·ï¿½Ï£ï¿½", async () => {
     const res = await safeFetch(`/api/materials/folders/${currentFolderId}`, { method:"DELETE" });
     if (res) { currentFolderId = "root"; loadMaterials("root"); }
   });
 }
 
 async function moveMaterial() {
-  if (!selectedMaterial) { alert("ÏÈÑ¡ÔñËØ²Ä"); return; }
+  if (!selectedMaterial) { alert("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ø²ï¿½"); return; }
   const folderId = document.querySelector("#moveFolderSelect").value || "root";
   const res = await safeFetch(`/api/materials/${selectedMaterial.id}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ folderId }) });
   if (res) loadMaterials(folderId);
@@ -1377,7 +1377,7 @@ function renderTags() {
 }
 
 async function addTag() {
-  if (!selectedMaterial) { alert("ÏÈÑ¡ÔñËØ²Ä"); return; }
+  if (!selectedMaterial) { alert("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ø²ï¿½"); return; }
   const input = document.querySelector("#tagInput");
   const val = (input.value || "").trim();
   if (!val) return;
@@ -1412,7 +1412,7 @@ function renderDevices(selector, list = []) {
   tbody.innerHTML = "";
   list.forEach((d) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${d.id}</td><td>${d.role}</td><td>${d.ip || ""}</td><td>${d.online ? "ÔÚÏß" : "ÀëÏß"}</td><td>${new Date(d.lastSeen || 0).toLocaleTimeString()}</td>`;
+    tr.innerHTML = `<td>${d.id}</td><td>${d.role}</td><td>${d.ip || ""}</td><td>${d.online ? "ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½"}</td><td>${new Date(d.lastSeen || 0).toLocaleTimeString()}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -1467,20 +1467,20 @@ async function power(action) {
 
 async function doUpload() {
   const fileInput = document.querySelector("#uploadFile");
-  if (!fileInput.files.length) { alert("ÇëÑ¡ÔñÎÄ¼þ"); return; }
+  if (!fileInput.files.length) { alert("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ä¼ï¿½"); return; }
   const form = new FormData();
   form.append("file", fileInput.files[0]);
   form.append("mode", document.querySelector("#mode").value);
   form.append("gap1", document.querySelector("#gap1").value || "0");
   form.append("gap2", document.querySelector("#gap2").value || "0");
-  document.querySelector("#uploadStatus").textContent = "ÉÏ´«ÖÐ...";
+  document.querySelector("#uploadStatus").textContent = "ï¿½Ï´ï¿½ï¿½ï¿½...";
   document.querySelector("#previewArea").style.display = "none";
   const res = await safeFetch("/api/upload", { method: "POST", body: form });
   if (!res) return;
   const data = await res.json();
   if (data.ok) {
     const p = data.program;
-    document.querySelector("#uploadStatus").textContent = `Éú³É½ÚÄ¿ ${p.id}`;
+    document.querySelector("#uploadStatus").textContent = `ï¿½ï¿½ï¿½É½ï¿½Ä¿ ${p.id}`;
     document.querySelector("#previewArea").style.display = "block";
     document.querySelector("#prevLeft").src = p.slices.left.preview;
     document.querySelector("#prevCenter").src = p.slices.center.preview;
@@ -1488,16 +1488,16 @@ async function doUpload() {
     window.__lastProgramId = p.id;
     loadPrograms();
     lastUploadSlices = { left: p.slices.left.url, center: p.slices.center.url, right: p.slices.right.url, preview: p.slices.center.preview };
-    document.querySelector("#currentProgBadge").textContent = `µ±Ç°½ÚÄ¿£º${p.id}`;
+    document.querySelector("#currentProgBadge").textContent = `ï¿½ï¿½Ç°ï¿½ï¿½Ä¿ï¿½ï¿½${p.id}`;
     addSlideFromUpload();
   } else {
-    document.querySelector("#uploadStatus").textContent = `Ê§°Ü: ${data.error}`;
+    document.querySelector("#uploadStatus").textContent = `Ê§ï¿½ï¿½: ${data.error}`;
   }
 }
 
 async function confirmBroadcast() {
   const pid = window.__lastProgramId;
-  if (!pid) { alert("Ã»ÓÐ¿É·¢²¼µÄ½ÚÄ¿"); return; }
+  if (!pid) { alert("Ã»ï¿½Ð¿É·ï¿½ï¿½ï¿½ï¿½Ä½ï¿½Ä¿"); return; }
   const res = await safeFetch(`/api/programs/${pid}/broadcast`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ startAtUtcMs: Date.now() + 5000 }) });
   if (!res) return;
   const data = await res.json();
@@ -1514,7 +1514,7 @@ async function loadPrograms() {
   (data.programs || []).forEach((p) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${p.id}</td><td>${p.title || ""}</td><td>${new Date(p.createdAt).toLocaleString()}</td>
-    <td><button onclick=\"broadcastProgram('${p.id}')\">²¥·Å</button> <button class=\"secondary\" onclick=\"loadSequence('${p.id}')\">ÔØÈëÖÆ×÷</button></td>`;
+    <td><button onclick=\"broadcastProgram('${p.id}')\">ï¿½ï¿½ï¿½ï¿½</button> <button class=\"secondary\" onclick=\"loadSequence('${p.id}')\">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</button></td>`;
     tbody.appendChild(tr);
   });
   updateDashboard();
@@ -1547,28 +1547,28 @@ async function loadProgramsForEditor() {
     row.onclick = ()=>loadSequence(p.id);
     row.innerHTML = `<div><div style="color:var(--accent);">${p.title||p.id}</div><div style="color:var(--muted);font-size:12px;">${p.id}</div></div>`;
     const ops = document.createElement("div");
-    const btnRen = document.createElement("button"); btnRen.className="secondary"; btnRen.textContent="ÖØÃüÃû"; btnRen.onclick=(e)=>{ e.stopPropagation(); renameProgram(p.id); };
-    const btnDel = document.createElement("button"); btnDel.className="secondary"; btnDel.style.marginLeft="6px"; btnDel.textContent="É¾³ý"; btnDel.onclick=(e)=>{ e.stopPropagation(); deleteProgram(p.id); };
+    const btnRen = document.createElement("button"); btnRen.className="secondary"; btnRen.textContent="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; btnRen.onclick=(e)=>{ e.stopPropagation(); renameProgram(p.id); };
+    const btnDel = document.createElement("button"); btnDel.className="secondary"; btnDel.style.marginLeft="6px"; btnDel.textContent="É¾ï¿½ï¿½"; btnDel.onclick=(e)=>{ e.stopPropagation(); deleteProgram(p.id); };
     ops.appendChild(btnRen); ops.appendChild(btnDel);
     row.appendChild(ops);
     wrap.appendChild(row);
   });
   if (!programsCache.length) {
-    const tip=document.createElement("div"); tip.style.color="var(--muted)"; tip.textContent="ÔÝÎÞ½ÚÄ¿£¬ÏÈ±£´æÒ»¸ö°É¡£";
+    const tip=document.createElement("div"); tip.style.color="var(--muted)"; tip.textContent="ï¿½ï¿½ï¿½Þ½ï¿½Ä¿ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½É¡ï¿½";
     wrap.appendChild(tip);
   }
 }
 
 async function renameProgram(id) {
   const p = programsCache.find(x=>x.id===id);
-  const name = prompt("ÐÂ½ÚÄ¿Ãû³Æ", p?.title || id);
+  const name = prompt("ï¿½Â½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½", p?.title || id);
   if (!name) return;
   const res = await safeFetch(`/api/programs/${id}`, { method:"PATCH", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ title: name }) });
   if (res) { loadPrograms(); loadProgramsForEditor(); }
 }
 
 async function deleteProgram(id) {
-  showConfirm("È·¶¨É¾³ý¸Ã½ÚÄ¿£¿", async () => {
+  showConfirm("È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ã½ï¿½Ä¿ï¿½ï¿½", async () => {
     const res = await safeFetch(`/api/programs/${id}`, { method:"DELETE" });
     if (res) { 
       loadPrograms(); 
@@ -1594,7 +1594,7 @@ function runConfirm() {
 }
 
 function loadSequence(id) {
-  // ½ÚÄ¿ÖÆ×÷ÒÑÇ¨ÒÆµ½¶ÀÁ¢Ò³Ãæ
+  // ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¨ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
   window.location.href = `program-builder.html?programId=${encodeURIComponent(id)}`;
 }
 
@@ -1605,14 +1605,14 @@ async function saveCustom() {
   const res = await safeFetch("/api/programs/custom", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, title, slices }) });
   if (!res) return;
   const data = await res.json();
-  if (data.ok) { loadPrograms(); log(`ÒÑ±£´æ½ÚÄ¿ ${id}`); } else { log(`±£´æÊ§°Ü: ${data.error}`); }
+  if (data.ok) { loadPrograms(); log(`ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½Ä¿ ${id}`); } else { log(`ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: ${data.error}`); }
 }
 
 async function refreshFromDisk() {
   const res = await safeFetch("/api/programs/reload", { method: "POST" });
   if (!res) return;
   const data = await res.json();
-  if (data.ok) { loadPrograms(); log(`ÒÑ´Ó´ÅÅÌË¢ÐÂ£¬µ±Ç°½ÚÄ¿Êý ${data.count}`); } else { log(`Ë¢ÐÂÊ§°Ü: ${data.error}`); }
+  if (data.ok) { loadPrograms(); log(`ï¿½Ñ´Ó´ï¿½ï¿½ï¿½Ë¢ï¿½Â£ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ä¿ï¿½ï¿½ ${data.count}`); } else { log(`Ë¢ï¿½ï¿½Ê§ï¿½ï¿½: ${data.error}`); }
 }
 
 async function addSchedule() {
@@ -1634,7 +1634,7 @@ async function loadSchedule() {
   (data.schedules || []).forEach((s) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${s.id}</td><td>${s.programId}</td><td>${new Date(s.startAtUtcMs).toLocaleString()}</td>
-    <td><button onclick=\"deleteSchedule('${s.id}')\">É¾³ý</button></td>`;
+    <td><button onclick=\"deleteSchedule('${s.id}')\">É¾ï¿½ï¿½</button></td>`;
     tbody.appendChild(tr);
   });
   updateDashboard();
@@ -1663,24 +1663,24 @@ async function saveClientIps() {
   const res = await safeFetch("/api/client-ips", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res) return;
   const data = await res.json();
-  document.querySelector("#ipSaveStatus").textContent = data.ok ? "ÒÑ±£´æ" : (data.error || "Ê§°Ü");
+  document.querySelector("#ipSaveStatus").textContent = data.ok ? "ï¿½Ñ±ï¿½ï¿½ï¿½" : (data.error || "Ê§ï¿½ï¿½");
   setTimeout(() => (document.querySelector("#ipSaveStatus").textContent = ""), 2000);
 }
 
 function updateGapPreview() {
   const gap1El = document.querySelector("#gap1");
   const gap2El = document.querySelector("#gap2");
-  if (!gap1El || !gap2El) return; // ¾É½ÚÄ¿ÖÆ×÷ÊÓÍ¼ÒÑÒþ²Ø/ÒÆ³ýÊ±±ÜÃâ±¨´í
+  if (!gap1El || !gap2El) return; // ï¿½É½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½Æ³ï¿½Ê±ï¿½ï¿½ï¿½â±¨ï¿½ï¿½
   const gap1 = Number(gap1El.value || 0);
   const gap2 = Number(gap2El.value || 0);
   const total = 1080 + gap1 + 3840 + gap2 + 1080;
   const scale = 600 / total;
   const segs = [
-    { w: 1080, color: "#38bdf8", label: "×óÆÁ" },
-    { w: gap1, color: "#f59e0b", label: `·ì1 ${gap1}px` },
-    { w: 3840, color: "#22c55e", label: "ÖÐÆÁ" },
-    { w: gap2, color: "#f59e0b", label: `·ì2 ${gap2}px` },
-    { w: 1080, color: "#38bdf8", label: "ÓÒÆÁ" },
+    { w: 1080, color: "#38bdf8", label: "ï¿½ï¿½ï¿½ï¿½" },
+    { w: gap1, color: "#f59e0b", label: `ï¿½ï¿½1 ${gap1}px` },
+    { w: 3840, color: "#22c55e", label: "ï¿½ï¿½ï¿½ï¿½" },
+    { w: gap2, color: "#f59e0b", label: `ï¿½ï¿½2 ${gap2}px` },
+    { w: 1080, color: "#38bdf8", label: "ï¿½ï¿½ï¿½ï¿½" },
   ];
   const viz = document.querySelector("#gapViz");
   if (viz) {
@@ -1700,7 +1700,7 @@ function updateGapPreview() {
     });
   }
   const gapLabel = document.querySelector("#gapLabel");
-  if (gapLabel) gapLabel.textContent = `×Ü¿í ${total}px£¬Ëõ·ÅÔ¤ÀÀ 600px£»·ìÏ¶½«±»¡°Ñ¹Ëõ¡±µô£¬±ÜÃâÊµ¼ÊÆ´·ìºÚ±ß¡£`;
+  if (gapLabel) gapLabel.textContent = `ï¿½Ü¿ï¿½ ${total}pxï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ 600pxï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Æ´ï¿½ï¿½Ú±ß¡ï¿½`;
   buildPreviewStage(gap1, gap2);
   buildEditStage();
 }
@@ -1709,7 +1709,7 @@ function newProgram() {
   slides = [];
   lastUploadSlices = null;
   document.querySelector("#timelineName").value = `program_${Date.now()}`;
-  document.querySelector("#currentProgBadge").textContent = "µ±Ç°½ÚÄ¿£ºÎ´ÃüÃû";
+  document.querySelector("#currentProgBadge").textContent = "ï¿½ï¿½Ç°ï¿½ï¿½Ä¿ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½";
   renderSlidesList();
 }
 
@@ -1733,7 +1733,7 @@ function renderSlidesList() {
     info.style.flex = "1";
     const dur = getSlideDuration(s);
     info.innerHTML = `<div>#${idx + 1} ${s.type.toUpperCase()} ${s.title || ""}</div>
-      <div style=\"font-size:12px;color:var(--muted);\">Ê±³¤: ${dur}s ¡¤ À´Ô´: ${s.sourceName||""}</div>`;
+      <div style=\"font-size:12px;color:var(--muted);\">Ê±ï¿½ï¿½: ${dur}s ï¿½ï¿½ ï¿½ï¿½Ô´: ${s.sourceName||""}</div>`;
     row.appendChild(info);
     const ctrls = document.createElement("div");
     ctrls.style.display="flex"; ctrls.style.gap="6px"; ctrls.style.alignItems="center";
@@ -1741,7 +1741,7 @@ function renderSlidesList() {
     durInput.type="number"; durInput.min="1"; durInput.style.width="70px"; durInput.value = s.duration || (s.type==="image"? Number(document.querySelector("#defaultImageDur").value||5):dur);
     durInput.onchange = ()=>{ s.duration = Number(durInput.value)||dur; updateTotalDuration(); renderSlidesList(); };
     ctrls.appendChild(durInput);
-    ["¡ü","¡ý","É¾"].forEach((txt,i)=>{
+    ["ï¿½ï¿½","ï¿½ï¿½","É¾"].forEach((txt,i)=>{
       const b=document.createElement("button"); b.textContent=txt;
       b.onclick=()=>{ if(i===0) moveSlide(idx,-1); else if(i===1) moveSlide(idx,1); else deleteSlide(idx); };
       ctrls.appendChild(b);
@@ -1752,7 +1752,7 @@ function renderSlidesList() {
   if (!slides.length) {
     const tip = document.createElement("div");
     tip.style.color = "var(--muted)";
-    tip.textContent = "ÔÝÎÞËØ²Ä£¬ÓÒ²àÑ¡ÔñËØ²Äºóµã¡°¼ÓÈë½ÚÄ¿¡±¡£";
+    tip.textContent = "ï¿½ï¿½ï¿½ï¿½ï¿½Ø²Ä£ï¿½ï¿½Ò²ï¿½Ñ¡ï¿½ï¿½ï¿½Ø²Äºï¿½ã¡°ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½";
     wrap.appendChild(tip);
   }
   updateTotalDuration();
@@ -1781,7 +1781,7 @@ function applyDefaults() {
   renderSlidesList();
 }
 function addSlideFromUpload() {
-  if (!lastUploadSlices) { alert("ÏÈÉÏ´«ËØ²Ä"); return; }
+  if (!lastUploadSlices) { alert("ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ø²ï¿½"); return; }
   const type = lastUploadSlices.center.toLowerCase().match(/\.mp4|\.mov|\.webm/) ? "video" : "image";
   slides.push({ type, title: document.querySelector("#timelineName").value || "upload", urlLeft: lastUploadSlices.left, urlCenter: lastUploadSlices.center, urlRight: lastUploadSlices.right, preview: lastUploadSlices.preview || lastUploadSlices.center, effect: "random", duration: 5, offsetX:0, offsetY:0 });
   renderSlidesList();
@@ -1790,7 +1790,7 @@ function addSlideFromUpload() {
 let currentEditIndex = -1;
 
 function addSelectedToTimeline() {
-  if (!selectedMaterial) { alert("ÏÈÔÚÓÒ²àÑ¡ÔñËØ²Ä"); return; }
+  if (!selectedMaterial) { alert("ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½Ñ¡ï¿½ï¿½ï¿½Ø²ï¿½"); return; }
   const isVideo = (selectedMaterial.mime || "").startsWith("video");
   const slide = {
     id: "s_" + Date.now(),
@@ -1961,7 +1961,7 @@ function effectClass(effect){
 function playSlide(idx) {
   clearTimeout(timelineTimer);
   const s = slides[idx];
-  document.querySelector("#previewLabel").textContent = `µÚ ${idx+1}/${slides.length} ¡¤ ${s.title||""} ¡¤ ×ª³¡ ${s.effect||"random"}`;
+  document.querySelector("#previewLabel").textContent = `ï¿½ï¿½ ${idx+1}/${slides.length} ï¿½ï¿½ ${s.title||""} ï¿½ï¿½ ×ªï¿½ï¿½ ${s.effect||"random"}`;
   setStageMedia(document.querySelector("#stageLeft"), document.querySelector("#stageLeftImg"), s.urlLeft, s.effect, { x: s.offsetX||0, y: s.offsetY||0 });
   setStageMedia(document.querySelector("#stageCenter"), document.querySelector("#stageCenterImg"), s.urlCenter, s.effect, { x: s.offsetX||0, y: s.offsetY||0 });
   setStageMedia(document.querySelector("#stageRight"), document.querySelector("#stageRightImg"), s.urlRight, s.effect, { x: s.offsetX||0, y: s.offsetY||0 });
@@ -1969,9 +1969,9 @@ function playSlide(idx) {
   const durMs = getSlideDuration(s) * 1000;
   timelineTimer = setTimeout(()=>{ timelineIndex = (timelineIndex+1)%slides.length; playSlide(timelineIndex); }, durMs);
 }
-function previewTimeline() { if (!slides.length) { alert("ÏÈÌí¼ÓËØ²Ä"); return; } timelinePlaying = true; timelineIndex = 0; document.querySelector("#timelinePreviewPanel").style.display="block"; document.querySelector("#btnPlay").textContent="ÔÝÍ£"; playSlide(timelineIndex); }
+function previewTimeline() { if (!slides.length) { alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½"); return; } timelinePlaying = true; timelineIndex = 0; document.querySelector("#timelinePreviewPanel").style.display="block"; document.querySelector("#btnPlay").textContent="ï¿½ï¿½Í£"; playSlide(timelineIndex); }
 function stopTimelinePreview() { timelinePlaying=false; clearTimeout(timelineTimer); document.querySelector("#timelinePreviewPanel").style.display="none"; }
-function togglePlay(){ timelinePlaying=!timelinePlaying; document.querySelector("#btnPlay").textContent= timelinePlaying? "ÔÝÍ£":"²¥·Å"; if(timelinePlaying) playSlide(timelineIndex);} 
+function togglePlay(){ timelinePlaying=!timelinePlaying; document.querySelector("#btnPlay").textContent= timelinePlaying? "ï¿½ï¿½Í£":"ï¿½ï¿½ï¿½ï¿½"; if(timelinePlaying) playSlide(timelineIndex);} 
 function prevSlide(){ if(!slides.length)return; timelineIndex=(timelineIndex-1+slides.length)%slides.length; playSlide(timelineIndex);} 
 function nextSlide(){ if(!slides.length)return; timelineIndex=(timelineIndex+1)%slides.length; playSlide(timelineIndex);} 
 function fastForward(){ if(!slides.length)return; timelineIndex=(timelineIndex+2)%slides.length; playSlide(timelineIndex);} 
@@ -1987,7 +1987,7 @@ function updateTotalDuration() {
 }
 
 async function saveTimeline() {
-  if (!slides.length) { alert("ÏÈÌí¼ÓËØ²Ä"); return; }
+  if (!slides.length) { alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½"); return; }
   const name = document.querySelector("#timelineName").value || `program_${Date.now()}`;
   const first = slides[0];
   const sequence = slides.map((s)=>({ ...s, duration: getSlideDuration(s) }));
@@ -1996,12 +1996,12 @@ async function saveTimeline() {
   const res = await safeFetch("/api/programs/custom", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res) return;
   const data = await res.json();
-  document.querySelector("#timelineStatus").textContent = data.ok ? "ÒÑ±£´æ½ÚÄ¿" : (data.error || "Ê§°Ü");
+  document.querySelector("#timelineStatus").textContent = data.ok ? "ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½Ä¿" : (data.error || "Ê§ï¿½ï¿½");
   loadPrograms();
   setTimeout(()=>document.querySelector("#timelineStatus").textContent="",2000);
 }
 
-// ³õÊ¼¼ÓÔØ
+// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "1";
 applySidebarState();
 systemMode = localStorage.getItem("systemMode") || "upload";
@@ -2018,5 +2018,6 @@ startPreview();
 </script>
 </body>
 </html>
+
 
 
