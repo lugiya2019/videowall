@@ -11,8 +11,8 @@ android {
         applicationId "com.videowall.client"
         minSdk 21
         targetSdk 34
-        versionCode 8
-        versionName "0.4.0"
+        versionCode 9
+        versionName "0.4.1"
         manifestPlaceholders = [ screenOrientation: "landscape" ]
         buildConfigField "String", "WS_URL", '"ws://192.168.1.10:8088/ws"'
     }
@@ -91,3 +91,4 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
     implementation "org.java-websocket:Java-WebSocket:1.5.4"
 }
+
